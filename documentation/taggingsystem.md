@@ -1,29 +1,5 @@
 # Tagging System
 
-- [Tagging System](#tagging-system)
-  - [Task Description](#task-description)
-  - [Design Decisions](#design-decisions)
-    - [NoSQL (DynamoDB) vs SQL (MySQL)](#nosql-dynamodb-vs-sql-mysql)
-      - [NoSQL](#nosql)
-      - [SQL](#sql)
-      - [Conclusion](#conclusion)
-    - [Allowing Link to External Sources](#allowing-link-to-external-sources)
-      - [Advantages](#advantages)
-      - [Disadvantages](#disadvantages)
-      - [Conclusion](#conclusion-1)
-  - [Data structure](#data-structure)
-  - [System Architecture](#system-architecture)
-    - [Option 1](#option-1)
-      - [Advantages](#advantages-1)
-      - [Disadvantages](#disadvantages-1)
-    - [Option 2](#option-2)
-      - [Advantages](#advantages-2)
-      - [Disadvantages](#disadvantages-2)
-    - [Option 3](#option-3)
-      - [Advantages](#advantages-3)
-      - [Disadvantages](#disadvantages-3)
-      - [Conclusion](#conclusion-2)
-
 ## Task Description
 
 As metadata is contributed as an official record of the data we can't alter it in anyway for our own search and discovery purposes. To highlight certain data/services/applications on our web presence, we will need to be able to tag the item with a marker that allows it to be displayed.
@@ -83,6 +59,8 @@ S/O
 
 ## Data structure
 
+### database/document name: metadata
+
 ```javascript
 fileMetadata = {
     name: String,
@@ -96,23 +74,53 @@ fileMetadata = {
     indicators: String[],
     emergencyResponse: Boolean,
     licence: String[],
-    sources: source[],
-    relatedCollections:collection[]
-}
-
-source = {
+    sources: [{
     description: String,
     url: String,
     format: String, // (geoJson, sqlDump, PDF, PNG, Docx, mp4),
     protocol: String // (direct download, data stream, p2p, embeded),
+}],
+    relatedCollections:objectRef[] //collection database/table
+    tags:objectRef[] //tags database/table
 }
+```
 
+### database/document name: metadata
+
+```javascript
 collection = {
     title: String,
     description: String,
     content: objectRef[] // (files or collections)
+    tags:objectRef[] //tags database/table
 } // (versions, part of set of quarterly reports)
 ```
+
+### database/document name: tags
+
+```javascript
+tags = {
+    tagName: {
+    active: boolean,
+    content: objectRef[] // (files or collections)
+    }
+} // (versions, part of set of quarterly reports)
+```
+
+## Function Structure 
+
+
+![architecture 1](./assets/images/lambdas.png)
+
+### Advantages
+
+* the smaller validation functions offer a way to minimize how punishing each cold start is, and prevent from loading code that is not used as often (ex: users may add tags more often than files.).
+* small functions can be kept warm. Even medium ones cannot.
+
+### Reference information
+
+Cold start frequency is defined by a ration of function weight to frequency of calls.
+
 
 ## System Architecture
 
