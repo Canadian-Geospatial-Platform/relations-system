@@ -63,45 +63,47 @@ S/O
 
 ```javascript
 fileMetadata = {
-    name: String,
+    title: String,
     description: String,
     keywords: String[],
     featured: Boolean,
     foundationLayers: null, // Please clarify
-    authoritativeData: boolean,
-    Area: geoJson // (Region),
-    authority: String[] // (Government, Public, Academia, etc.),
+    authoritativeData: Boolean,
+    area: geoJson // (Region),
+    authorities: String[] // (Government, Public, Academia, etc.),
     indicators: String[],
     emergencyResponse: Boolean,
-    licence: String[],
+    licences: String[],
     sources: [{
-    description: String,
-    url: String,
-    format: String, // (geoJson, sqlDump, PDF, PNG, Docx, mp4),
-    protocol: String // (direct download, data stream, p2p, embeded),
+        title: String,
+        description: String,
+        url: String,
+        format: String, // (geoJson, sqlDump, PDF, PNG, Docx, mp4),
+        protocol: String, // (direct download, data stream, p2p, embeded),
 }],
     relatedCollections:objectRef[] //collection database/table
-    tags:objectRef[] //tags database/table
+    tags:objectRef[] //tags database/table,
+    active: Boolean
 }
 ```
 
-### database/document name: metadata
+### database/document name: collection
 
 ```javascript
 collection = {
     title: String,
     description: String,
     content: objectRef[] // (files or collections)
-    tags:objectRef[] //tags database/table
+    tags: objectRef[] //tags database/table
 } // (versions, part of set of quarterly reports)
 ```
 
 ### database/document name: tags
 
 ```javascript
-tags = {
-    tagName: {
-    active: boolean,
+tag = {
+    title: String,
+    description: String,
     content: objectRef[] // (files or collections)
     }
 } // (versions, part of set of quarterly reports)
