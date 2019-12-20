@@ -2,7 +2,7 @@
 
 ## Architecture
 
-![architecture 1](./assets/images/taggingsystem3/architecture1.png)
+![architecture 1](./assets/images/taggingsystem4/architecture1.png)
 
 ## Structure
 
@@ -18,8 +18,9 @@ file = {
     }
     userDefinedMetadata: {
         ...
-        geoLocationUrl: String // points to geoLocationBucket entry
-        fileFormat: String // this files format ex: csv, png
+        geoLocationUrl: String, // points to geoLocationBucket entry
+        fileFormat: String, // this files format ex: csv, png
+        collections: [ String ] // id of tags from dynamo
     }
 }
 ```
@@ -36,7 +37,7 @@ file = {
         title: String // Ex: Canada
         alternateTitles: [ String ] // Ex: Bas Canada, Haut Canada
         ...
-        geoLocation: geoJson // Or desired format
+        geoLocation: geoJson, // Or desired format
     }
 }
 ```
@@ -54,6 +55,7 @@ tag = {
     area: String, // url to area OPTIONAL
 } // (ottawa, water)
 ```
+
 #### TagRelation
 
 ```javascript
@@ -68,7 +70,7 @@ tagRelation = {
 }
 ```
 
-#### Collection
+##### Collection
 
 ```javascript
 collection = {
@@ -76,18 +78,10 @@ collection = {
     title: String,
     description: String,
     area: String, // url to area OPTIONAL
-} // ( mountains, rivers, cities, different file formats for same file )
-```
-
-#### CollectionRelation
-
-```javascript
-CollectionRelation = {
-    id: String,
-    referenceid: String, // reference to collection from collection table
-    reference: {
-        url: String, // (file, collection or location url)
-        type: String, // (file, collection or location)
-    }
-} 
+    references: [{
+        type: String, // (file, collection, tag or location)
+        url: String
+        }] // (files or collections)
+    tags: [String] //tags table
+} // (versions, part of set of quarterly reports)
 ```
