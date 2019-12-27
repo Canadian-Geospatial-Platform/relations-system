@@ -20,7 +20,7 @@ file = {
         ...
         geoLocationUrl: String, // points to geoLocationBucket entry
         fileFormat: String, // this files format ex: csv, png
-        collections: [ String ] // id of tags from dynamo
+        collections: [ String ] // id of collections from dynamo
     }
 }
 ```

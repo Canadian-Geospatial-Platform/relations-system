@@ -49,7 +49,7 @@ file = {
 tag = {
     id: String,
     title: String,
-    titleAlternatives: [String],
+    atlernativeTitles: [String],
     description: String,
     area: String, // url to area OPTIONAL
 } // (ottawa, water)
@@ -60,7 +60,7 @@ tag = {
 tagRelation = {
     id: String,
     referenceid: String, // reference to tag from tag table
-    popularity: Number, // increments each time we get a click with it as a filter
+    popularityIndex: Number, // increments each time we get a click with it as a filter
     reference: {
         url: String, // (file, collection or location url)
         type: String, // (file, collection or location)
