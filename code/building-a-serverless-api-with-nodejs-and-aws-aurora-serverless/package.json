@@ -1,0 +1,19 @@
+{
+  "name": "building-a-serverless-api-with-nodejs-and-aws-aurora-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "offline": "sls offline start --skipCacheInvalidation"
+  },
+  "keywords": [],
+  "author": "Adnan Rahić",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-offline": "^3.33.0"
+  },
+  "dependencies": {
+    "mysql2": "^1.7.0",
+    "sequelize": "^4.44.3"
+  }
+}
