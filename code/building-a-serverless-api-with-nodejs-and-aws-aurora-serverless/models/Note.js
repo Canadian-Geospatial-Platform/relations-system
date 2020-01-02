@@ -1,11 +1,11 @@
 module.exports = (sequelize, type) => {
   return sequelize.define('note', {
-    id: {
+    Id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    title: type.STRING,
-    description: type.STRING
+    Title: type.STRING,
+    Description: type.STRING
   })
 }

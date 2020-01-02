@@ -1,11 +1,11 @@
 module.exports = (sequelize, type) => {
   return sequelize.define("TagRelation", {
-    id: {
+    Id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    popularityindex: type.INTEGER,
-    referenceurl: type.STRING
+    PopularityIndex: type.INTEGER,
+    ReferenceUrl: type.STRING
   });
 };
