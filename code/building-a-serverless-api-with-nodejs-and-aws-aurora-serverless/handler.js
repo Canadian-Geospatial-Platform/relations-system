@@ -227,3 +227,109 @@ module.exports.tagDestroy = async event => {
     };
   }
 };
+
+module.exports.tagRelationCreate = async event => {
+  try {
+    const { TagRelation } = await connectToDatabase();
+    const tagRelation = await TagRelation.create(JSON.parse(event.body));
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tagRelation)
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not create the tagRelation. " + err
+    };
+  }
+};
+
+module.exports.tagRelationGetOne = async event => {
+  try {
+    const { TagRelation } = await connectToDatabase();
+    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    if (!tagRelation)
+      throw new HTTPError(
+        404,
+        `TagRelation with id: ${event.pathParameters.id} was not found`
+      );
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tagRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not fetch the TagRelation."
+    };
+  }
+};
+
+module.exports.tagRelationGetAll = async () => {
+  try {
+    const { TagRelation } = await connectToDatabase();
+    const tagRelations = await TagRelation.findAll();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tagRelations)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not fetch the tagRelations."
+    };
+  }
+};
+
+module.exports.tagRelationUpdate = async event => {
+  try {
+    const input = JSON.parse(event.body);
+    const { TagRelation } = await connectToDatabase();
+    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    if (!tagRelation)
+      throw new HTTPError(
+        404,
+        `TagRelation with id: ${event.pathParameters.id} was not found`
+      );
+    if (input.title) tagRelation.title = input.title;
+    if (input.description) tagRelation.description = input.description;
+    await tagRelation.save();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tagRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not update the TagRelation."
+    };
+  }
+};
+
+module.exports.tagRelationDestroy = async event => {
+  try {
+    const { TagRelation } = await connectToDatabase();
+    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    if (!tagRelation)
+      throw new HTTPError(
+        404,
+        `TagRelation with id: ${event.pathParameters.id} was not found`
+      );
+    await tagRelation.destroy();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tagRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not destroy the TagRelation."
+    };
+  }
+};

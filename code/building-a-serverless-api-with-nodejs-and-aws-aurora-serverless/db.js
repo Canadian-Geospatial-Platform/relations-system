@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize')
+const mysql2 = require('mysql2'); // Needed to fix sequelize issues with WebPack
+
 const NoteModel = require('./models/Note')
 const TagModel = require('./models/Tag')
-const mysql2 = require('mysql2'); // Needed to fix sequelize issues with WebPack
+const TagRelationModel = require('./models/TagRelation')
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -16,7 +18,8 @@ const sequelize = new Sequelize(
 )
 const Note = NoteModel(sequelize, Sequelize)
 const Tag = TagModel(sequelize, Sequelize)
-const Models = { Note, Tag }
+const TagRelation = TagRelationModel(sequelize, Sequelize)
+const Models = { Note, Tag, TagRelation }
 const connection = {}
 
 module.exports = async () => {
