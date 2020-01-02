@@ -295,8 +295,9 @@ module.exports.tagRelationUpdate = async event => {
         404,
         `TagRelation with id: ${event.pathParameters.id} was not found`
       );
-    if (input.title) tagRelation.title = input.title;
-    if (input.description) tagRelation.description = input.description;
+    if (input.PopularityIndex)
+      tagRelation.PopularityIndex = input.PopularityIndex;
+    if (input.RessourceUrl) tagRelation.RessourceUrl = input.RessourceUrl;
     await tagRelation.save();
     return {
       statusCode: 200,

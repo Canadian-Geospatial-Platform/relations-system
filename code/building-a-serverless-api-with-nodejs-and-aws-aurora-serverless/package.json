@@ -4,7 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation --stage dev --region ca-central-1\""
+    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\""
   },
   "keywords": [],
   "author": "Adnan Rahić",
