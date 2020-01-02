@@ -22,7 +22,7 @@ const TagRelation = TagRelationModel(sequelize, Sequelize)
 const Models = { Note, Tag, TagRelation }
 const connection = {}
 
-TagRelation.belongsTo(Tag)
+TagRelation.belongsTo(Tag, { onDelete: 'cascade' })
 
 module.exports = async () => {
   if (connection.isConnected) {
