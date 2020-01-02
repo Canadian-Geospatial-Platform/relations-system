@@ -9,7 +9,7 @@ provider:
   runtime: nodejs8.10
   timeout: 30
   stage: ${self:custom.secrets.NODE_ENV}
-  environment: 
+  environment:
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
     DB_NAME: ${self:custom.secrets.DB_NAME}
     DB_USER: ${self:custom.secrets.DB_USER}
@@ -31,41 +31,76 @@ functions:
           path: /
           method: get
           cors: true
-  create:
+  noteCreate:
     handler: handler.noteCreate
     events:
       - http:
           path: notes
           method: post
           cors: true
-  getOne:
+  noteGetOne:
     handler: handler.noteGetOne
     events:
       - http:
           path: notes/{id}
           method: get
           cors: true
-  getAll:
+  noteGetAll:
     handler: handler.noteGetAll
     events:
-     - http:
-         path: notes
-         method: get
-         cors: true
-  update:
+      - http:
+          path: notes
+          method: get
+          cors: true
+  noteUpdate:
     handler: handler.noteUpdate
     events:
-     - http:
-         path: notes/{id}
-         method: put
-         cors: true
-  destroy:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+  noteDestroy:
     handler: handler.noteDestroy
     events:
-     - http:
-         path: notes/{id}
-         method: delete
-         cors: true
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+  tagCreate:
+    handler: handler.tagCreate
+    events:
+      - http:
+          path: tags
+          method: post
+          cors: true
+  tagGetOne:
+    handler: handler.tagGetOne
+    events:
+      - http:
+          path: tags/{id}
+          method: get
+          cors: true
+  tagGetAll:
+    handler: handler.tagGetAll
+    events:
+      - http:
+          path: tags
+          method: get
+          cors: true
+  tagUpdate:
+    handler: handler.tagUpdate
+    events:
+      - http:
+          path: tags/{id}
+          method: put
+          cors: true
+  tagDestroy:
+    handler: handler.tagDestroy
+    events:
+      - http:
+          path: tags/{id}
+          method: delete
+          cors: true
 
 plugins:
   - serverless-offline

@@ -4,12 +4,13 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "offline": "sls offline start --skipCacheInvalidation --stage dev --region ca-central-1" 
+    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation --stage dev --region ca-central-1\""
   },
   "keywords": [],
   "author": "Adnan Rahić",
   "license": "MIT",
   "devDependencies": {
+    "nodemon": "^2.0.2",
     "serverless-offline": "^3.33.0"
   },
   "dependencies": {
