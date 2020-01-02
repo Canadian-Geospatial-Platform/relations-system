@@ -271,9 +271,7 @@ module.exports.tagRelationGetOne = async event => {
 module.exports.tagRelationGetAll = async () => {
   try {
     const { TagRelation } = await connectToDatabase();
-    const tagRelations = await TagRelation.findAll({
- 
-    });
+    const tagRelations = await TagRelation.findAll();
     return {
       statusCode: 200,
       body: JSON.stringify(tagRelations)

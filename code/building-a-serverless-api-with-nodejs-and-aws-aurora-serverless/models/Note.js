@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define('note', {
+  return sequelize.define("note", {
     Id: {
       type: type.INTEGER,
       primaryKey: true,
@@ -7,5 +7,5 @@ module.exports = (sequelize, type) => {
     },
     Title: type.STRING,
     Description: type.STRING
-  })
-}
+  });
+};

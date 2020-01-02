@@ -6,6 +6,6 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     PopularityIndex: type.INTEGER,
-    ReferenceUrl: type.STRING
+    RessourceUrl: type.STRING
   });
 };
