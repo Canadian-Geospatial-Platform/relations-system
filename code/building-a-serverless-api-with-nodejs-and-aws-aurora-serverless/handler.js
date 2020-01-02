@@ -16,7 +16,7 @@ module.exports.healthCheck = async () => {
   }
 }
 
-module.exports.create = async (event) => {
+module.exports.noteCreate = async (event) => {
   try {
     const { Note } = await connectToDatabase()
     const note = await Note.create(JSON.parse(event.body))
@@ -34,7 +34,7 @@ module.exports.create = async (event) => {
   }
 }
 
-module.exports.getOne = async (event) => {
+module.exports.noteGetOne = async (event) => {
   try {
     const { Note } = await connectToDatabase()
     const note = await Note.findById(event.pathParameters.id)
@@ -52,7 +52,7 @@ module.exports.getOne = async (event) => {
   }
 }
 
-module.exports.getAll = async () => {
+module.exports.noteGetAll = async () => {
   try {
     const { Note } = await connectToDatabase()
     const notes = await Note.findAll()
@@ -69,7 +69,7 @@ module.exports.getAll = async () => {
   }
 }
 
-module.exports.update = async (event) => {
+module.exports.noteUpdate = async (event) => {
   try {
     const input = JSON.parse(event.body)
     const { Note } = await connectToDatabase()
@@ -91,7 +91,7 @@ module.exports.update = async (event) => {
   }
 }
 
-module.exports.destroy = async (event) => {
+module.exports.noteDestroy = async (event) => {
   try {
     const { Note } = await connectToDatabase()
     const note = await Note.findById(event.pathParameters.id)

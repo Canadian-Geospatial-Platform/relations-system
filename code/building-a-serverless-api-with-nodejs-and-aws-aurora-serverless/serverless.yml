@@ -32,35 +32,35 @@ functions:
           method: get
           cors: true
   create:
-    handler: handler.create
+    handler: handler.noteCreate
     events:
       - http:
           path: notes
           method: post
           cors: true
   getOne:
-    handler: handler.getOne
+    handler: handler.noteGetOne
     events:
       - http:
           path: notes/{id}
           method: get
           cors: true
   getAll:
-    handler: handler.getAll
+    handler: handler.noteGetAll
     events:
      - http:
          path: notes
          method: get
          cors: true
   update:
-    handler: handler.update
+    handler: handler.noteUpdate
     events:
      - http:
          path: notes/{id}
          method: put
          cors: true
   destroy:
-    handler: handler.destroy
+    handler: handler.noteDestroy
     events:
      - http:
          path: notes/{id}

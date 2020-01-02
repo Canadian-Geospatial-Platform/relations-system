@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const NoteModel = require('./models/Note')
+const TagModel = require('./models/Tag')
 const mysql2 = require('mysql2'); // Needed to fix sequelize issues with WebPack
 
 const sequelize = new Sequelize(
@@ -14,7 +15,8 @@ const sequelize = new Sequelize(
   }
 )
 const Note = NoteModel(sequelize, Sequelize)
-const Models = { Note }
+const Tag = TagModel(sequelize, Sequelize)
+const Models = { Note, Tag }
 const connection = {}
 
 module.exports = async () => {
