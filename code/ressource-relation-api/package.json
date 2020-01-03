@@ -1,5 +1,5 @@
 {
-  "name": "building-a-serverless-api-with-nodejs-and-aws-aurora-serverless",
+  "name": "nrcan-ressource-relation-api",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
@@ -11,11 +11,11 @@
   "license": "",
   "devDependencies": {
     "nodemon": "^2.0.2",
-    "serverless-offline": "^3.33.0"
+    "serverless-offline": "^5.12.1"
   },
   "dependencies": {
     "apidoc-sequelize-generator": "^1.0.5",
-    "mysql2": "^1.7.0",
-    "sequelize": "^4.44.3"
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.3"
   }
 }

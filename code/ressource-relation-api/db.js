@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const gendoc = require("apidoc-sequelize-generator");
+const Gendoc = require("apidoc-sequelize-generator");
 const Mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
 const CollectionModel = require("./models/Collection");
@@ -31,7 +31,7 @@ TagRelation.belongsTo(Collection, { onDelete: "cascade" });
 TagRelation.belongsTo(Ressource, { onDelete: "cascade" });
 TagRelation.belongsTo(Tag, { onDelete: "cascade" });
 
-const ModelDocs = gendoc(sequelize)
+const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
 

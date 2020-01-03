@@ -37,7 +37,7 @@ module.exports.tagCreate = async event => {
 module.exports.tagGetOne = async event => {
   try {
     const { Tag } = await connectToDatabase();
-    const tag = await Tag.findById(event.pathParameters.id);
+    const tag = await Tag.findByPk(event.pathParameters.id);
     if (!tag)
       throw new HTTPError(
         404,
@@ -77,7 +77,7 @@ module.exports.tagUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
     const { Tag } = await connectToDatabase();
-    const tag = await Tag.findById(event.pathParameters.id);
+    const tag = await Tag.findByPk(event.pathParameters.id);
     if (!tag)
       throw new HTTPError(
         404,
@@ -102,7 +102,7 @@ module.exports.tagUpdate = async event => {
 module.exports.tagDestroy = async event => {
   try {
     const { Tag } = await connectToDatabase();
-    const tag = await Tag.findById(event.pathParameters.id);
+    const tag = await Tag.findByPk(event.pathParameters.id);
     if (!tag)
       throw new HTTPError(
         404,
@@ -143,7 +143,7 @@ module.exports.tagRelationCreate = async event => {
 module.exports.tagRelationGetOne = async event => {
   try {
     const { TagRelation } = await connectToDatabase();
-    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    const tagRelation = await TagRelation.findByPk(event.pathParameters.id);
     if (!tagRelation)
       throw new HTTPError(
         404,
@@ -183,7 +183,7 @@ module.exports.tagRelationUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
     const { TagRelation } = await connectToDatabase();
-    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    const tagRelation = await TagRelation.findByPk(event.pathParameters.id);
     if (!tagRelation)
       throw new HTTPError(
         404,
@@ -209,7 +209,7 @@ module.exports.tagRelationUpdate = async event => {
 module.exports.tagRelationDestroy = async event => {
   try {
     const { TagRelation } = await connectToDatabase();
-    const tagRelation = await TagRelation.findById(event.pathParameters.id);
+    const tagRelation = await TagRelation.findByPk(event.pathParameters.id);
     if (!tagRelation)
       throw new HTTPError(
         404,
@@ -250,7 +250,7 @@ module.exports.collectionCreate = async event => {
 module.exports.collectionGetOne = async event => {
   try {
     const { Collection } = await connectToDatabase();
-    const collection = await Collection.findById(event.pathParameters.id);
+    const collection = await Collection.findByPk(event.pathParameters.id);
     if (!collection)
       throw new HTTPError(
         404,
@@ -290,7 +290,7 @@ module.exports.collectionUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
     const { Collection } = await connectToDatabase();
-    const collection = await Collection.findById(event.pathParameters.id);
+    const collection = await Collection.findByPk(event.pathParameters.id);
     if (!collection)
       throw new HTTPError(
         404,
@@ -315,7 +315,7 @@ module.exports.collectionUpdate = async event => {
 module.exports.collectionDestroy = async event => {
   try {
     const { Collection } = await connectToDatabase();
-    const collection = await Collection.findById(event.pathParameters.id);
+    const collection = await Collection.findByPk(event.pathParameters.id);
     if (!collection)
       throw new HTTPError(
         404,
@@ -358,7 +358,7 @@ module.exports.collectionRelationCreate = async event => {
 module.exports.collectionRelationGetOne = async event => {
   try {
     const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findById(
+    const collectionRelation = await CollectionRelation.findByPk(
       event.pathParameters.id
     );
     if (!collectionRelation)
@@ -400,7 +400,7 @@ module.exports.collectionRelationUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
     const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findById(
+    const collectionRelation = await CollectionRelation.findByPk(
       event.pathParameters.id
     );
     if (!collectionRelation)
@@ -428,7 +428,7 @@ module.exports.collectionRelationUpdate = async event => {
 module.exports.collectionRelationDestroy = async event => {
   try {
     const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findById(
+    const collectionRelation = await CollectionRelation.findByPk(
       event.pathParameters.id
     );
     if (!collectionRelation)
@@ -471,7 +471,7 @@ module.exports.ressourceCreate = async event => {
 module.exports.ressourceGetOne = async event => {
   try {
     const { Ressource } = await connectToDatabase();
-    const ressource = await Ressource.findById(event.pathParameters.id);
+    const ressource = await Ressource.findByPk(event.pathParameters.id);
     if (!ressource)
       throw new HTTPError(
         404,
@@ -511,7 +511,7 @@ module.exports.ressourceUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
     const { Ressource } = await connectToDatabase();
-    const ressource = await Ressource.findById(event.pathParameters.id);
+    const ressource = await Ressource.findByPk(event.pathParameters.id);
     if (!ressource)
       throw new HTTPError(
         404,
@@ -537,7 +537,7 @@ module.exports.ressourceUpdate = async event => {
 module.exports.ressourceDestroy = async event => {
   try {
     const { Ressource } = await connectToDatabase();
-    const ressource = await Ressource.findById(event.pathParameters.id);
+    const ressource = await Ressource.findByPk(event.pathParameters.id);
     if (!ressource)
       throw new HTTPError(
         404,
