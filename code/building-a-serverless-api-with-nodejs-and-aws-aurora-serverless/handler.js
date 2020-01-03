@@ -16,112 +16,6 @@ module.exports.healthCheck = async () => {
   };
 };
 
-module.exports.noteCreate = async event => {
-  try {
-    const { Note } = await connectToDatabase();
-    const note = await Note.create(JSON.parse(event.body));
-    return {
-      statusCode: 200,
-      body: JSON.stringify(note)
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not create the note. " + err
-    };
-  }
-};
-
-module.exports.noteGetOne = async event => {
-  try {
-    const { Note } = await connectToDatabase();
-    const note = await Note.findById(event.pathParameters.id);
-    if (!note)
-      throw new HTTPError(
-        404,
-        `Note with id: ${event.pathParameters.id} was not found`
-      );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(note)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not fetch the Note."
-    };
-  }
-};
-
-module.exports.noteGetAll = async () => {
-  try {
-    const { Note } = await connectToDatabase();
-    const notes = await Note.findAll();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(notes)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the notes."
-    };
-  }
-};
-
-module.exports.noteUpdate = async event => {
-  try {
-    const input = JSON.parse(event.body);
-    const { Note } = await connectToDatabase();
-    const note = await Note.findById(event.pathParameters.id);
-    if (!note)
-      throw new HTTPError(
-        404,
-        `Note with id: ${event.pathParameters.id} was not found`
-      );
-    if (input.title) note.title = input.title;
-    if (input.description) note.description = input.description;
-    await note.save();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(note)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not update the Note."
-    };
-  }
-};
-
-module.exports.noteDestroy = async event => {
-  try {
-    const { Note } = await connectToDatabase();
-    const note = await Note.findById(event.pathParameters.id);
-    if (!note)
-      throw new HTTPError(
-        404,
-        `Note with id: ${event.pathParameters.id} was not found`
-      );
-    await note.destroy();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(note)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not destroy the Note."
-    };
-  }
-};
-
 module.exports.tagCreate = async event => {
   try {
     const { Tag } = await connectToDatabase();
@@ -437,6 +331,120 @@ module.exports.collectionDestroy = async event => {
       statusCode: err.statusCode || 500,
       headers: { "Content-Type": "text/plain" },
       body: err.message || "Could not destroy the Collection."
+    };
+  }
+};
+//
+module.exports.collectionRelationCreate = async event => {
+  try {
+    const { CollectionRelation } = await connectToDatabase();
+    const collectionRelation = await CollectionRelation.create(
+      JSON.parse(event.body)
+    );
+    return {
+      statusCode: 200,
+      body: JSON.stringify(collectionRelation)
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not create the collectionRelation. " + err
+    };
+  }
+};
+
+module.exports.collectionRelationGetOne = async event => {
+  try {
+    const { CollectionRelation } = await connectToDatabase();
+    const collectionRelation = await CollectionRelation.findById(
+      event.pathParameters.id
+    );
+    if (!collectionRelation)
+      throw new HTTPError(
+        404,
+        `CollectionRelation with id: ${event.pathParameters.id} was not found`
+      );
+    return {
+      statusCode: 200,
+      body: JSON.stringify(collectionRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not fetch the CollectionRelation."
+    };
+  }
+};
+
+module.exports.collectionRelationGetAll = async () => {
+  try {
+    const { CollectionRelation } = await connectToDatabase();
+    const collectionRelations = await CollectionRelation.findAll();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(collectionRelations)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not fetch the collectionRelations."
+    };
+  }
+};
+
+module.exports.collectionRelationUpdate = async event => {
+  try {
+    const input = JSON.parse(event.body);
+    const { CollectionRelation } = await connectToDatabase();
+    const collectionRelation = await CollectionRelation.findById(
+      event.pathParameters.id
+    );
+    if (!collectionRelation)
+      throw new HTTPError(
+        404,
+        `CollectionRelation with id: ${event.pathParameters.id} was not found`
+      );
+    if (input.Title) collectionRelation.Title = input.Title;
+    if (input.Description) collectionRelation.Description = input.Description;
+    await collectionRelation.save();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(collectionRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not update the CollectionRelation."
+    };
+  }
+};
+
+module.exports.collectionRelationDestroy = async event => {
+  try {
+    const { CollectionRelation } = await connectToDatabase();
+    const collectionRelation = await CollectionRelation.findById(
+      event.pathParameters.id
+    );
+    if (!collectionRelation)
+      throw new HTTPError(
+        404,
+        `CollectionRelation with id: ${event.pathParameters.id} was not found`
+      );
+    await collectionRelation.destroy();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(collectionRelation)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not destroy the CollectionRelation."
     };
   }
 };

@@ -31,41 +31,6 @@ functions:
           path: /
           method: get
           cors: true
-  noteCreate:
-    handler: handler.noteCreate
-    events:
-      - http:
-          path: notes
-          method: post
-          cors: true
-  noteGetOne:
-    handler: handler.noteGetOne
-    events:
-      - http:
-          path: notes/{id}
-          method: get
-          cors: true
-  noteGetAll:
-    handler: handler.noteGetAll
-    events:
-      - http:
-          path: notes
-          method: get
-          cors: true
-  noteUpdate:
-    handler: handler.noteUpdate
-    events:
-      - http:
-          path: notes/{id}
-          method: put
-          cors: true
-  noteDestroy:
-    handler: handler.noteDestroy
-    events:
-      - http:
-          path: notes/{id}
-          method: delete
-          cors: true
   tagCreate:
     handler: handler.tagCreate
     events:
@@ -169,6 +134,41 @@ functions:
     events:
       - http:
           path: collections/{id}
+          method: delete
+          cors: true
+  collectionRelationCreate:
+    handler: handler.collectionRelationCreate
+    events:
+      - http:
+          path: collectionRelations
+          method: post
+          cors: true
+  collectionRelationGetOne:
+    handler: handler.collectionRelationGetOne
+    events:
+      - http:
+          path: collectionRelations/{id}
+          method: get
+          cors: true
+  collectionRelationGetAll:
+    handler: handler.collectionRelationGetAll
+    events:
+      - http:
+          path: collectionRelations
+          method: get
+          cors: true
+  collectionRelationUpdate:
+    handler: handler.collectionRelationUpdate
+    events:
+      - http:
+          path: collectionRelations/{id}
+          method: put
+          cors: true
+  collectionRelationDestroy:
+    handler: handler.collectionRelationDestroy
+    events:
+      - http:
+          path: collectionRelations/{id}
           method: delete
           cors: true
 

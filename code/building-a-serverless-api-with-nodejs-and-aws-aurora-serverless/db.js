@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
 const CollectionModel = require("./models/Collection");
-const NoteModel = require("./models/Note");
+const CollectionRelationModel = require("./models/CollectionRelation");
 const TagModel = require("./models/Tag");
 const TagRelationModel = require("./models/TagRelation");
 
@@ -18,13 +18,14 @@ const sequelize = new Sequelize(
   }
 );
 const Collection = CollectionModel(sequelize, Sequelize);
-const Note = NoteModel(sequelize, Sequelize);
+const CollectionRelation = CollectionRelationModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const TagRelation = TagRelationModel(sequelize, Sequelize);
 
-const Models = { Collection, Note, Tag, TagRelation };
+const Models = { Collection, CollectionRelation, Tag, TagRelation };
 const connection = {};
 
+CollectionRelation.belongsTo(Collection, { onDelete: "cascade" });
 TagRelation.belongsTo(Tag, { onDelete: "cascade" });
 
 module.exports = async () => {
