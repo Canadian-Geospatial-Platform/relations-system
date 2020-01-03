@@ -7,8 +7,8 @@
     "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\""
   },
   "keywords": [],
-  "author": "Adnan Rahić",
-  "license": "MIT",
+  "author": "Pascal Vautour",
+  "license": "",
   "devDependencies": {
     "nodemon": "^2.0.2",
     "serverless-offline": "^3.33.0"
