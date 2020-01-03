@@ -15,6 +15,9 @@ const sequelize = new Sequelize(
   {
     dialect: "mysql",
     dialectModule: Mysql2, // Needed to fix sequelize issues with WebPack
+    dialectOptions: {
+      connectTimeout: 60000
+    },
     host: process.env.DB_HOST,
     port: process.env.DB_PORT
   }

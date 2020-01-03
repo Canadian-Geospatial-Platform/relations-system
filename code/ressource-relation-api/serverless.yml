@@ -1,4 +1,4 @@
-service: web-api
+service: ressource-relation-api
 
 custom:
   secrets: ${file(secrets.json)}
@@ -6,7 +6,7 @@ custom:
 provider:
   name: aws
   region: ${self:custom.secrets.REGION}
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   timeout: 30
   stage: ${self:custom.secrets.NODE_ENV}
   environment:
@@ -24,7 +24,7 @@ provider:
       - ${self:custom.secrets.SUBNET2_ID}
 
 functions:
-  healthCheck:
+  docs:
     handler: handler.docs
     events:
       - http:
