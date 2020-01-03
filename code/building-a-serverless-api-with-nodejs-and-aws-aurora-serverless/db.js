@@ -1,10 +1,10 @@
 const Sequelize = require("sequelize");
 const mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
+const CollectionModel = require("./models/Collection");
 const NoteModel = require("./models/Note");
 const TagModel = require("./models/Tag");
 const TagRelationModel = require("./models/TagRelation");
-const CollectionModel = require("./models/Collection");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -17,12 +17,12 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT
   }
 );
+const Collection = CollectionModel(sequelize, Sequelize);
 const Note = NoteModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const TagRelation = TagRelationModel(sequelize, Sequelize);
-const Collection = CollectionModel(sequelize, Sequelize);
 
-const Models = { Note, Tag, TagRelation, Collection };
+const Models = { Collection, Note, Tag, TagRelation };
 const connection = {};
 
 TagRelation.belongsTo(Tag, { onDelete: "cascade" });
