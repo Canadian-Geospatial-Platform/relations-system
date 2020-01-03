@@ -1,4 +1,5 @@
 # How to create a serverless API with MySQL
+
 This project was created following the instructions provided at this url: https://hackernoon.com/a-crash-course-on-serverless-with-aws-building-apis-with-lambda-and-aurora-serverless-49885c46e37a
 
 # To run the project locally
@@ -13,4 +14,10 @@ sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_D
 
 ```
 npm run offline
+```
+
+3. Connecting to the database manually to inspect and drop tables when required by orm modifications
+
+```
+mysql -h 127.0.0.1 -P 3306 --protocol=tcp -u root -p
 ```

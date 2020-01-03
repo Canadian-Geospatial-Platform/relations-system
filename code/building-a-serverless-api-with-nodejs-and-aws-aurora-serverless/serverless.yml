@@ -171,6 +171,41 @@ functions:
           path: collectionRelations/{id}
           method: delete
           cors: true
+  ressourceCreate:
+    handler: handler.ressourceCreate
+    events:
+      - http:
+          path: ressources
+          method: post
+          cors: true
+  ressourceGetOne:
+    handler: handler.ressourceGetOne
+    events:
+      - http:
+          path: ressources/{id}
+          method: get
+          cors: true
+  ressourceGetAll:
+    handler: handler.ressourceGetAll
+    events:
+      - http:
+          path: ressources
+          method: get
+          cors: true
+  ressourceUpdate:
+    handler: handler.ressourceUpdate
+    events:
+      - http:
+          path: ressources/{id}
+          method: put
+          cors: true
+  ressourceDestroy:
+    handler: handler.ressourceDestroy
+    events:
+      - http:
+          path: ressources/{id}
+          method: delete
+          cors: true
 
 plugins:
   - serverless-offline

@@ -1,10 +1,12 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define("TagRelation", {
+  return sequelize.define("Ressource", {
     Id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    PopularityIndex: type.INTEGER
+    Title: type.STRING,
+    Description: type.STRING,
+    RessourceUrl: type.STRING
   });
 };

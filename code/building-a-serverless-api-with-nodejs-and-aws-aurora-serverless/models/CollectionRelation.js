@@ -5,7 +5,6 @@ module.exports = (sequelize, type) => {
       primaryKey: true,
       autoIncrement: true
     },
-    PopularityIndex: type.INTEGER,
-    RessourceUrl: type.STRING
+    PopularityIndex: type.INTEGER
   });
 };

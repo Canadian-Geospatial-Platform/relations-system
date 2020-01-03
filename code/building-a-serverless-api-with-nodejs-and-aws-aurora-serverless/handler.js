@@ -191,7 +191,7 @@ module.exports.tagRelationUpdate = async event => {
       );
     if (input.PopularityIndex)
       tagRelation.PopularityIndex = input.PopularityIndex;
-    if (input.RessourceUrl) tagRelation.RessourceUrl = input.RessourceUrl;
+    if (input.RessourceId) tagRelation.RessourceId = input.RessourceId;
     await tagRelation.save();
     return {
       statusCode: 200,
@@ -334,7 +334,7 @@ module.exports.collectionDestroy = async event => {
     };
   }
 };
-//
+
 module.exports.collectionRelationCreate = async event => {
   try {
     const { CollectionRelation } = await connectToDatabase();
@@ -408,8 +408,9 @@ module.exports.collectionRelationUpdate = async event => {
         404,
         `CollectionRelation with id: ${event.pathParameters.id} was not found`
       );
-    if (input.Title) collectionRelation.Title = input.Title;
-    if (input.Description) collectionRelation.Description = input.Description;
+    if (input.PopularityIndex)
+      collectionRelation.PopularityIndex = input.PopularityIndex;
+    if (input.RessourceId) collectionRelation.RessourceId = input.RessourceId;
     await collectionRelation.save();
     return {
       statusCode: 200,
@@ -445,6 +446,113 @@ module.exports.collectionRelationDestroy = async event => {
       statusCode: err.statusCode || 500,
       headers: { "Content-Type": "text/plain" },
       body: err.message || "Could not destroy the CollectionRelation."
+    };
+  }
+};
+//
+module.exports.ressourceCreate = async event => {
+  try {
+    const { Ressource } = await connectToDatabase();
+    const ressource = await Ressource.create(JSON.parse(event.body));
+    return {
+      statusCode: 200,
+      body: JSON.stringify(ressource)
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not create the ressource. " + err
+    };
+  }
+};
+
+module.exports.ressourceGetOne = async event => {
+  try {
+    const { Ressource } = await connectToDatabase();
+    const ressource = await Ressource.findById(event.pathParameters.id);
+    if (!ressource)
+      throw new HTTPError(
+        404,
+        `Ressource with id: ${event.pathParameters.id} was not found`
+      );
+    return {
+      statusCode: 200,
+      body: JSON.stringify(ressource)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not fetch the Ressource."
+    };
+  }
+};
+
+module.exports.ressourceGetAll = async () => {
+  try {
+    const { Ressource } = await connectToDatabase();
+    const ressources = await Ressource.findAll();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(ressources)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: "Could not fetch the ressources."
+    };
+  }
+};
+
+module.exports.ressourceUpdate = async event => {
+  try {
+    const input = JSON.parse(event.body);
+    const { Ressource } = await connectToDatabase();
+    const ressource = await Ressource.findById(event.pathParameters.id);
+    if (!ressource)
+      throw new HTTPError(
+        404,
+        `Ressource with id: ${event.pathParameters.id} was not found`
+      );
+    if (input.Title) ressource.Title = input.Title;
+    if (input.Description) ressource.Description = input.Description;
+    if (input.RessourceUrl) ressource.RessourceUrl = input.RessourceUrl;
+    await ressource.save();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(ressource)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not update the Ressource."
+    };
+  }
+};
+
+module.exports.ressourceDestroy = async event => {
+  try {
+    const { Ressource } = await connectToDatabase();
+    const ressource = await Ressource.findById(event.pathParameters.id);
+    if (!ressource)
+      throw new HTTPError(
+        404,
+        `Ressource with id: ${event.pathParameters.id} was not found`
+      );
+    await ressource.destroy();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(ressource)
+    };
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "text/plain" },
+      body: err.message || "Could not destroy the Ressource."
     };
   }
 };
