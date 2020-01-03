@@ -1,0 +1,211 @@
+service: ressource-relation-api
+
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  region: ${self:custom.secrets.REGION}
+  runtime: nodejs10.x
+  timeout: 30
+  stage: ${self:custom.secrets.NODE_ENV}
+  environment:
+    DB_HOST: ${self:custom.secrets.DB_HOST}
+    DB_NAME: ${self:custom.secrets.DB_NAME}
+    DB_PASSWORD: ${self:custom.secrets.DB_PASSWORD}
+    DB_PORT: ${self:custom.secrets.DB_PORT}
+    DB_USER: ${self:custom.secrets.DB_USER}
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+  vpc:
+    securityGroupIds:
+      - ${self:custom.secrets.SECURITY_GROUP_ID}
+    subnetIds:
+      - ${self:custom.secrets.SUBNET1_ID}
+      - ${self:custom.secrets.SUBNET2_ID}
+
+functions:
+  docs:
+    handler: handler.docs
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+  tagCreate:
+    handler: handler.tagCreate
+    events:
+      - http:
+          path: tags
+          method: post
+          cors: true
+  tagGetOne:
+    handler: handler.tagGetOne
+    events:
+      - http:
+          path: tags/{id}
+          method: get
+          cors: true
+  tagGetAll:
+    handler: handler.tagGetAll
+    events:
+      - http:
+          path: tags
+          method: get
+          cors: true
+  tagUpdate:
+    handler: handler.tagUpdate
+    events:
+      - http:
+          path: tags/{id}
+          method: put
+          cors: true
+  tagDestroy:
+    handler: handler.tagDestroy
+    events:
+      - http:
+          path: tags/{id}
+          method: delete
+          cors: true
+  tagRelationCreate:
+    handler: handler.tagRelationCreate
+    events:
+      - http:
+          path: tagRelations
+          method: post
+          cors: true
+  tagRelationGetOne:
+    handler: handler.tagRelationGetOne
+    events:
+      - http:
+          path: tagRelations/{id}
+          method: get
+          cors: true
+  tagRelationGetAll:
+    handler: handler.tagRelationGetAll
+    events:
+      - http:
+          path: tagRelations
+          method: get
+          cors: true
+  tagRelationUpdate:
+    handler: handler.tagRelationUpdate
+    events:
+      - http:
+          path: tagRelations/{id}
+          method: put
+          cors: true
+  tagRelationDestroy:
+    handler: handler.tagRelationDestroy
+    events:
+      - http:
+          path: tagRelations/{id}
+          method: delete
+          cors: true
+  collectionCreate:
+    handler: handler.collectionCreate
+    events:
+      - http:
+          path: collections
+          method: post
+          cors: true
+  collectionGetOne:
+    handler: handler.collectionGetOne
+    events:
+      - http:
+          path: collections/{id}
+          method: get
+          cors: true
+  collectionGetAll:
+    handler: handler.collectionGetAll
+    events:
+      - http:
+          path: collections
+          method: get
+          cors: true
+  collectionUpdate:
+    handler: handler.collectionUpdate
+    events:
+      - http:
+          path: collections/{id}
+          method: put
+          cors: true
+  collectionDestroy:
+    handler: handler.collectionDestroy
+    events:
+      - http:
+          path: collections/{id}
+          method: delete
+          cors: true
+  collectionRelationCreate:
+    handler: handler.collectionRelationCreate
+    events:
+      - http:
+          path: collectionRelations
+          method: post
+          cors: true
+  collectionRelationGetOne:
+    handler: handler.collectionRelationGetOne
+    events:
+      - http:
+          path: collectionRelations/{id}
+          method: get
+          cors: true
+  collectionRelationGetAll:
+    handler: handler.collectionRelationGetAll
+    events:
+      - http:
+          path: collectionRelations
+          method: get
+          cors: true
+  collectionRelationUpdate:
+    handler: handler.collectionRelationUpdate
+    events:
+      - http:
+          path: collectionRelations/{id}
+          method: put
+          cors: true
+  collectionRelationDestroy:
+    handler: handler.collectionRelationDestroy
+    events:
+      - http:
+          path: collectionRelations/{id}
+          method: delete
+          cors: true
+  ressourceCreate:
+    handler: handler.ressourceCreate
+    events:
+      - http:
+          path: ressources
+          method: post
+          cors: true
+  ressourceGetOne:
+    handler: handler.ressourceGetOne
+    events:
+      - http:
+          path: ressources/{id}
+          method: get
+          cors: true
+  ressourceGetAll:
+    handler: handler.ressourceGetAll
+    events:
+      - http:
+          path: ressources
+          method: get
+          cors: true
+  ressourceUpdate:
+    handler: handler.ressourceUpdate
+    events:
+      - http:
+          path: ressources/{id}
+          method: put
+          cors: true
+  ressourceDestroy:
+    handler: handler.ressourceDestroy
+    events:
+      - http:
+          path: ressources/{id}
+          method: delete
+          cors: true
+
+plugins:
+  - serverless-offline

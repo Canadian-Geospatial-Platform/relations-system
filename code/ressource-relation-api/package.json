@@ -1,0 +1,21 @@
+{
+  "name": "nrcan-ressource-relation-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\""
+  },
+  "keywords": [],
+  "author": "Pascal Vautour",
+  "license": "",
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "serverless-offline": "^5.12.1"
+  },
+  "dependencies": {
+    "apidoc-sequelize-generator": "^1.0.5",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.3"
+  }
+}
