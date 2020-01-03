@@ -25,11 +25,20 @@ const Ressource = RessourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const TagRelation = TagRelationModel(sequelize, Sequelize);
 
-CollectionRelation.belongsTo(Collection, { onDelete: "cascade" });
-CollectionRelation.belongsTo(Ressource, { onDelete: "cascade" });
+CollectionRelation.belongsTo(Collection, {
+  foreignKey: { allowNull: false },
+  onDelete: "cascade"
+});
+CollectionRelation.belongsTo(Ressource, {
+  foreignKey: { allowNull: false },
+  onDelete: "cascade"
+});
 TagRelation.belongsTo(Collection, { onDelete: "cascade" });
 TagRelation.belongsTo(Ressource, { onDelete: "cascade" });
-TagRelation.belongsTo(Tag, { onDelete: "cascade" });
+TagRelation.belongsTo(Tag, {
+  foreignKey: { allowNull: false },
+  onDelete: "cascade"
+});
 
 const ModelDocs = Gendoc(sequelize)
   .auto()
