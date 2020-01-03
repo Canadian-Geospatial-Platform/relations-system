@@ -127,10 +127,13 @@ module.exports.tagRelationCreate = async event => {
   try {
     const { TagRelation } = await connectToDatabase();
     const input = JSON.parse(event.body);
-    if (!(input.CollectionId ^ input.RessourceId))
+    if (
+      (input.CollectionId && input.RessourceId) ||
+      (!input.CollectionId && !input.RessourceId)
+    )
       throw new HTTPError(
         422,
-        `A TagRelation can only have one CollectionId XOR RessourceId`
+        `A TagRelation must have one CollectionId XOR RessourceId`
       );
     const tagRelation = await TagRelation.create(input);
     return {
@@ -196,10 +199,10 @@ module.exports.tagRelationUpdate = async event => {
         404,
         `TagRelation with id: ${event.pathParameters.id} was not found`
       );
-    if (!(input.CollectionId ^ input.RessourceId))
+    if (input.CollectionId && input.RessourceId)
       throw new HTTPError(
         422,
-        `A TagRelation can only have one CollectionId XOR RessourceId`
+        `A TagRelation must have one CollectionId XOR RessourceId`
       );
     if (input.PopularityIndex)
       tagRelation.PopularityIndex = input.PopularityIndex;
@@ -361,10 +364,13 @@ module.exports.collectionRelationCreate = async event => {
   try {
     const { CollectionRelation } = await connectToDatabase();
     const input = JSON.parse(event.body);
-    if (!(input.CollectionRessourceId ^ input.RessourceId))
+    if (
+      (input.CollectionRessourceId && input.RessourceId) ||
+      (!input.CollectionRessourceId && !input.RessourceId)
+    )
       throw new HTTPError(
         422,
-        `A CollectionRelation can only have one CollectionRessourceId XOR RessourceId`
+        `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
       );
     const collectionRelation = await CollectionRelation.create(input);
     return {
@@ -434,10 +440,10 @@ module.exports.collectionRelationUpdate = async event => {
         404,
         `CollectionRelation with id: ${event.pathParameters.id} was not found`
       );
-    if (!(input.CollectionRessourceId ^ input.RessourceId))
+    if (input.CollectionRessourceId && input.RessourceId)
       throw new HTTPError(
         422,
-        `A CollectionRelation can only have one CollectionRessourceId XOR RessourceId`
+        `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
       );
     if (input.PopularityIndex)
       collectionRelation.PopularityIndex = input.PopularityIndex;
