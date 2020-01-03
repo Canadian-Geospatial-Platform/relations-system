@@ -6,6 +6,10 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     Title: type.STRING,
-    Description: type.STRING
+    Description: type.STRING,
+    PopularityIndex: {
+      type: type.INTEGER,
+      defaultValue: 0
+    }
   });
 };

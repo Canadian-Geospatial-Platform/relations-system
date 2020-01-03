@@ -7,6 +7,10 @@ module.exports = (sequelize, type) => {
     },
     Title: type.STRING,
     Description: type.STRING,
-    RessourceUrl: type.STRING
+    RessourceUrl: type.STRING,
+    PopularityIndex: {
+      type: type.INTEGER,
+      defaultValue: 0
+    }
   });
 };

@@ -83,6 +83,7 @@ module.exports.tagUpdate = async event => {
         404,
         `Tag with id: ${event.pathParameters.id} was not found`
       );
+    if (input.PopularityIndex) tag.PopularityIndex = input.PopularityIndex;
     if (input.title) tag.title = input.title;
     if (input.description) tag.description = input.description;
     await tag.save();
@@ -298,6 +299,8 @@ module.exports.collectionUpdate = async event => {
         404,
         `Collection with id: ${event.pathParameters.id} was not found`
       );
+    if (input.PopularityIndex)
+      collection.PopularityIndex = input.PopularityIndex;
     if (input.Title) collection.Title = input.Title;
     if (input.Description) collection.Description = input.Description;
     await collection.save();
@@ -521,6 +524,8 @@ module.exports.ressourceUpdate = async event => {
         404,
         `Ressource with id: ${event.pathParameters.id} was not found`
       );
+    if (input.PopularityIndex)
+      ressource.PopularityIndex = input.PopularityIndex;
     if (input.Title) ressource.Title = input.Title;
     if (input.Description) ressource.Description = input.Description;
     if (input.RessourceUrl) ressource.RessourceUrl = input.RessourceUrl;
