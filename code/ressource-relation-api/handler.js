@@ -360,9 +360,13 @@ module.exports.collectionDestroy = async event => {
 module.exports.collectionRelationCreate = async event => {
   try {
     const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.create(
-      JSON.parse(event.body)
-    );
+    const input = JSON.parse(event.body);
+    if (!(input.CollectionRessourceId ^ input.RessourceId))
+      throw new HTTPError(
+        422,
+        `A CollectionRelation can only have one CollectionRessourceId XOR RessourceId`
+      );
+    const collectionRelation = await CollectionRelation.create(input);
     return {
       statusCode: 200,
       body: JSON.stringify(collectionRelation)
@@ -430,11 +434,23 @@ module.exports.collectionRelationUpdate = async event => {
         404,
         `CollectionRelation with id: ${event.pathParameters.id} was not found`
       );
+    if (!(input.CollectionRessourceId ^ input.RessourceId))
+      throw new HTTPError(
+        422,
+        `A CollectionRelation can only have one CollectionRessourceId XOR RessourceId`
+      );
     if (input.PopularityIndex)
       collectionRelation.PopularityIndex = input.PopularityIndex;
     if (input.CollectionId)
       collectionRelation.CollectionId = input.CollectionId;
-    if (input.RessourceId) collectionRelation.RessourceId = input.RessourceId;
+    if (input.CollectionRessourceId) {
+      collectionRelation.RessourceId = null;
+      collectionRelation.CollectionRessourceId = input.CollectionRessourceId;
+    }
+    if (input.RessourceId) {
+      collectionRelation.CollectionRessourceId = null;
+      collectionRelation.RessourceId = input.RessourceId;
+    }
     await collectionRelation.save();
     return {
       statusCode: 200,

@@ -29,8 +29,9 @@ CollectionRelation.belongsTo(Collection, {
   foreignKey: { allowNull: false },
   onDelete: "cascade"
 });
-CollectionRelation.belongsTo(Ressource, {
-  foreignKey: { allowNull: false },
+CollectionRelation.belongsTo(Ressource, { onDelete: "cascade" });
+CollectionRelation.belongsTo(Collection, {
+  as: "CollectionRessource",
   onDelete: "cascade"
 });
 TagRelation.belongsTo(Collection, { onDelete: "cascade" });
