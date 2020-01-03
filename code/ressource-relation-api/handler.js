@@ -126,7 +126,13 @@ module.exports.tagDestroy = async event => {
 module.exports.tagRelationCreate = async event => {
   try {
     const { TagRelation } = await connectToDatabase();
-    const tagRelation = await TagRelation.create(JSON.parse(event.body));
+    const input = JSON.parse(event.body);
+    if (!(input.CollectionId ^ input.RessourceId))
+      throw new HTTPError(
+        422,
+        `A TagRelation can only have one CollectionId XOR RessourceId`
+      );
+    const tagRelation = await TagRelation.create(input);
     return {
       statusCode: 200,
       body: JSON.stringify(tagRelation)
@@ -190,10 +196,21 @@ module.exports.tagRelationUpdate = async event => {
         404,
         `TagRelation with id: ${event.pathParameters.id} was not found`
       );
+    if (!(input.CollectionId ^ input.RessourceId))
+      throw new HTTPError(
+        422,
+        `A TagRelation can only have one CollectionId XOR RessourceId`
+      );
     if (input.PopularityIndex)
       tagRelation.PopularityIndex = input.PopularityIndex;
-    if (input.CollectionId) tagRelation.CollectionId = input.CollectionId;
-    if (input.RessourceId) tagRelation.RessourceId = input.RessourceId;
+    if (input.CollectionId) {
+      tagRelation.RessourceId = null;
+      tagRelation.CollectionId = input.CollectionId;
+    }
+    if (input.RessourceId) {
+      tagRelation.CollectionId = null;
+      tagRelation.RessourceId = input.RessourceId;
+    }
     if (input.TagId) tagRelation.TagId = input.TagId;
     await tagRelation.save();
     return {
