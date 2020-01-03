@@ -191,7 +191,9 @@ module.exports.tagRelationUpdate = async event => {
       );
     if (input.PopularityIndex)
       tagRelation.PopularityIndex = input.PopularityIndex;
+    if (input.CollectionId) tagRelation.CollectionId = input.CollectionId;
     if (input.RessourceId) tagRelation.RessourceId = input.RessourceId;
+    if (input.TagId) tagRelation.TagId = input.TagId;
     await tagRelation.save();
     return {
       statusCode: 200,
@@ -410,6 +412,8 @@ module.exports.collectionRelationUpdate = async event => {
       );
     if (input.PopularityIndex)
       collectionRelation.PopularityIndex = input.PopularityIndex;
+    if (input.CollectionId)
+      collectionRelation.CollectionId = input.CollectionId;
     if (input.RessourceId) collectionRelation.RessourceId = input.RessourceId;
     await collectionRelation.save();
     return {
