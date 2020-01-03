@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
-const mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
+const gendoc = require("apidoc-sequelize-generator");
+const Mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
 const CollectionModel = require("./models/Collection");
 const CollectionRelationModel = require("./models/CollectionRelation");
@@ -13,7 +14,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     dialect: "mysql",
-    dialectModule: mysql2, // Needed to fix sequelize issues with WebPack
+    dialectModule: Mysql2, // Needed to fix sequelize issues with WebPack
     host: process.env.DB_HOST,
     port: process.env.DB_PORT
   }
@@ -24,14 +25,26 @@ const Ressource = RessourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const TagRelation = TagRelationModel(sequelize, Sequelize);
 
-const Models = { Collection, CollectionRelation, Ressource, Tag, TagRelation };
-const connection = {};
-
 CollectionRelation.belongsTo(Collection, { onDelete: "cascade" });
 CollectionRelation.belongsTo(Ressource, { onDelete: "cascade" });
 TagRelation.belongsTo(Collection, { onDelete: "cascade" });
 TagRelation.belongsTo(Ressource, { onDelete: "cascade" });
 TagRelation.belongsTo(Tag, { onDelete: "cascade" });
+
+const ModelDocs = gendoc(sequelize)
+  .auto()
+  .toString();
+
+const Models = {
+  Collection,
+  CollectionRelation,
+  ModelDocs, // The docs detailing the Models
+  Ressource,
+  Tag,
+  TagRelation
+};
+
+const connection = {};
 
 module.exports = async () => {
   if (connection.isConnected) {

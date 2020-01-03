@@ -1,5 +1,4 @@
 "use strict";
-
 const connectToDatabase = require("./db");
 function HTTPError(statusCode, message) {
   const error = new Error(message);
@@ -7,12 +6,13 @@ function HTTPError(statusCode, message) {
   return error;
 }
 
-module.exports.healthCheck = async () => {
-  await connectToDatabase();
+module.exports.docs = async () => {
+  const { ModelDocs } = await connectToDatabase();
   console.log("Connection successful.");
+
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "Connection successful." })
+    body: ModelDocs
   };
 };
 

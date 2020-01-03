@@ -25,7 +25,7 @@ provider:
 
 functions:
   healthCheck:
-    handler: handler.healthCheck
+    handler: handler.docs
     events:
       - http:
           path: /
