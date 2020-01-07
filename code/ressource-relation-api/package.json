@@ -4,7 +4,8 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\""
+    "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\"",
+    "deploy": "sls deploy"
   },
   "keywords": [],
   "author": "Pascal Vautour",
