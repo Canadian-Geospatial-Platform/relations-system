@@ -206,6 +206,114 @@ functions:
           path: ressources/{id}
           method: delete
           cors: true
+  #
+  userCreate:
+    handler: handler.userCreate
+    events:
+      - http:
+          path: users
+          method: post
+          cors: true
+  userGetOne:
+    handler: handler.userGetOne
+    events:
+      - http:
+          path: users/{id}
+          method: get
+          cors: true
+  userGetAll:
+    handler: handler.userGetAll
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+  userUpdate:
+    handler: handler.userUpdate
+    events:
+      - http:
+          path: users/{id}
+          method: put
+          cors: true
+  userDestroy:
+    handler: handler.userDestroy
+    events:
+      - http:
+          path: users/{id}
+          method: delete
+          cors: true
+  #
+  communityCreate:
+    handler: handler.communityCreate
+    events:
+      - http:
+          path: communitys
+          method: post
+          cors: true
+  communityGetOne:
+    handler: handler.communityGetOne
+    events:
+      - http:
+          path: communitys/{id}
+          method: get
+          cors: true
+  communityGetAll:
+    handler: handler.communityGetAll
+    events:
+      - http:
+          path: communitys
+          method: get
+          cors: true
+  communityUpdate:
+    handler: handler.communityUpdate
+    events:
+      - http:
+          path: communitys/{id}
+          method: put
+          cors: true
+  communityDestroy:
+    handler: handler.communityDestroy
+    events:
+      - http:
+          path: communitys/{id}
+          method: delete
+          cors: true
+  #
+  communityUserRelationCreate:
+    handler: handler.communityUserRelationCreate
+    events:
+      - http:
+          path: communityUserRelations
+          method: post
+          cors: true
+  communityUserRelationGetOne:
+    handler: handler.communityUserRelationGetOne
+    events:
+      - http:
+          path: communityUserRelations/{communityId}/{userId}
+          method: get
+          cors: true
+  communityUserRelationGetAll:
+    handler: handler.communityUserRelationGetAll
+    events:
+      - http:
+          path: communityUserRelations
+          method: get
+          cors: true
+  communityUserRelationUpdate:
+    handler: handler.communityUserRelationUpdate
+    events:
+      - http:
+          path: communityUserRelations/{communityId}/{userId}
+          method: put
+          cors: true
+  communityUserRelationDestroy:
+    handler: handler.communityUserRelationDestroy
+    events:
+      - http:
+          path: communityUserRelations/{communityId}/{userId}
+          method: delete
+          cors: true
 
 plugins:
   - serverless-offline

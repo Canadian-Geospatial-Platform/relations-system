@@ -7,6 +7,9 @@ const CollectionRelationModel = require("./models/CollectionRelation");
 const RessourceModel = require("./models/Ressource");
 const TagModel = require("./models/Tag");
 const TagRelationModel = require("./models/TagRelation");
+const UserModel = require("./models/User");
+const CommunityModel = require("./models/Community");
+const CommunityUserRelationModel = require("./models/CommunityUserRelations");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -27,6 +30,9 @@ const CollectionRelation = CollectionRelationModel(sequelize, Sequelize);
 const Ressource = RessourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const TagRelation = TagRelationModel(sequelize, Sequelize);
+const User = UserModel(sequelize, Sequelize);
+const Community = CommunityModel(sequelize, Sequelize);
+const CommunityUserRelation = CommunityUserRelationModel(sequelize, Sequelize);
 
 CollectionRelation.belongsTo(Collection, {
   foreignKey: { allowNull: false },
@@ -44,6 +50,17 @@ TagRelation.belongsTo(Tag, {
   onDelete: "cascade"
 });
 
+Community.belongsToMany(User, {
+  through: CommunityUserRelation,
+  onDelete: "cascade",
+  primaryKey: true
+});
+User.belongsToMany(Community, {
+  through: CommunityUserRelation,
+  onDelete: "cascade",
+  primaryKey: true
+});
+
 const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
@@ -54,7 +71,10 @@ const Models = {
   ModelDocs, // The docs detailing the Models
   Ressource,
   Tag,
-  TagRelation
+  TagRelation,
+  User,
+  Community,
+  CommunityUserRelation
 };
 
 const connection = {};
