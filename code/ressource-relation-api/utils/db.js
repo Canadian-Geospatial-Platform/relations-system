@@ -1,15 +1,17 @@
+"use strict";
+
 const Sequelize = require("sequelize");
 const Gendoc = require("apidoc-sequelize-generator");
 const Mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
-const CollectionModel = require("./models/Collection");
-const CollectionRelationModel = require("./models/CollectionRelation");
-const RessourceModel = require("./models/Ressource");
-const TagModel = require("./models/Tag");
-const TagRelationModel = require("./models/TagRelation");
-const UserModel = require("./models/User");
-const CommunityModel = require("./models/Community");
-const CommunityUserRelationModel = require("./models/CommunityUserRelations");
+const CollectionModel = require("../models/Collection");
+const CollectionRelationModel = require("../models/CollectionRelation");
+const RessourceModel = require("../models/Ressource");
+const TagModel = require("../models/Tag");
+const TagRelationModel = require("../models/TagRelation");
+const UserModel = require("../models/User");
+const CommunityModel = require("../models/Community");
+const CommunityUserRelationModel = require("../models/CommunityUserRelations");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,

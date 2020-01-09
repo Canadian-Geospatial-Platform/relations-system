@@ -208,35 +208,35 @@ functions:
           cors: true
   #
   userCreate:
-    handler: handler.userCreate
+    handler: /handlers/User.userCreate
     events:
       - http:
           path: users
           method: post
           cors: true
   userGetOne:
-    handler: handler.userGetOne
+    handler: /handlers/User.userGetOne
     events:
       - http:
           path: users/{id}
           method: get
           cors: true
   userGetAll:
-    handler: handler.userGetAll
+    handler: /handlers/User.userGetAll
     events:
       - http:
           path: users
           method: get
           cors: true
   userUpdate:
-    handler: handler.userUpdate
+    handler: /handlers/User.userUpdate
     events:
       - http:
           path: users/{id}
           method: put
           cors: true
   userDestroy:
-    handler: handler.userDestroy
+    handler: /handlers/User.userDestroy
     events:
       - http:
           path: users/{id}
@@ -244,35 +244,35 @@ functions:
           cors: true
   #
   communityCreate:
-    handler: handler.communityCreate
+    handler: /handlers/Community.communityCreate
     events:
       - http:
           path: communitys
           method: post
           cors: true
   communityGetOne:
-    handler: handler.communityGetOne
+    handler: /handlers/Community.communityGetOne
     events:
       - http:
           path: communitys/{id}
           method: get
           cors: true
   communityGetAll:
-    handler: handler.communityGetAll
+    handler: /handlers/Community.communityGetAll
     events:
       - http:
           path: communitys
           method: get
           cors: true
   communityUpdate:
-    handler: handler.communityUpdate
+    handler: /handlers/Community.communityUpdate
     events:
       - http:
           path: communitys/{id}
           method: put
           cors: true
   communityDestroy:
-    handler: handler.communityDestroy
+    handler: /handlers/Community.communityDestroy
     events:
       - http:
           path: communitys/{id}
@@ -280,35 +280,35 @@ functions:
           cors: true
   #
   communityUserRelationCreate:
-    handler: handler.communityUserRelationCreate
+    handler: /handlers/CommunityUserRelation.communityUserRelationCreate
     events:
       - http:
           path: communityUserRelations
           method: post
           cors: true
   communityUserRelationGetOne:
-    handler: handler.communityUserRelationGetOne
+    handler: /handlers/CommunityUserRelation.communityUserRelationGetOne
     events:
       - http:
           path: communityUserRelations/{communityId}/{userId}
           method: get
           cors: true
   communityUserRelationGetAll:
-    handler: handler.communityUserRelationGetAll
+    handler: /handlers/CommunityUserRelation.communityUserRelationGetAll
     events:
       - http:
           path: communityUserRelations
           method: get
           cors: true
   communityUserRelationUpdate:
-    handler: handler.communityUserRelationUpdate
+    handler: /handlers/CommunityUserRelation.communityUserRelationUpdate
     events:
       - http:
           path: communityUserRelations/{communityId}/{userId}
           method: put
           cors: true
   communityUserRelationDestroy:
-    handler: handler.communityUserRelationDestroy
+    handler: /handlers/CommunityUserRelation.communityUserRelationDestroy
     events:
       - http:
           path: communityUserRelations/{communityId}/{userId}

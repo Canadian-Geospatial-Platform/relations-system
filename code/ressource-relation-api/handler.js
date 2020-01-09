@@ -1,10 +1,6 @@
 "use strict";
-const connectToDatabase = require("./db");
-function HTTPError(statusCode, message) {
-  const error = new Error(message);
-  error.statusCode = statusCode;
-  return error;
-}
+const connectToDatabase = require("./utils/db");
+const HTTPError = require("./utils/httpError");
 
 module.exports.docs = async () => {
   const { ModelDocs } = await connectToDatabase();
@@ -605,340 +601,344 @@ module.exports.ressourceDestroy = async event => {
   }
 };
 //
-module.exports.userCreate = async event => {
-  try {
-    const { User } = await connectToDatabase();
-    const user = await User.create(JSON.parse(event.body));
-    return {
-      statusCode: 200,
-      body: JSON.stringify(user)
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not create the user. " + err
-    };
-  }
-};
+// module.exports.userCreate = async event => {
+//   try {
+//     const { User } = await connectToDatabase();
+//     const user = await User.create(JSON.parse(event.body));
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(user)
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not create the user. " + err
+//     };
+//   }
+// };
 
-module.exports.userGetOne = async event => {
-  try {
-    const { User } = await connectToDatabase();
-    const user = await User.findByPk(event.pathParameters.id);
-    if (!user)
-      throw new HTTPError(
-        404,
-        `User with id: ${event.pathParameters.id} was not found`
-      );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(user)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not fetch the User."
-    };
-  }
-};
+// module.exports.userGetOne = async event => {
+//   try {
+//     const { User } = await connectToDatabase();
+//     const user = await User.findByPk(event.pathParameters.id);
+//     if (!user)
+//       throw new HTTPError(
+//         404,
+//         `User with id: ${event.pathParameters.id} was not found`
+//       );
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(user)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not fetch the User."
+//     };
+//   }
+// };
 
-module.exports.userGetAll = async () => {
-  try {
-    const { User } = await connectToDatabase();
-    const users = await User.findAll();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(users)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the users."
-    };
-  }
-};
+// module.exports.userGetAll = async () => {
+//   try {
+//     const { User } = await connectToDatabase();
+//     const users = await User.findAll();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(users)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not fetch the users."
+//     };
+//   }
+// };
 
-module.exports.userUpdate = async event => {
-  try {
-    const input = JSON.parse(event.body);
-    const { User } = await connectToDatabase();
-    const user = await User.findByPk(event.pathParameters.id);
-    if (!user)
-      throw new HTTPError(
-        404,
-        `User with id: ${event.pathParameters.id} was not found`
-      );
-    if (input.PopularityIndex) user.PopularityIndex = input.PopularityIndex;
-    if (input.Name) user.Name = input.Name;
-    if (input.Description) user.Description = input.Description;
-    await user.save();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(user)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not update the User."
-    };
-  }
-};
+// module.exports.userUpdate = async event => {
+//   try {
+//     const input = JSON.parse(event.body);
+//     const { User } = await connectToDatabase();
+//     const user = await User.findByPk(event.pathParameters.id);
+//     if (!user)
+//       throw new HTTPError(
+//         404,
+//         `User with id: ${event.pathParameters.id} was not found`
+//       );
+//     if (input.PopularityIndex) user.PopularityIndex = input.PopularityIndex;
+//     if (input.Name) user.Name = input.Name;
+//     if (input.Description) user.Description = input.Description;
+//     await user.save();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(user)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not update the User."
+//     };
+//   }
+// };
 
-module.exports.userDestroy = async event => {
-  try {
-    const { User } = await connectToDatabase();
-    const user = await User.findByPk(event.pathParameters.id);
-    if (!user)
-      throw new HTTPError(
-        404,
-        `User with id: ${event.pathParameters.id} was not found`
-      );
-    await user.destroy();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(user)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not destroy the User."
-    };
-  }
-};
+// module.exports.userDestroy = async event => {
+//   try {
+//     const { User } = await connectToDatabase();
+//     const user = await User.findByPk(event.pathParameters.id);
+//     if (!user)
+//       throw new HTTPError(
+//         404,
+//         `User with id: ${event.pathParameters.id} was not found`
+//       );
+//     await user.destroy();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(user)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not destroy the User."
+//     };
+//   }
+// };
 //
-module.exports.communityCreate = async event => {
-  try {
-    const { Community } = await connectToDatabase();
-    const community = await Community.create(JSON.parse(event.body));
-    return {
-      statusCode: 200,
-      body: JSON.stringify(community)
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not create the community. " + err
-    };
-  }
-};
+// module.exports.communityCreate = async event => {
+//   try {
+//     const { Community } = await connectToDatabase();
+//     const community = await Community.create(JSON.parse(event.body));
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(community)
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not create the community. " + err
+//     };
+//   }
+// };
 
-module.exports.communityGetOne = async event => {
-  try {
-    const { Community } = await connectToDatabase();
-    const community = await Community.findByPk(event.pathParameters.id);
-    if (!community)
-      throw new HTTPError(
-        404,
-        `Community with id: ${event.pathParameters.id} was not found`
-      );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(community)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not fetch the Community."
-    };
-  }
-};
+// module.exports.communityGetOne = async event => {
+//   try {
+//     const { Community } = await connectToDatabase();
+//     const community = await Community.findByPk(event.pathParameters.id);
+//     if (!community)
+//       throw new HTTPError(
+//         404,
+//         `Community with id: ${event.pathParameters.id} was not found`
+//       );
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(community)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not fetch the Community."
+//     };
+//   }
+// };
 
-module.exports.communityGetAll = async () => {
-  try {
-    const { Community } = await connectToDatabase();
-    const communitys = await Community.findAll();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communitys)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the communitys."
-    };
-  }
-};
+// module.exports.communityGetAll = async () => {
+//   try {
+//     const { Community } = await connectToDatabase();
+//     const communitys = await Community.findAll();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communitys)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not fetch the communitys."
+//     };
+//   }
+// };
 
-module.exports.communityUpdate = async event => {
-  try {
-    const input = JSON.parse(event.body);
-    const { Community } = await connectToDatabase();
-    const community = await Community.findByPk(event.pathParameters.id);
-    if (!community)
-      throw new HTTPError(
-        404,
-        `Community with id: ${event.pathParameters.id} was not found`
-      );
-    if (input.PopularityIndex)
-      community.PopularityIndex = input.PopularityIndex;
-    if (input.Name) community.Name = input.Name;
-    if (input.Description) community.Description = input.Description;
-    await community.save();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(community)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not update the Community."
-    };
-  }
-};
+// module.exports.communityUpdate = async event => {
+//   try {
+//     const input = JSON.parse(event.body);
+//     const { Community } = await connectToDatabase();
+//     const community = await Community.findByPk(event.pathParameters.id);
+//     if (!community)
+//       throw new HTTPError(
+//         404,
+//         `Community with id: ${event.pathParameters.id} was not found`
+//       );
+//     if (input.PopularityIndex)
+//       community.PopularityIndex = input.PopularityIndex;
+//     if (input.Name) community.Name = input.Name;
+//     if (input.Description) community.Description = input.Description;
+//     await community.save();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(community)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not update the Community."
+//     };
+//   }
+// };
 
-module.exports.communityDestroy = async event => {
-  try {
-    const { Community } = await connectToDatabase();
-    const community = await Community.findByPk(event.pathParameters.id);
-    if (!community)
-      throw new HTTPError(
-        404,
-        `Community with id: ${event.pathParameters.id} was not found`
-      );
-    await community.destroy();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(community)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not destroy the Community."
-    };
-  }
-};
+// module.exports.communityDestroy = async event => {
+//   try {
+//     const { Community } = await connectToDatabase();
+//     const community = await Community.findByPk(event.pathParameters.id);
+//     if (!community)
+//       throw new HTTPError(
+//         404,
+//         `Community with id: ${event.pathParameters.id} was not found`
+//       );
+//     await community.destroy();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(community)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not destroy the Community."
+//     };
+//   }
+// };
 //
-module.exports.communityUserRelationCreate = async event => {
-  try {
-    const { CommunityUserRelation } = await connectToDatabase();
-    const communityUserRelation = await CommunityUserRelation.create(
-      JSON.parse(event.body)
-    );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communityUserRelation)
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not create the communityUserRelation. " + err
-    };
-  }
-};
+// module.exports.communityUserRelationCreate = async event => {
+//   try {
+//     const { CommunityUserRelation } = await connectToDatabase();
+//     const communityUserRelation = await CommunityUserRelation.create(
+//       JSON.parse(event.body)
+//     );
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communityUserRelation)
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not create the communityUserRelation. " + err
+//     };
+//   }
+// };
 
-module.exports.communityUserRelationGetOne = async event => {
-  try {
-    const { CommunityUserRelation } = await connectToDatabase();
-    const communityUserRelation = await CommunityUserRelation.findOne({
-      where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
-      }
-    });
-    if (!communityUserRelation)
-      throw new HTTPError(
-        404,
-        `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
-      );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communityUserRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not fetch the CommunityUserRelation."
-    };
-  }
-};
+// module.exports.communityUserRelationGetOne = async event => {
+//   try {
+//     const { CommunityUserRelation } = await connectToDatabase();
+//     const communityUserRelation = await CommunityUserRelation.findOne({
+//       where: {
+//         CommunityId: event.pathParameters.communityId,
+//         UserId: event.pathParameters.userId
+//       }
+//     });
+//     if (!communityUserRelation)
+//       throw new HTTPError(
+//         404,
+//         `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+//       );
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communityUserRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not fetch the CommunityUserRelation."
+//     };
+//   }
+// };
 
-module.exports.communityUserRelationGetAll = async () => {
-  try {
-    const { CommunityUserRelation } = await connectToDatabase();
-    const communityUserRelations = await CommunityUserRelation.findAll();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communityUserRelations)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the communityUserRelations."
-    };
-  }
-};
+// module.exports.communityUserRelationGetAll = async () => {
+//   try {
+//     const { CommunityUserRelation } = await connectToDatabase();
+//     const communityUserRelations = await CommunityUserRelation.findAll();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communityUserRelations)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not fetch the communityUserRelations."
+//     };
+//   }
+// };
 
-module.exports.communityUserRelationUpdate = async event => {
-  try {
-    const input = JSON.parse(event.body);
-    const { CommunityUserRelation } = await connectToDatabase();
-    const communityUserRelation = await CommunityUserRelation.findOne({
-      where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
-      }
-    });
-    if (!communityUserRelation)
-      throw new HTTPError(
-        404,
-        `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
-      );
-    if (input.PopularityIndex)
-      communityUserRelation.PopularityIndex = input.PopularityIndex;
-    await communityUserRelation.save();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communityUserRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not update the CommunityUserRelation."
-    };
-  }
-};
+// module.exports.communityUserRelationUpdate = async event => {
+//   try {
+//     const input = JSON.parse(event.body);
+//     const { CommunityUserRelation } = await connectToDatabase();
+//     const communityUserRelation = await CommunityUserRelation.findOne({
+//       where: {
+//         CommunityId: event.pathParameters.communityId,
+//         UserId: event.pathParameters.userId
+//       }
+//     });
+//     if (!communityUserRelation)
+//       throw new HTTPError(
+//         404,
+//         `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+//       );
+//     if (input.PopularityIndex)
+//       communityUserRelation.PopularityIndex = input.PopularityIndex;
+//     await communityUserRelation.save();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communityUserRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not update the CommunityUserRelation."
+//     };
+//   }
+// };
 
-module.exports.communityUserRelationDestroy = async event => {
-  try {
-    const { CommunityUserRelation } = await connectToDatabase();
-    const communityUserRelation = await CommunityUserRelation.findOne({
-      where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
-      }
-    });
-    if (!communityUserRelation)
-      throw new HTTPError(
-        404,
-        `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
-      );
-    await communityUserRelation.destroy();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(communityUserRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not destroy the CommunityUserRelation."
-    };
-  }
-};
+// module.exports.communityUserRelationDestroy = async event => {
+//   try {
+//     const { CommunityUserRelation } = await connectToDatabase();
+//     const communityUserRelation = await CommunityUserRelation.findOne({
+//       where: {
+//         CommunityId: event.pathParameters.communityId,
+//         UserId: event.pathParameters.userId
+//       }
+//     });
+//     if (!communityUserRelation)
+//       throw new HTTPError(
+//         404,
+//         `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+//       );
+//     await communityUserRelation.destroy();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(communityUserRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not destroy the CommunityUserRelation."
+//     };
+//   }
+// };
+
+// const communityUserRelation = require("./handlers/communityUserRelation");
+
+//// testing
