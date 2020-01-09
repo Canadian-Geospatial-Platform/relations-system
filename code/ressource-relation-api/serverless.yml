@@ -251,6 +251,8 @@ functions:
           path: communitys
           method: post
           cors: true
+    environment:
+      table: "12345678"
   communityGetOne:
     handler: /handlers/Community.communityGetOne
     events:

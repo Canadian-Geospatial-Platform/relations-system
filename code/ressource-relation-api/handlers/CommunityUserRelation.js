@@ -23,18 +23,25 @@ module.exports.communityUserRelationCreate = async event => {
 };
 
 module.exports.communityUserRelationGetOne = async event => {
+  const cidName = "CommunityId";
+  const wobj = JSON.stringify({
+    [cidName]: event.pathParameters.communityId,
+    UserId: event.pathParameters.userId
+  });
+
   try {
     const { CommunityUserRelation } = await connectToDatabase();
     const communityUserRelation = await CommunityUserRelation.findOne({
       where: {
-        CommunityId: event.pathParameters.communityId,
+        [cidName]: event.pathParameters.communityId,
         UserId: event.pathParameters.userId
       }
     });
     if (!communityUserRelation)
       throw new HTTPError(
         404,
-        `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+        `CommunityUserRelation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found` +
+          wobj
       );
     return {
       statusCode: 200,

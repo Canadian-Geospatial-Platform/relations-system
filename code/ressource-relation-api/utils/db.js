@@ -9,7 +9,6 @@ const RessourceModel = require("../models/Ressource");
 const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
-
 const RelationModel = require("../models/Relation");
 
 const sequelize = new Sequelize(
