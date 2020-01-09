@@ -1,7 +1,7 @@
 "use strict";
 
-module.exports = (sequelize, type) => {
-  return sequelize.define("CollectionRelation", {
+module.exports = (sequelize, type, tableName) => {
+  return sequelize.define(tableName, {
     Id: {
       type: type.INTEGER,
       primaryKey: true,

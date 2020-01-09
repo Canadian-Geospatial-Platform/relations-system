@@ -356,141 +356,141 @@ module.exports.collectionDestroy = async event => {
   }
 };
 
-module.exports.collectionRelationCreate = async event => {
-  try {
-    const { CollectionRelation } = await connectToDatabase();
-    const input = JSON.parse(event.body);
-    if (
-      (input.CollectionRessourceId && input.RessourceId) ||
-      (!input.CollectionRessourceId && !input.RessourceId)
-    )
-      throw new HTTPError(
-        422,
-        `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
-      );
-    const collectionRelation = await CollectionRelation.create(input);
-    return {
-      statusCode: 200,
-      body: JSON.stringify(collectionRelation)
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not create the collectionRelation. " + err
-    };
-  }
-};
+// module.exports.collectionRelationCreate = async event => {
+//   try {
+//     const { CollectionRelation } = await connectToDatabase();
+//     const input = JSON.parse(event.body);
+//     if (
+//       (input.CollectionRessourceId && input.RessourceId) ||
+//       (!input.CollectionRessourceId && !input.RessourceId)
+//     )
+//       throw new HTTPError(
+//         422,
+//         `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
+//       );
+//     const collectionRelation = await CollectionRelation.create(input);
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(collectionRelation)
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not create the collectionRelation. " + err
+//     };
+//   }
+// };
 
-module.exports.collectionRelationGetOne = async event => {
-  try {
-    const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findByPk(
-      event.pathParameters.id
-    );
-    if (!collectionRelation)
-      throw new HTTPError(
-        404,
-        `CollectionRelation with id: ${event.pathParameters.id} was not found`
-      );
-    return {
-      statusCode: 200,
-      body: JSON.stringify(collectionRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not fetch the CollectionRelation."
-    };
-  }
-};
+// module.exports.collectionRelationGetOne = async event => {
+//   try {
+//     const { CollectionRelation } = await connectToDatabase();
+//     const collectionRelation = await CollectionRelation.findByPk(
+//       event.pathParameters.id
+//     );
+//     if (!collectionRelation)
+//       throw new HTTPError(
+//         404,
+//         `CollectionRelation with id: ${event.pathParameters.id} was not found`
+//       );
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(collectionRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not fetch the CollectionRelation."
+//     };
+//   }
+// };
 
-module.exports.collectionRelationGetAll = async () => {
-  try {
-    const { CollectionRelation } = await connectToDatabase();
-    const collectionRelations = await CollectionRelation.findAll();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(collectionRelations)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the collectionRelations."
-    };
-  }
-};
+// module.exports.collectionRelationGetAll = async () => {
+//   try {
+//     const { CollectionRelation } = await connectToDatabase();
+//     const collectionRelations = await CollectionRelation.findAll();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(collectionRelations)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: "Could not fetch the collectionRelations."
+//     };
+//   }
+// };
 
-module.exports.collectionRelationUpdate = async event => {
-  try {
-    const input = JSON.parse(event.body);
-    const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findByPk(
-      event.pathParameters.id
-    );
-    if (!collectionRelation)
-      throw new HTTPError(
-        404,
-        `CollectionRelation with id: ${event.pathParameters.id} was not found`
-      );
-    if (input.CollectionRessourceId && input.RessourceId)
-      throw new HTTPError(
-        422,
-        `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
-      );
-    if (input.PopularityIndex)
-      collectionRelation.PopularityIndex = input.PopularityIndex;
-    if (input.CollectionId)
-      collectionRelation.CollectionId = input.CollectionId;
-    if (input.CollectionRessourceId) {
-      collectionRelation.RessourceId = null;
-      collectionRelation.CollectionRessourceId = input.CollectionRessourceId;
-    }
-    if (input.RessourceId) {
-      collectionRelation.CollectionRessourceId = null;
-      collectionRelation.RessourceId = input.RessourceId;
-    }
-    await collectionRelation.save();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(collectionRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not update the CollectionRelation."
-    };
-  }
-};
+// module.exports.collectionRelationUpdate = async event => {
+//   try {
+//     const input = JSON.parse(event.body);
+//     const { CollectionRelation } = await connectToDatabase();
+//     const collectionRelation = await CollectionRelation.findByPk(
+//       event.pathParameters.id
+//     );
+//     if (!collectionRelation)
+//       throw new HTTPError(
+//         404,
+//         `CollectionRelation with id: ${event.pathParameters.id} was not found`
+//       );
+//     if (input.CollectionRessourceId && input.RessourceId)
+//       throw new HTTPError(
+//         422,
+//         `A CollectionRelation must have one CollectionRessourceId XOR RessourceId`
+//       );
+//     if (input.PopularityIndex)
+//       collectionRelation.PopularityIndex = input.PopularityIndex;
+//     if (input.CollectionId)
+//       collectionRelation.CollectionId = input.CollectionId;
+//     if (input.CollectionRessourceId) {
+//       collectionRelation.RessourceId = null;
+//       collectionRelation.CollectionRessourceId = input.CollectionRessourceId;
+//     }
+//     if (input.RessourceId) {
+//       collectionRelation.CollectionRessourceId = null;
+//       collectionRelation.RessourceId = input.RessourceId;
+//     }
+//     await collectionRelation.save();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(collectionRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not update the CollectionRelation."
+//     };
+//   }
+// };
 
-module.exports.collectionRelationDestroy = async event => {
-  try {
-    const { CollectionRelation } = await connectToDatabase();
-    const collectionRelation = await CollectionRelation.findByPk(
-      event.pathParameters.id
-    );
-    if (!collectionRelation)
-      throw new HTTPError(
-        404,
-        `CollectionRelation with id: ${event.pathParameters.id} was not found`
-      );
-    await collectionRelation.destroy();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(collectionRelation)
-    };
-  } catch (err) {
-    return {
-      statusCode: err.statusCode || 500,
-      headers: { "Content-Type": "text/plain" },
-      body: err.message || "Could not destroy the CollectionRelation."
-    };
-  }
-};
+// module.exports.collectionRelationDestroy = async event => {
+//   try {
+//     const { CollectionRelation } = await connectToDatabase();
+//     const collectionRelation = await CollectionRelation.findByPk(
+//       event.pathParameters.id
+//     );
+//     if (!collectionRelation)
+//       throw new HTTPError(
+//         404,
+//         `CollectionRelation with id: ${event.pathParameters.id} was not found`
+//       );
+//     await collectionRelation.destroy();
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(collectionRelation)
+//     };
+//   } catch (err) {
+//     return {
+//       statusCode: err.statusCode || 500,
+//       headers: { "Content-Type": "text/plain" },
+//       body: err.message || "Could not destroy the CollectionRelation."
+//     };
+//   }
+// };
 //
 // module.exports.ressourceCreate = async event => {
 //   try {
