@@ -172,35 +172,35 @@ functions:
           method: delete
           cors: true
   ressourceCreate:
-    handler: handler.ressourceCreate
+    handler: /handlers/Ressource.ressourceCreate
     events:
       - http:
           path: ressources
           method: post
           cors: true
   ressourceGetOne:
-    handler: handler.ressourceGetOne
+    handler: /handlers/Ressource.ressourceGetOne
     events:
       - http:
           path: ressources/{id}
           method: get
           cors: true
   ressourceGetAll:
-    handler: handler.ressourceGetAll
+    handler: /handlers/Ressource.ressourceGetAll
     events:
       - http:
           path: ressources
           method: get
           cors: true
   ressourceUpdate:
-    handler: handler.ressourceUpdate
+    handler: /handlers/Ressource.ressourceUpdate
     events:
       - http:
           path: ressources/{id}
           method: put
           cors: true
   ressourceDestroy:
-    handler: handler.ressourceDestroy
+    handler: /handlers/Ressource.ressourceDestroy
     events:
       - http:
           path: ressources/{id}
