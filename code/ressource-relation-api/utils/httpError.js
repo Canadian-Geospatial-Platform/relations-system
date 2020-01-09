@@ -1,12 +1,9 @@
 "use strict";
 
-const HTTPError = () => {
-  // your method logic
+function HTTPError(statusCode, message) {
   const error = new Error(message);
   error.statusCode = statusCode;
   return error;
-};
+}
 
-module.exports = {
-  HTTPError
-};
+module.exports = HTTPError;

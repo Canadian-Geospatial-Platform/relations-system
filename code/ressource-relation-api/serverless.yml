@@ -136,41 +136,42 @@ functions:
           path: collections/{id}
           method: delete
           cors: true
-  collectionRelationCreate:
-    handler: handler.collectionRelationCreate
+  collectionRessourceRelationCreate:
+    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationCreate
     events:
       - http:
-          path: collectionRelations
+          path: collectionRessourceRelations
           method: post
           cors: true
-  collectionRelationGetOne:
-    handler: handler.collectionRelationGetOne
+  collectionRessourceRelationGetOne:
+    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationGetOne
     events:
       - http:
-          path: collectionRelations/{id}
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
           method: get
           cors: true
-  collectionRelationGetAll:
-    handler: handler.collectionRelationGetAll
+  collectionRessourceRelationGetAll:
+    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationGetAll
     events:
       - http:
-          path: collectionRelations
+          path: collectionRessourceRelations
           method: get
           cors: true
-  collectionRelationUpdate:
-    handler: handler.collectionRelationUpdate
+  collectionRessourceRelationUpdate:
+    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationUpdate
     events:
       - http:
-          path: collectionRelations/{id}
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
           method: put
           cors: true
-  collectionRelationDestroy:
-    handler: handler.collectionRelationDestroy
+  collectionRessourceRelationDestroy:
+    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationDestroy
     events:
       - http:
-          path: collectionRelations/{id}
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
           method: delete
           cors: true
+  #
   ressourceCreate:
     handler: /handlers/Ressource.ressourceCreate
     events:
