@@ -251,8 +251,6 @@ functions:
           path: communitys
           method: post
           cors: true
-    environment:
-      table: "12345678"
   communityGetOne:
     handler: /handlers/Community.communityGetOne
     events:
@@ -317,6 +315,62 @@ functions:
           path: communityUserRelations/{communityId}/{userId}
           method: delete
           cors: true
+  #
+  relationCreate:
+    handler: /handlers/Relation.relationCreate
+    events:
+      - http:
+          path: relations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  relationGetOne:
+    handler: /handlers/Relation.relationGetOne
+    events:
+      - http:
+          path: relations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  relationGetAll:
+    handler: /handlers/Relation.relationGetAll
+    events:
+      - http:
+          path: relations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  relationUpdate:
+    handler: /handlers/Relation.relationUpdate
+    events:
+      - http:
+          path: relations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  relationDestroy:
+    handler: /handlers/Relation.relationDestroy
+    events:
+      - http:
+          path: relations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
 
 plugins:
   - serverless-offline

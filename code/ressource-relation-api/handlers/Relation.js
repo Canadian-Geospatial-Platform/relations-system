@@ -4,8 +4,13 @@ const HTTPError = require("../utils/httpError");
 
 module.exports.relationCreate = async event => {
   try {
-    const { Relation } = await connectToDatabase();
-    const relation = await Relation.create(JSON.parse(event.body));
+    const db = await connectToDatabase();
+    console.log(JSON.stringify(event.body));
+    console.log(process.env.TABLE_NAME);
+    const relation = await db[process.env.TABLE_NAME].create(
+      JSON.parse(event.body)
+    );
+    console.log(JSON.stringify(relation));
     return {
       statusCode: 200,
       body: JSON.stringify(relation)
@@ -22,17 +27,17 @@ module.exports.relationCreate = async event => {
 
 module.exports.relationGetOne = async event => {
   try {
-    const { Relation } = await connectToDatabase();
-    const relation = await Relation.findOne({
+    const db = await connectToDatabase();
+    const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
+        [process.env.FK_NAME_1]: event.pathParameters.id1,
+        [process.env.FK_NAME_2]: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
       );
     return {
       statusCode: 200,
@@ -49,8 +54,8 @@ module.exports.relationGetOne = async event => {
 
 module.exports.relationGetAll = async () => {
   try {
-    const { Relation } = await connectToDatabase();
-    const relations = await Relation.findAll();
+    const db = await connectToDatabase();
+    const relations = await db[process.env.TABLE_NAME].findAll();
     return {
       statusCode: 200,
       body: JSON.stringify(relations)
@@ -67,17 +72,17 @@ module.exports.relationGetAll = async () => {
 module.exports.relationUpdate = async event => {
   try {
     const input = JSON.parse(event.body);
-    const { Relation } = await connectToDatabase();
-    const relation = await Relation.findOne({
+    const db = await connectToDatabase();
+    const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
+        [process.env.FK_NAME_1]: event.pathParameters.id1,
+        [process.env.FK_NAME_2]: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
       );
     if (input.PopularityIndex) relation.PopularityIndex = input.PopularityIndex;
     await relation.save();
@@ -96,17 +101,17 @@ module.exports.relationUpdate = async event => {
 
 module.exports.relationDestroy = async event => {
   try {
-    const { Relation } = await connectToDatabase();
-    const relation = await Relation.findOne({
+    const db = await connectToDatabase();
+    const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        CommunityId: event.pathParameters.communityId,
-        UserId: event.pathParameters.userId
+        [process.env.FK_NAME_1]: event.pathParameters.id1,
+        [process.env.FK_NAME_2]: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with communityId: ${event.pathParameters.communityId} and userId: ${event.pathParameters.userId} was not found`
+        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
       );
     await relation.destroy();
     return {
