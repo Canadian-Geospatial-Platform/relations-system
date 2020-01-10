@@ -136,41 +136,6 @@ functions:
           path: collections/{id}
           method: delete
           cors: true
-  collectionRessourceRelationCreate:
-    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationCreate
-    events:
-      - http:
-          path: collectionRessourceRelations
-          method: post
-          cors: true
-  collectionRessourceRelationGetOne:
-    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationGetOne
-    events:
-      - http:
-          path: collectionRessourceRelations/{collectionId}/{ressourceId}
-          method: get
-          cors: true
-  collectionRessourceRelationGetAll:
-    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationGetAll
-    events:
-      - http:
-          path: collectionRessourceRelations
-          method: get
-          cors: true
-  collectionRessourceRelationUpdate:
-    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationUpdate
-    events:
-      - http:
-          path: collectionRessourceRelations/{collectionId}/{ressourceId}
-          method: put
-          cors: true
-  collectionRessourceRelationDestroy:
-    handler: /handlers/CollectionRessourceRelation.collectionRessourceRelationDestroy
-    events:
-      - http:
-          path: collectionRessourceRelations/{collectionId}/{ressourceId}
-          method: delete
-          cors: true
   #
   ressourceCreate:
     handler: /handlers/Ressource.ressourceCreate
@@ -279,98 +244,106 @@ functions:
           path: communitys/{id}
           method: delete
           cors: true
-  #
+  # Relations
   communityUserRelationCreate:
-    handler: /handlers/CommunityUserRelation.communityUserRelationCreate
-    events:
-      - http:
-          path: communityUserRelations
-          method: post
-          cors: true
-  communityUserRelationGetOne:
-    handler: /handlers/CommunityUserRelation.communityUserRelationGetOne
-    events:
-      - http:
-          path: communityUserRelations/{communityId}/{userId}
-          method: get
-          cors: true
-  communityUserRelationGetAll:
-    handler: /handlers/CommunityUserRelation.communityUserRelationGetAll
-    events:
-      - http:
-          path: communityUserRelations
-          method: get
-          cors: true
-  communityUserRelationUpdate:
-    handler: /handlers/CommunityUserRelation.communityUserRelationUpdate
-    events:
-      - http:
-          path: communityUserRelations/{communityId}/{userId}
-          method: put
-          cors: true
-  communityUserRelationDestroy:
-    handler: /handlers/CommunityUserRelation.communityUserRelationDestroy
-    events:
-      - http:
-          path: communityUserRelations/{communityId}/{userId}
-          method: delete
-          cors: true
-  #
-  relationCreate:
     handler: /handlers/Relation.relationCreate
     events:
       - http:
-          path: relations
+          path: communityUserRelations
           method: post
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
-      FK_NAME_1: "CommunityId"
-      FK_NAME_2: "UserId"
-  relationGetOne:
+  communityUserRelationGetOne:
     handler: /handlers/Relation.relationGetOne
     events:
       - http:
-          path: relations/{id1}/{id2}
+          path: communityUserRelations/{id1}/{id2}
           method: get
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "UserId"
-  relationGetAll:
+  communityUserRelationGetAll:
     handler: /handlers/Relation.relationGetAll
     events:
       - http:
-          path: relations
+          path: communityUserRelations
           method: get
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
-      FK_NAME_1: "CommunityId"
-      FK_NAME_2: "UserId"
-  relationUpdate:
+  communityUserRelationUpdate:
     handler: /handlers/Relation.relationUpdate
     events:
       - http:
-          path: relations/{id1}/{id2}
+          path: communityUserRelations/{id1}/{id2}
           method: put
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "UserId"
-  relationDestroy:
+  communityUserRelationDestroy:
     handler: /handlers/Relation.relationDestroy
     events:
       - http:
-          path: relations/{id1}/{id2}
+          path: communityUserRelations/{id1}/{id2}
           method: delete
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "UserId"
+
+  collectionRessourceRelationCreate:
+    handler: /handlers/Relation.relationCreate
+    events:
+      - http:
+          path: collectionRessourceRelations
+          method: post
+          cors: true
+  collectionRessourceRelationGetOne:
+    handler: /handlers/Relation.relationGetOne
+    events:
+      - http:
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "collectionId"
+      FK_NAME_2: "ressourceId"
+  collectionRessourceRelationGetAll:
+    handler: /handlers/Relation.relationGetAll
+    events:
+      - http:
+          path: collectionRessourceRelations
+          method: get
+          cors: true
+  collectionRessourceRelationUpdate:
+    handler: /handlers/Relation.relationUpdate
+    events:
+      - http:
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "collectionId"
+      FK_NAME_2: "ressourceId"
+  collectionRessourceRelationDestroy:
+    handler: /handlers/Relation.relationDestroy
+    events:
+      - http:
+          path: collectionRessourceRelations/{collectionId}/{ressourceId}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "collectionId"
+      FK_NAME_2: "ressourceId"
 
 plugins:
   - serverless-offline
