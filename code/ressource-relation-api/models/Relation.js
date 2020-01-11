@@ -15,14 +15,12 @@ module.exports = (sequelize, type, tableName) => {
       },
       ParentId: {
         type: type.INTEGER,
-        onDelete: "cascade",
         allowNull: false,
         omitNull: true,
         unique: "parentChildIndex"
       },
       ChildId: {
         type: type.INTEGER,
-        onDelete: "cascade",
         allowNull: false,
         omitNull: true,
         unique: "parentChildIndex"

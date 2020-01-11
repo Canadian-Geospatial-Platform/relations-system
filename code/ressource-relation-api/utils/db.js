@@ -47,40 +47,37 @@ const CommunityUserRelation = RelationModel(
   "CommunityUserRelation"
 );
 
-Collection.belongsToMany(Ressource, {
-  allowNull: false,
-  through: CollectionRessourceRelation,
-  onDelete: "cascade",
-  primaryKey: true,
-  required: true
-});
 Ressource.belongsToMany(Collection, {
   through: CollectionRessourceRelation,
-  onDelete: "cascade",
-  primaryKey: true,
-  required: true
-});
-
-Collection.belongsToMany(Collection, {
-  through: CollectionCollectionRelation,
   as: "ChildId",
   otherKey: "ParentId"
 });
+// Collection.belongsToMany(Ressource, {
+//   through: CollectionRessourceRelation,
+//   as: "ParentId",
+//   otherKey: "ChildId"
+// });
+
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
   as: "ParentId",
   otherKey: "ChildId"
 });
+Collection.belongsToMany(Collection, {
+  through: CollectionCollectionRelation,
+  as: "ChildId",
+  otherKey: "ParentId"
+});
 
 Community.belongsToMany(User, {
   through: CommunityUserRelation,
-  onDelete: "cascade",
-  primaryKey: true
+  as: "ParentId",
+  otherKey: "ChildId"
 });
 User.belongsToMany(Community, {
   through: CommunityUserRelation,
-  onDelete: "cascade",
-  primaryKey: true
+  as: "ChildId",
+  otherKey: "ParentId"
 });
 
 const ModelDocs = Gendoc(sequelize)
