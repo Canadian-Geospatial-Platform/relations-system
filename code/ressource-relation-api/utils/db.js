@@ -63,7 +63,6 @@ Ressource.belongsToMany(Collection, {
 
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
-  onDelete: "cascade",
   as: "ChildId",
   otherKey: "ParentId"
 });
