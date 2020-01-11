@@ -66,6 +66,11 @@ Collection.belongsToMany(Collection, {
   as: "ChildId",
   otherKey: "ParentId"
 });
+Collection.belongsToMany(Collection, {
+  through: CollectionCollectionRelation,
+  as: "ParentId",
+  otherKey: "ChildId"
+});
 
 Community.belongsToMany(User, {
   through: CommunityUserRelation,
