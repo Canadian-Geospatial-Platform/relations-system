@@ -36,11 +36,37 @@ const CollectionRessourceRelation = RelationModel(
   Sequelize,
   "CollectionRessourceRelation"
 );
+const CollectionCollectionRelation = RelationModel(
+  sequelize,
+  Sequelize,
+  "CollectionCollectionRelation"
+);
 const CommunityUserRelation = RelationModel(
   sequelize,
   Sequelize,
   "CommunityUserRelation"
 );
+
+Collection.belongsToMany(Ressource, {
+  allowNull: false,
+  through: CollectionRessourceRelation,
+  onDelete: "cascade",
+  primaryKey: true,
+  required: true
+});
+Ressource.belongsToMany(Collection, {
+  through: CollectionRessourceRelation,
+  onDelete: "cascade",
+  primaryKey: true,
+  required: true
+});
+
+Collection.belongsToMany(Collection, {
+  through: CollectionCollectionRelation,
+  onDelete: "cascade",
+  as: "ChildId",
+  otherKey: "ParentId"
+});
 
 Community.belongsToMany(User, {
   through: CommunityUserRelation,
@@ -49,17 +75,6 @@ Community.belongsToMany(User, {
 });
 User.belongsToMany(Community, {
   through: CommunityUserRelation,
-  onDelete: "cascade",
-  primaryKey: true
-});
-
-Collection.belongsToMany(Ressource, {
-  through: CollectionRessourceRelation,
-  onDelete: "cascade",
-  primaryKey: true
-});
-Ressource.belongsToMany(Collection, {
-  through: CollectionRessourceRelation,
   onDelete: "cascade",
   primaryKey: true
 });
@@ -76,7 +91,8 @@ const Models = {
   User,
   Community,
   CommunityUserRelation,
-  CollectionRessourceRelation
+  CollectionRessourceRelation,
+  CollectionCollectionRelation
 };
 
 const connection = {};

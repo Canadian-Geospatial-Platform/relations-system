@@ -10,6 +10,18 @@ module.exports = (sequelize, type, tableName) => {
     PopularityIndex: {
       type: type.INTEGER,
       defaultValue: 0
+    },
+    ParentId: {
+      type: type.INTEGER,
+      allowNull: false,
+      omitNull: true,
+      unique: "parentChildIndex"
+    },
+    ChildId: {
+      type: type.INTEGER,
+      allowNull: false,
+      omitNull: true,
+      unique: "parentChildIndex"
     }
   });
 };

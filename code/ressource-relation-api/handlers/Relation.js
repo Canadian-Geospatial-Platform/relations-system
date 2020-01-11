@@ -5,8 +5,6 @@ const HTTPError = require("../utils/httpError");
 module.exports.relationCreate = async event => {
   try {
     const db = await connectToDatabase();
-    console.log(JSON.stringify(event.body));
-    console.log(process.env.TABLE_NAME);
     const relation = await db[process.env.TABLE_NAME].create(
       JSON.parse(event.body)
     );

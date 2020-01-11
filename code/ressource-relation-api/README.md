@@ -14,7 +14,7 @@ This project was created following the instructions provided at this url: https:
 
 #### Dependencies
 
-- nodejs (v10.x): https://github.com/nvm-sh/nvm#installing-and-updating
+- nodejs (v12.x): https://github.com/nvm-sh/nvm#installing-and-updating
 - serverless framework cli: https://serverless.com/framework/docs/getting-started#installing-via-npm
 - configure aws credentials: https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
