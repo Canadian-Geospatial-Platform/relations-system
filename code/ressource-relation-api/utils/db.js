@@ -56,17 +56,13 @@ const CommunityUserRelation = RelationModel(
 
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
-  foreignKey: "Id",
   as: "ParentId",
-  otherKey: "ChildId",
-  onDelete: "cascade"
+  otherKey: "ChildId"
 });
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
-  foreignKey: "Id",
   as: "ChildId",
-  otherKey: "ParentId",
-  onDelete: "cascade"
+  otherKey: "ParentId"
 });
 
 Ressource.belongsToMany(Collection, {
