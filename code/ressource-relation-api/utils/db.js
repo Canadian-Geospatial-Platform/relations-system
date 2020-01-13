@@ -72,12 +72,12 @@ Collection.belongsToMany(Ressource, {
   through: CollectionRessourceRelation
 });
 
-// Community.belongsToMany(User, {
-//   through: CommunityUserRelation
-// });
-// User.belongsToMany(Community, {
-//   through: CommunityUserRelation
-// });
+Community.belongsToMany(User, {
+  through: CommunityUserRelation
+});
+User.belongsToMany(Community, {
+  through: CommunityUserRelation
+});
 
 const ModelDocs = Gendoc(sequelize)
   .auto()
