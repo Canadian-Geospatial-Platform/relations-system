@@ -362,7 +362,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationGetOne:
-    handler: /handlers/SelfRelation.relationGetOne
+    handler: /handlers/Relation.relationGetOne
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
@@ -370,8 +370,10 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
   collectionCollectionRelationGetAll:
-    handler: /handlers/SelfRelation.relationGetAll
+    handler: /handlers/Relation.relationGetAll
     events:
       - http:
           path: collectionCollectionRelations
@@ -380,7 +382,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationUpdate:
-    handler: /handlers/SelfRelation.relationUpdate
+    handler: /handlers/Relation.relationUpdate
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
@@ -388,8 +390,10 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
   collectionCollectionRelationDestroy:
-    handler: /handlers/SelfRelation.relationDestroy
+    handler: /handlers/Relation.relationDestroy
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
@@ -397,6 +401,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
 
 plugins:
   - serverless-offline

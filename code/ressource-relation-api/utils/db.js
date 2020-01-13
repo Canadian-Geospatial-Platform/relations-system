@@ -9,7 +9,6 @@ const RessourceModel = require("../models/Ressource");
 const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
-const SelfRelationModel = require("../models/selfRelation");
 const RelationModel = require("../models/Relation");
 
 const sequelize = new Sequelize(
@@ -32,10 +31,12 @@ const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
 
-const CollectionCollectionRelation = SelfRelationModel(
+const CollectionCollectionRelation = RelationModel(
   sequelize,
   Sequelize,
-  "CollectionCollectionRelation"
+  "CollectionCollectionRelation",
+  "ParentId",
+  "ChildId"
 );
 
 const CollectionRessourceRelation = RelationModel(
@@ -55,13 +56,17 @@ const CommunityUserRelation = RelationModel(
 
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
+  foreignKey: "Id",
   as: "ParentId",
-  otherKey: "ChildId"
+  otherKey: "ChildId",
+  onDelete: "cascade"
 });
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
+  foreignKey: "Id",
   as: "ChildId",
-  otherKey: "ParentId"
+  otherKey: "ParentId",
+  onDelete: "cascade"
 });
 
 Ressource.belongsToMany(Collection, {
