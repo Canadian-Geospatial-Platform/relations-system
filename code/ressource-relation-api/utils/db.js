@@ -9,6 +9,7 @@ const RessourceModel = require("../models/Ressource");
 const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
+const SelfRelationModel = require("../models/selfRelation");
 const RelationModel = require("../models/Relation");
 
 const sequelize = new Sequelize(
@@ -31,54 +32,51 @@ const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
 
-const CollectionRessourceRelation = RelationModel(
-  sequelize,
-  Sequelize,
-  "CollectionRessourceRelation"
-);
-const CollectionCollectionRelation = RelationModel(
+const CollectionCollectionRelation = SelfRelationModel(
   sequelize,
   Sequelize,
   "CollectionCollectionRelation"
 );
+
+const CollectionRessourceRelation = RelationModel(
+  sequelize,
+  Sequelize,
+  "CollectionRessourceRelation",
+  "CollectionId",
+  "RessourceId"
+);
 const CommunityUserRelation = RelationModel(
   sequelize,
   Sequelize,
-  "CommunityUserRelation"
+  "CommunityUserRelation",
+  "CommunityId",
+  "UserId"
 );
 
+Collection.belongsToMany(Collection, {
+  through: CollectionCollectionRelation,
+  as: "ParentId",
+  otherKey: "ChildId"
+});
+Collection.belongsToMany(Collection, {
+  through: CollectionCollectionRelation,
+  as: "ChildId",
+  otherKey: "ParentId"
+});
+
 Ressource.belongsToMany(Collection, {
-  through: CollectionRessourceRelation,
-  as: "ChildId",
-  otherKey: "ParentId"
+  through: CollectionRessourceRelation
 });
-// Collection.belongsToMany(Ressource, {
-//   through: CollectionRessourceRelation,
-//   as: "ParentId",
-//   otherKey: "ChildId"
+Collection.belongsToMany(Ressource, {
+  through: CollectionRessourceRelation
+});
+
+// Community.belongsToMany(User, {
+//   through: CommunityUserRelation
 // });
-
-Collection.belongsToMany(Collection, {
-  through: CollectionCollectionRelation,
-  as: "ParentId",
-  otherKey: "ChildId"
-});
-Collection.belongsToMany(Collection, {
-  through: CollectionCollectionRelation,
-  as: "ChildId",
-  otherKey: "ParentId"
-});
-
-Community.belongsToMany(User, {
-  through: CommunityUserRelation,
-  as: "ParentId",
-  otherKey: "ChildId"
-});
-User.belongsToMany(Community, {
-  through: CommunityUserRelation,
-  as: "ChildId",
-  otherKey: "ParentId"
-});
+// User.belongsToMany(Community, {
+//   through: CommunityUserRelation
+// });
 
 const ModelDocs = Gendoc(sequelize)
   .auto()

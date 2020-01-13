@@ -5,8 +5,6 @@ const HTTPError = require("../utils/httpError");
 module.exports.relationCreate = async event => {
   try {
     const db = await connectToDatabase();
-    console.log(JSON.stringify(event.body));
-    console.log(process.env.TABLE_NAME);
     const relation = await db[process.env.TABLE_NAME].create(
       JSON.parse(event.body)
     );
@@ -30,14 +28,14 @@ module.exports.relationGetOne = async event => {
     const db = await connectToDatabase();
     const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        [process.env.FK_NAME_1]: event.pathParameters.id1,
-        [process.env.FK_NAME_2]: event.pathParameters.id2
+        ParentId: event.pathParameters.id1,
+        ChildId: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
+        `Relation with ParentId: ${event.pathParameters.id1} and ChildId: ${event.pathParameters.id2} was not found`
       );
     return {
       statusCode: 200,
@@ -75,14 +73,14 @@ module.exports.relationUpdate = async event => {
     const db = await connectToDatabase();
     const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        [process.env.FK_NAME_1]: event.pathParameters.id1,
-        [process.env.FK_NAME_2]: event.pathParameters.id2
+        ParentId: event.pathParameters.id1,
+        ChildId: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
+        `Relation with ParentId: ${event.pathParameters.id1} and ChildId: ${event.pathParameters.id2} was not found`
       );
     if (input.PopularityIndex) relation.PopularityIndex = input.PopularityIndex;
     await relation.save();
@@ -104,14 +102,14 @@ module.exports.relationDestroy = async event => {
     const db = await connectToDatabase();
     const relation = await db[process.env.TABLE_NAME].findOne({
       where: {
-        [process.env.FK_NAME_1]: event.pathParameters.id1,
-        [process.env.FK_NAME_2]: event.pathParameters.id2
+        ParentId: event.pathParameters.id1,
+        ChildId: event.pathParameters.id2
       }
     });
     if (!relation)
       throw new HTTPError(
         404,
-        `Relation with ${process.env.FK_NAME_1}: ${event.pathParameters.id1} and ${process.env.FK_NAME_2}: ${event.pathParameters.id2} was not found`
+        `Relation with ParentId: ${event.pathParameters.id1} and ChildId: ${event.pathParameters.id2} was not found`
       );
     await relation.destroy();
     return {

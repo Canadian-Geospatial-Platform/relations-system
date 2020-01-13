@@ -263,7 +263,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
-
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
   communityUserRelationGetAll:
     handler: /handlers/Relation.relationGetAll
     events:
@@ -282,6 +283,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
 
   communityUserRelationDestroy:
     handler: /handlers/Relation.relationDestroy
@@ -292,6 +295,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
 
   #
   collectionRessourceRelationCreate:
@@ -312,7 +317,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionRessourceRelation"
-
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
   collectionRessourceRelationGetAll:
     handler: /handlers/Relation.relationGetAll
     events:
@@ -331,6 +337,8 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionRessourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
 
   collectionRessourceRelationDestroy:
     handler: /handlers/Relation.relationDestroy
@@ -341,8 +349,9 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionRessourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
 
-  #
   collectionCollectionRelationCreate:
     handler: /handlers/Relation.relationCreate
     events:
@@ -353,7 +362,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationGetOne:
-    handler: /handlers/Relation.relationGetOne
+    handler: /handlers/SelfRelation.relationGetOne
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
@@ -362,7 +371,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationGetAll:
-    handler: /handlers/Relation.relationGetAll
+    handler: /handlers/SelfRelation.relationGetAll
     events:
       - http:
           path: collectionCollectionRelations
@@ -371,7 +380,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationUpdate:
-    handler: /handlers/Relation.relationUpdate
+    handler: /handlers/SelfRelation.relationUpdate
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
@@ -380,7 +389,7 @@ functions:
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
   collectionCollectionRelationDestroy:
-    handler: /handlers/Relation.relationDestroy
+    handler: /handlers/SelfRelation.relationDestroy
     events:
       - http:
           path: collectionCollectionRelations/{parentId}/{childId}
