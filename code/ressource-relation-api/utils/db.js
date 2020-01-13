@@ -64,6 +64,7 @@ Collection.belongsToMany(Collection, {
   as: "ChildId",
   otherKey: "ParentId"
 });
+CollectionCollectionRelation.removeAttribute("CollectionId"); // sequelize generates this useless attribute
 
 Ressource.belongsToMany(Collection, {
   through: CollectionRessourceRelation
