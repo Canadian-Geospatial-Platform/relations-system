@@ -1,6 +1,6 @@
 "use strict";
-const connectToDatabase = require("../utils/db");
-const HTTPError = require("../utils/httpError");
+const connectToDatabase = require("../../utils/db");
+const HTTPError = require("../../utils/httpError");
 
 module.exports.communityCreate = async event => {
   try {

@@ -1,0 +1,72 @@
+service: ${file(../../secrets.json):API_NAME}
+
+custom:
+  secrets: ${file(../../secrets.json)}
+  webpack:
+    webpackConfig: "../../webpack.config.js"
+    includeModules: false
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+provider:
+  name: aws
+  region: ${self:custom.secrets.REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${self:custom.secrets.NODE_ENV}
+  versionFunctions: false
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    DB_HOST: ${self:custom.secrets.DB_HOST}
+    DB_NAME: ${self:custom.secrets.DB_NAME}
+    DB_PORT: ${self:custom.secrets.DB_PORT}
+    DB_USER: ${self:custom.secrets.DB_USER}
+    DB_PASSWORD: ${self:custom.secrets.DB_PASSWORD}
+  vpc:
+    securityGroupIds:
+      - ${self:custom.secrets.SECURITY_GROUP_ID}
+    subnetIds:
+      - ${self:custom.secrets.SUBNET1_ID}
+      - ${self:custom.secrets.SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  communityCreate:
+    handler: handler.communityCreate
+    events:
+      - http:
+          path: communitys
+          method: post
+          cors: true
+  communityGetOne:
+    handler: handler.communityGetOne
+    events:
+      - http:
+          path: communitys/{id}
+          method: get
+          cors: true
+  communityGetAll:
+    handler: handler.communityGetAll
+    events:
+      - http:
+          path: communitys
+          method: get
+          cors: true
+  communityUpdate:
+    handler: handler.communityUpdate
+    events:
+      - http:
+          path: communitys/{id}
+          method: put
+          cors: true
+  communityDestroy:
+    handler: handler.communityDestroy
+    events:
+      - http:
+          path: communitys/{id}
+          method: delete
+          cors: true

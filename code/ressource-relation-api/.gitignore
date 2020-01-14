@@ -9,4 +9,7 @@ jspm_packages
 variables.env
 secrets*.json
 
+# Generated directories
+*.webpack
+
 .vscode
