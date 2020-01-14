@@ -174,41 +174,41 @@ functions:
   #         method: delete
   #         cors: true
   #
-  userCreate:
-    handler: /handlers/User.userCreate
-    events:
-      - http:
-          path: users
-          method: post
-          cors: true
-  userGetOne:
-    handler: /handlers/User.userGetOne
-    events:
-      - http:
-          path: users/{id}
-          method: get
-          cors: true
-  userGetAll:
-    handler: /handlers/User.userGetAll
-    events:
-      - http:
-          path: users
-          method: get
-          cors: true
-  userUpdate:
-    handler: /handlers/User.userUpdate
-    events:
-      - http:
-          path: users/{id}
-          method: put
-          cors: true
-  userDestroy:
-    handler: /handlers/User.userDestroy
-    events:
-      - http:
-          path: users/{id}
-          method: delete
-          cors: true
+  # userCreate:
+  #   handler: /handlers/User.userCreate
+  #   events:
+  #     - http:
+  #         path: users
+  #         method: post
+  #         cors: true
+  # userGetOne:
+  #   handler: /handlers/User.userGetOne
+  #   events:
+  #     - http:
+  #         path: users/{id}
+  #         method: get
+  #         cors: true
+  # userGetAll:
+  #   handler: /handlers/User.userGetAll
+  #   events:
+  #     - http:
+  #         path: users
+  #         method: get
+  #         cors: true
+  # userUpdate:
+  #   handler: /handlers/User.userUpdate
+  #   events:
+  #     - http:
+  #         path: users/{id}
+  #         method: put
+  #         cors: true
+  # userDestroy:
+  #   handler: /handlers/User.userDestroy
+  #   events:
+  #     - http:
+  #         path: users/{id}
+  #         method: delete
+  #         cors: true
   #
   # communityCreate:
   #   handler: /handlers/Community.communityCreate
