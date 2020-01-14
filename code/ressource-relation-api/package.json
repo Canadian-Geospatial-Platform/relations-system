@@ -5,14 +5,28 @@
   "main": "handler.js",
   "scripts": {
     "offline": "nodemon --exec \"sls offline start --skipCacheInvalidation\"",
-    "deploy": "sls deploy"
+    "offline-tag": "nodemon --exec \"sls offline start --skipCacheInvalidation\"",
+    "deploy": "sls deploy",
+    "tag:install": "",
+    "tag:deploy": "",
+    "tag:offline": "sls deploy --function "
   },
   "keywords": [],
   "author": "Pascal Vautour",
   "license": "",
   "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
     "nodemon": "^2.0.2",
-    "serverless-offline": "^5.12.1"
+    "serverless": "^1.61.1",
+    "serverless-offline": "^5.12.1",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-webpack": "^5.3.1",
+    "terser-webpack-plugin": "^2.3.2",
+    "webpack": "^4.41.5",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "apidoc-sequelize-generator": "^1.0.5",

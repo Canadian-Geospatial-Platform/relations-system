@@ -1,4 +1,4 @@
-service: ressource-relation-api
+service: nrcan-relation-api
 
 custom:
   secrets: ${file(secrets.json)}
