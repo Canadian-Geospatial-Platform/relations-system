@@ -2,7 +2,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
-  entry: "./handler.js",
   target: "node",
   externals: [nodeExternals(), "pg", "sqlite3", "tedious", "pg-hstore"],
   output: {

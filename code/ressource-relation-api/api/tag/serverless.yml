@@ -31,6 +31,9 @@ provider:
       - ${self:custom.secrets.SUBNET1_ID}
       - ${self:custom.secrets.SUBNET2_ID}
 
+package:
+  individually: true
+
 functions:
   tagCreate:
     handler: handler.tagCreate
