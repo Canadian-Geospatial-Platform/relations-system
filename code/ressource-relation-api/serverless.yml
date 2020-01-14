@@ -9,6 +9,7 @@ provider:
   runtime: nodejs12.x
   timeout: 30
   stage: ${self:custom.secrets.NODE_ENV}
+  versionFunctions: false
   environment:
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
     DB_HOST: ${self:custom.secrets.DB_HOST}
