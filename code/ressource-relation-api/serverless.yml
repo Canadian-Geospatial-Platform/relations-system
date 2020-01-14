@@ -138,41 +138,41 @@ functions:
           method: delete
           cors: true
   #
-  ressourceCreate:
-    handler: /handlers/Ressource.ressourceCreate
-    events:
-      - http:
-          path: ressources
-          method: post
-          cors: true
-  ressourceGetOne:
-    handler: /handlers/Ressource.ressourceGetOne
-    events:
-      - http:
-          path: ressources/{id}
-          method: get
-          cors: true
-  ressourceGetAll:
-    handler: /handlers/Ressource.ressourceGetAll
-    events:
-      - http:
-          path: ressources
-          method: get
-          cors: true
-  ressourceUpdate:
-    handler: /handlers/Ressource.ressourceUpdate
-    events:
-      - http:
-          path: ressources/{id}
-          method: put
-          cors: true
-  ressourceDestroy:
-    handler: /handlers/Ressource.ressourceDestroy
-    events:
-      - http:
-          path: ressources/{id}
-          method: delete
-          cors: true
+  # ressourceCreate:
+  #   handler: /handlers/Ressource.ressourceCreate
+  #   events:
+  #     - http:
+  #         path: ressources
+  #         method: post
+  #         cors: true
+  # ressourceGetOne:
+  #   handler: /handlers/Ressource.ressourceGetOne
+  #   events:
+  #     - http:
+  #         path: ressources/{id}
+  #         method: get
+  #         cors: true
+  # ressourceGetAll:
+  #   handler: /handlers/Ressource.ressourceGetAll
+  #   events:
+  #     - http:
+  #         path: ressources
+  #         method: get
+  #         cors: true
+  # ressourceUpdate:
+  #   handler: /handlers/Ressource.ressourceUpdate
+  #   events:
+  #     - http:
+  #         path: ressources/{id}
+  #         method: put
+  #         cors: true
+  # ressourceDestroy:
+  #   handler: /handlers/Ressource.ressourceDestroy
+  #   events:
+  #     - http:
+  #         path: ressources/{id}
+  #         method: delete
+  #         cors: true
   #
   userCreate:
     handler: /handlers/User.userCreate
@@ -210,41 +210,41 @@ functions:
           method: delete
           cors: true
   #
-  communityCreate:
-    handler: /handlers/Community.communityCreate
-    events:
-      - http:
-          path: communitys
-          method: post
-          cors: true
-  communityGetOne:
-    handler: /handlers/Community.communityGetOne
-    events:
-      - http:
-          path: communitys/{id}
-          method: get
-          cors: true
-  communityGetAll:
-    handler: /handlers/Community.communityGetAll
-    events:
-      - http:
-          path: communitys
-          method: get
-          cors: true
-  communityUpdate:
-    handler: /handlers/Community.communityUpdate
-    events:
-      - http:
-          path: communitys/{id}
-          method: put
-          cors: true
-  communityDestroy:
-    handler: /handlers/Community.communityDestroy
-    events:
-      - http:
-          path: communitys/{id}
-          method: delete
-          cors: true
+  # communityCreate:
+  #   handler: /handlers/Community.communityCreate
+  #   events:
+  #     - http:
+  #         path: communitys
+  #         method: post
+  #         cors: true
+  # communityGetOne:
+  #   handler: /handlers/Community.communityGetOne
+  #   events:
+  #     - http:
+  #         path: communitys/{id}
+  #         method: get
+  #         cors: true
+  # communityGetAll:
+  #   handler: /handlers/Community.communityGetAll
+  #   events:
+  #     - http:
+  #         path: communitys
+  #         method: get
+  #         cors: true
+  # communityUpdate:
+  #   handler: /handlers/Community.communityUpdate
+  #   events:
+  #     - http:
+  #         path: communitys/{id}
+  #         method: put
+  #         cors: true
+  # communityDestroy:
+  #   handler: /handlers/Community.communityDestroy
+  #   events:
+  #     - http:
+  #         path: communitys/{id}
+  #         method: delete
+  #         cors: true
   # Relations
   communityUserRelationCreate:
     handler: /handlers/Relation.relationCreate

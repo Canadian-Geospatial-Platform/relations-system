@@ -5,7 +5,7 @@ const Gendoc = require("apidoc-sequelize-generator");
 const Mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
 
 const CollectionModel = require("../models/Collection");
-const RessourceModel = require("../models/Ressource");
+const ResourceModel = require("../models/Resource");
 const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
@@ -26,7 +26,7 @@ const sequelize = new Sequelize(
   }
 );
 const Collection = CollectionModel(sequelize, Sequelize);
-const Ressource = RessourceModel(sequelize, Sequelize);
+const Resource = ResourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
@@ -39,12 +39,12 @@ const CollectionCollectionRelation = RelationModel(
   "ChildId"
 );
 
-const CollectionRessourceRelation = RelationModel(
+const CollectionResourceRelation = RelationModel(
   sequelize,
   Sequelize,
-  "CollectionRessourceRelation",
+  "CollectionResourceRelation",
   "CollectionId",
-  "RessourceId"
+  "ResourceId"
 );
 const CommunityUserRelation = RelationModel(
   sequelize,
@@ -66,11 +66,11 @@ Collection.belongsToMany(Collection, {
 });
 CollectionCollectionRelation.removeAttribute("CollectionId"); // sequelize generates this useless attribute
 
-Ressource.belongsToMany(Collection, {
-  through: CollectionRessourceRelation
+Resource.belongsToMany(Collection, {
+  through: CollectionResourceRelation
 });
-Collection.belongsToMany(Ressource, {
-  through: CollectionRessourceRelation
+Collection.belongsToMany(Resource, {
+  through: CollectionResourceRelation
 });
 
 Community.belongsToMany(User, {
@@ -87,12 +87,12 @@ const ModelDocs = Gendoc(sequelize)
 const Models = {
   Collection,
   ModelDocs, // The docs detailing the Models
-  Ressource,
+  Resource,
   Tag,
   User,
   Community,
   CommunityUserRelation,
-  CollectionRessourceRelation,
+  CollectionResourceRelation,
   CollectionCollectionRelation
 };
 
