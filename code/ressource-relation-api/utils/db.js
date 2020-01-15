@@ -10,6 +10,7 @@ const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
 const RelationModel = require("../models/Relation");
+const OwnershipRelationModel = require("../models/OwnershipRelation");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -54,6 +55,14 @@ const CommunityUserRelation = RelationModel(
   "UserId"
 );
 
+const UserCommunityOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "UserCommunityOwnershipRelation",
+  "UserId",
+  "CommunityId"
+);
+
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
   as: "ParentId",
@@ -93,7 +102,8 @@ const Models = {
   Community,
   CommunityUserRelation,
   CollectionResourceRelation,
-  CollectionCollectionRelation
+  CollectionCollectionRelation,
+  UserCommunityOwnershipRelation
 };
 
 const connection = {};
