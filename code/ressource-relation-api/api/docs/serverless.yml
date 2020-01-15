@@ -1,4 +1,4 @@
-service: ${file(../../secrets.json):API_NAME}
+service: ${file(../../secrets.json):API_NAME}-docs
 
 custom:
   secrets: ${file(../../secrets.json)}

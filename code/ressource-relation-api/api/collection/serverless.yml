@@ -1,4 +1,4 @@
-service: ${file(../../secrets.json):API_NAME}-community
+service: ${file(../../secrets.json):API_NAME}-collection
 
 custom:
   secrets: ${file(../../secrets.json)}
@@ -35,38 +35,38 @@ package:
   individually: true
 
 functions:
-  communityCreate:
-    handler: handler.communityCreate
+  collectionCreate:
+    handler: handler.collectionCreate
     events:
       - http:
-          path: communitys
+          path: collections
           method: post
           cors: true
-  communityGetOne:
-    handler: handler.communityGetOne
+  collectionGetOne:
+    handler: handler.collectionGetOne
     events:
       - http:
-          path: communitys/{id}
+          path: collections/{id}
           method: get
           cors: true
-  communityGetAll:
-    handler: handler.communityGetAll
+  collectionGetAll:
+    handler: handler.collectionGetAll
     events:
       - http:
-          path: communitys
+          path: collections
           method: get
           cors: true
-  communityUpdate:
-    handler: handler.communityUpdate
+  collectionUpdate:
+    handler: handler.collectionUpdate
     events:
       - http:
-          path: communitys/{id}
+          path: collections/{id}
           method: put
           cors: true
-  communityDestroy:
-    handler: handler.communityDestroy
+  collectionDestroy:
+    handler: handler.collectionDestroy
     events:
       - http:
-          path: communitys/{id}
+          path: collections/{id}
           method: delete
           cors: true
