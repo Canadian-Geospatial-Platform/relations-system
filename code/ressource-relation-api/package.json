@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "all:deploy": "npm run collection:deploy && npm run community:deploy && npm run relation:deploy && npm run resource:deploy && npm run tag:deploy && npm run user:deploy",
-    "all:offline": "npm run collection:offline & npm run community:offline & npm run relation:offline & npm run resource:offline & npm run tag:offline",
+    "all:offline": "npm run collection:offline & npm run community:offline & npm run relation:offline & npm run resource:offline & npm run tag:offline & npm run user:offline",
     "collection:deploy": "cd ./api/collection && sls deploy",
     "collection:offline": "cd ./api/collection && sls offline --port 3001 start  --skipCacheInvalidation",
     "community:deploy": "cd ./api/community && sls deploy",
@@ -18,6 +18,8 @@
     "tag:offline": "cd ./api/tag && sls offline start --port 3005 --skipCacheInvalidation",
     "user:deploy": "cd ./api/user && sls deploy",
     "user:offline": "cd ./api/user && sls offline start --port 3006 --skipCacheInvalidation",
+    "ownershipRelation:deploy": "cd ./api/ownership-relation && sls deploy",
+    "ownershipRelation:offline": "cd ./api/ownership-relation && sls offline start --port 3007 --skipCacheInvalidation",
     "clean": "rm -rf ../ressource-relation-api.webpack/"
   },
   "keywords": [],
