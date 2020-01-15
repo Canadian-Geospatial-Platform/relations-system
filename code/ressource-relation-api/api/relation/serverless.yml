@@ -1,0 +1,193 @@
+service: ${file(../../secrets.json):API_NAME}
+
+custom:
+  secrets: ${file(../../secrets.json)}
+  webpack:
+    webpackConfig: "../../webpack.config.js"
+    includeModules: false
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+provider:
+  name: aws
+  region: ${self:custom.secrets.REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${self:custom.secrets.NODE_ENV}
+  versionFunctions: false
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    DB_HOST: ${self:custom.secrets.DB_HOST}
+    DB_NAME: ${self:custom.secrets.DB_NAME}
+    DB_PORT: ${self:custom.secrets.DB_PORT}
+    DB_USER: ${self:custom.secrets.DB_USER}
+    DB_PASSWORD: ${self:custom.secrets.DB_PASSWORD}
+  vpc:
+    securityGroupIds:
+      - ${self:custom.secrets.SECURITY_GROUP_ID}
+    subnetIds:
+      - ${self:custom.secrets.SUBNET1_ID}
+      - ${self:custom.secrets.SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  # communityUser
+  communityUserRelationCreate:
+    handler: handler.relationCreate
+    events:
+      - http:
+          path: communityUserRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+  communityUserRelationGetOne:
+    handler: handler.relationGetOne
+    events:
+      - http:
+          path: communityUserRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  communityUserRelationGetAll:
+    handler: handler.relationGetAll
+    events:
+      - http:
+          path: communityUserRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+  communityUserRelationUpdate:
+    handler: handler.relationUpdate
+    events:
+      - http:
+          path: communityUserRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  communityUserRelationDestroy:
+    handler: handler.relationDestroy
+    events:
+      - http:
+          path: communityUserRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  # collectionRessource
+  collectionRessourceRelationCreate:
+    handler: handler.relationCreate
+    events:
+      - http:
+          path: collectionRessourceRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionRessourceRelation"
+  collectionRessourceRelationGetOne:
+    handler: handler.relationGetOne
+    events:
+      - http:
+          path: collectionRessourceRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionRessourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
+  collectionRessourceRelationGetAll:
+    handler: handler.relationGetAll
+    events:
+      - http:
+          path: collectionRessourceRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionRessourceRelation"
+  collectionRessourceRelationUpdate:
+    handler: handler.relationUpdate
+    events:
+      - http:
+          path: collectionRessourceRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionRessourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
+  collectionRessourceRelationDestroy:
+    handler: handler.relationDestroy
+    events:
+      - http:
+          path: collectionRessourceRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionRessourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "RessourceId"
+  # collectionCollection
+  collectionCollectionRelationCreate:
+    handler: handler.relationCreate
+    events:
+      - http:
+          path: collectionCollectionRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionCollectionRelation"
+  collectionCollectionRelationGetOne:
+    handler: handler.relationGetOne
+    events:
+      - http:
+          path: collectionCollectionRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
+  collectionCollectionRelationGetAll:
+    handler: handler.relationGetAll
+    events:
+      - http:
+          path: collectionCollectionRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionCollectionRelation"
+  collectionCollectionRelationUpdate:
+    handler: handler.relationUpdate
+    events:
+      - http:
+          path: collectionCollectionRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
+  collectionCollectionRelationDestroy:
+    handler: handler.relationDestroy
+    events:
+      - http:
+          path: collectionCollectionRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
