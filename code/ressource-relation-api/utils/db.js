@@ -32,21 +32,6 @@ const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
 
-const CollectionCollectionRelation = RelationModel(
-  sequelize,
-  Sequelize,
-  "CollectionCollectionRelation",
-  "ParentId",
-  "ChildId"
-);
-
-const CollectionResourceRelation = RelationModel(
-  sequelize,
-  Sequelize,
-  "CollectionResourceRelation",
-  "CollectionId",
-  "ResourceId"
-);
 const CommunityUserRelation = RelationModel(
   sequelize,
   Sequelize,
@@ -54,15 +39,20 @@ const CommunityUserRelation = RelationModel(
   "CommunityId",
   "UserId"
 );
+Community.belongsToMany(User, {
+  through: CommunityUserRelation
+});
+User.belongsToMany(Community, {
+  through: CommunityUserRelation
+});
 
-const UserCommunityOwnershipRelation = OwnershipRelationModel(
+const CollectionCollectionRelation = RelationModel(
   sequelize,
   Sequelize,
-  "UserCommunityOwnershipRelation",
-  "UserId",
-  "CommunityId"
+  "CollectionCollectionRelation",
+  "ParentId",
+  "ChildId"
 );
-
 Collection.belongsToMany(Collection, {
   through: CollectionCollectionRelation,
   as: "ParentId",
@@ -75,6 +65,13 @@ Collection.belongsToMany(Collection, {
 });
 CollectionCollectionRelation.removeAttribute("CollectionId"); // sequelize generates this useless attribute
 
+const CollectionResourceRelation = RelationModel(
+  sequelize,
+  Sequelize,
+  "CollectionResourceRelation",
+  "CollectionId",
+  "ResourceId"
+);
 Resource.belongsToMany(Collection, {
   through: CollectionResourceRelation
 });
@@ -82,11 +79,34 @@ Collection.belongsToMany(Resource, {
   through: CollectionResourceRelation
 });
 
+const UserCommunityOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "UserCommunityOwnershipRelation",
+  "UserId",
+  "CommunityId"
+);
+
 Community.belongsToMany(User, {
-  through: CommunityUserRelation
+  through: UserCommunityOwnershipRelation
 });
 User.belongsToMany(Community, {
-  through: CommunityUserRelation
+  through: UserCommunityOwnershipRelation
+});
+
+const UserResourceOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "UserResourceOwnershipRelation",
+  "UserId",
+  "ResourceId"
+);
+
+Resource.belongsToMany(User, {
+  through: UserResourceOwnershipRelation
+});
+User.belongsToMany(Resource, {
+  through: UserResourceOwnershipRelation
 });
 
 const ModelDocs = Gendoc(sequelize)
@@ -103,7 +123,8 @@ const Models = {
   CommunityUserRelation,
   CollectionResourceRelation,
   CollectionCollectionRelation,
-  UserCommunityOwnershipRelation
+  UserCommunityOwnershipRelation,
+  UserResourceOwnershipRelation
 };
 
 const connection = {};
