@@ -1,26 +1,43 @@
+const connectToDatabase = require("../../utils/db");
 const assert = require("assert");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const chaiFetch = require("chai-fetch");
-const fetch = require("node-fetch");
-const url = "localhost:3007";
+const Sequelize = require("sequelize");
+const url = "127.0.0.1:";
+const userPort = 3006;
+const ownershipRelationPort = 3007;
 
-chai.use(chaiFetch);
 chai.use(chaiHttp);
 const { expect } = chai;
 
-beforeEach(async function() {});
+describe("ownership-relation", async () => {
+  beforeEach(async () => {
+    const {
+      User,
+      Community,
+      UserCommunityOwnershipRelation
+    } = await connectToDatabase();
 
-describe("ownership-relation", function() {
-  describe("#indexOf()", function() {
-    it("should return -1 when the value is not present", function() {
-      assert.equal([1, 2, 3].indexOf(4), -1);
+    for (let i = 0; i < 10; i++) {
+      await User.create({
+        Name: "name " + i,
+        Description: "desc " + i
+      });
+      await Community.create({
+        Name: "name " + i,
+        Description: "desc " + i
+      });
+    }
+    await UserCommunityOwnershipRelation.create({
+      UserId: 3,
+      CommunityId: 7,
+      OwnershipTypeId: 1
     });
   });
   describe("Get /ownershipRelations", () => {
     it("should match responses with matching bodies", done => {
       chai
-        .request(url)
+        .request(url + ownershipRelationPort)
         .get("/userCommunityOwnershipRelations")
         .end((err, res) => {
           console.log(res.body);

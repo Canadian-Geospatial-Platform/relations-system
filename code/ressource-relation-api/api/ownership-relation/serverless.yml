@@ -128,7 +128,7 @@ functions:
       TABLE_NAME: "UserRessourceRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "RessourceId"
-  userRessourceRelationDestroy:
+  userRessourceOwnershipRelationDestroy:
     handler: handler.ownershipRelationDestroy
     events:
       - http:
@@ -136,7 +136,7 @@ functions:
           method: delete
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceRelation"
+      TABLE_NAME: "UserRessourceOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "RessourceId"
   # # collectionCollection
