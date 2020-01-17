@@ -90,6 +90,70 @@ describe("ownership-relation", async () => {
           done();
         });
     });
+
+    it("should not Post ownershipRelations with invalid UserId", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .post("/userCommunityOwnershipRelations")
+        .send({
+          UserId: 220,
+          CommunityId: 3,
+          OwnershipTypeId: 1
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(500);
+          done();
+        });
+    });
+
+    it("should not Post ownershipRelations with invalid CommunityId", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .post("/userCommunityOwnershipRelations")
+        .send({
+          UserId: 2,
+          CommunityId: -1,
+          OwnershipTypeId: 1
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(500);
+          done();
+        });
+    });
+
+    it("should not Post ownershipRelations with null CommunityId", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .post("/userCommunityOwnershipRelations")
+        .send({
+          UserId: 2,
+          CommunityId: null,
+          OwnershipTypeId: 1
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(500);
+          done();
+        });
+    });
+
+    it("should not Post ownershipRelations with null OwnershipTypeId", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .post("/userCommunityOwnershipRelations")
+        .send({
+          UserId: 2,
+          CommunityId: 8,
+          OwnershipTypeId: null
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(500);
+          done();
+        });
+    });
   });
 
   describe("Get /ownershipRelations/x/y", () => {
@@ -106,6 +170,42 @@ describe("ownership-relation", async () => {
             CommunityId: 8,
             OwnershipTypeId: 1
           });
+          done();
+        });
+    });
+
+    it("should return 404 on inexistant user", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .get("/userCommunityOwnershipRelations/20/8")
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.deep.equal({});
+          done();
+        });
+    });
+
+    it("should return 404 on inexistant community", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .get("/userCommunityOwnershipRelations/2/22")
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.deep.equal({});
+          done();
+        });
+    });
+
+    it("should return 404 on invalid url", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .get("/userCommunityOwnershipRelations/2/null")
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.deep.equal({});
           done();
         });
     });
@@ -129,6 +229,27 @@ describe("ownership-relation", async () => {
             UserId: 8,
             CommunityId: 2,
             OwnershipTypeId: 5
+          });
+          done();
+        });
+    });
+
+    it("should not Put values in Id fields", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .put("/userCommunityOwnershipRelations/8/2")
+        .send({
+          UserId: 22,
+          CommunityId: 22
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.containSubset({
+            UserId: 8,
+            CommunityId: 2,
+            OwnershipTypeId: 1
           });
           done();
         });
@@ -162,6 +283,18 @@ describe("ownership-relation", async () => {
               expect(res).to.have.status(404);
               done();
             });
+        });
+    });
+
+    it("should return 404 on inexisting realtion Delete specific relations", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .delete("/userCommunityOwnershipRelations/2/2")
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.deep.equal({});
+          done();
         });
     });
   });
