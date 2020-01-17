@@ -139,55 +139,55 @@ functions:
       TABLE_NAME: "UserResourceOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "ResourceId"
-  # # collectionCollection
-  # collectionCollectionRelationCreate:
-  #   handler: handler.ownershipRelationCreate
-  #   events:
-  #     - http:
-  #         path: collectionCollectionRelations
-  #         method: post
-  #         cors: true
-  #   environment:
-  #     TABLE_NAME: "CollectionCollectionRelation"
-  # collectionCollectionRelationGetOne:
-  #   handler: handler.ownershipRelationGetOne
-  #   events:
-  #     - http:
-  #         path: collectionCollectionRelations/{id1}/{id2}
-  #         method: get
-  #         cors: true
-  #   environment:
-  #     TABLE_NAME: "CollectionCollectionRelation"
-  #     FK_NAME_1: "ParentId"
-  #     FK_NAME_2: "ChildId"
-  # collectionCollectionRelationGetAll:
-  #   handler: handler.ownershipRelationGetAll
-  #   events:
-  #     - http:
-  #         path: collectionCollectionRelations
-  #         method: get
-  #         cors: true
-  #   environment:
-  #     TABLE_NAME: "CollectionCollectionRelation"
-  # collectionCollectionRelationUpdate:
-  #   handler: handler.ownershipRelationUpdate
-  #   events:
-  #     - http:
-  #         path: collectionCollectionRelations/{id1}/{id2}
-  #         method: put
-  #         cors: true
-  #   environment:
-  #     TABLE_NAME: "CollectionCollectionRelation"
-  #     FK_NAME_1: "ParentId"
-  #     FK_NAME_2: "ChildId"
-  # collectionCollectionRelationDestroy:
-  #   handler: handler.ownershipRelationDestroy
-  #   events:
-  #     - http:
-  #         path: collectionCollectionRelations/{id1}/{id2}
-  #         method: delete
-  #         cors: true
-  #   environment:
-  #     TABLE_NAME: "CollectionCollectionRelation"
-  #     FK_NAME_1: "ParentId"
-  #     FK_NAME_2: "ChildId"
+  # userTag
+  userTagOwnershipRelationCreate:
+    handler: handler.ownershipRelationCreate
+    events:
+      - http:
+          path: userTagOwnershipRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+  userTagOwnershipRelationGetOne:
+    handler: handler.ownershipRelationGetOne
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"
+  userTagOwnershipRelationGetAll:
+    handler: handler.ownershipRelationGetAll
+    events:
+      - http:
+          path: userTagOwnershipRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+  userTagOwnershipRelationUpdate:
+    handler: handler.ownershipRelationUpdate
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"
+  userTagOwnershipRelationDestroy:
+    handler: handler.ownershipRelationDestroy
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"
