@@ -87,58 +87,58 @@ functions:
       TABLE_NAME: "UserCommunityOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "CommunityId"
-  # userRessource
-  userRessourceOwnershipRelationCreate:
+  # userResource
+  userResourceOwnershipRelationCreate:
     handler: handler.ownershipRelationCreate
     events:
       - http:
-          path: userRessourceOwnershipRelations
+          path: userResourceOwnershipRelations
           method: post
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceOwnershipRelation"
-  userRessourceOwnershipRelationGetOne:
+      TABLE_NAME: "UserResourceOwnershipRelation"
+  userResourceOwnershipRelationGetOne:
     handler: handler.ownershipRelationGetOne
     events:
       - http:
-          path: userRessourceOwnershipRelations/{id1}/{id2}
+          path: userResourceOwnershipRelations/{id1}/{id2}
           method: get
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceOwnershipRelation"
+      TABLE_NAME: "UserResourceOwnershipRelation"
       FK_NAME_1: "UserId"
-      FK_NAME_2: "RessourceId"
-  userRessourceOwnershipRelationGetAll:
+      FK_NAME_2: "ResourceId"
+  userResourceOwnershipRelationGetAll:
     handler: handler.ownershipRelationGetAll
     events:
       - http:
-          path: userRessourceOwnershipRelations
+          path: userResourceOwnershipRelations
           method: get
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceOwnershipRelation"
-  userRessourceOwnershipRelationUpdate:
+      TABLE_NAME: "UserResourceOwnershipRelation"
+  userResourceOwnershipRelationUpdate:
     handler: handler.ownershipRelationUpdate
     events:
       - http:
-          path: userRessourceRelations/{id1}/{id2}
+          path: userResourceOwnershipRelations/{id1}/{id2}
           method: put
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceRelation"
+      TABLE_NAME: "UserResourceOwnershipRelation"
       FK_NAME_1: "UserId"
-      FK_NAME_2: "RessourceId"
-  userRessourceOwnershipRelationDestroy:
+      FK_NAME_2: "ResourceId"
+  userResourceOwnershipRelationDestroy:
     handler: handler.ownershipRelationDestroy
     events:
       - http:
-          path: userRessourceRelations/{id1}/{id2}
+          path: userResourceOwnershipRelations/{id1}/{id2}
           method: delete
           cors: true
     environment:
-      TABLE_NAME: "UserRessourceOwnershipRelation"
+      TABLE_NAME: "UserResourceOwnershipRelation"
       FK_NAME_1: "UserId"
-      FK_NAME_2: "RessourceId"
+      FK_NAME_2: "ResourceId"
   # # collectionCollection
   # collectionCollectionRelationCreate:
   #   handler: handler.ownershipRelationCreate

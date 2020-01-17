@@ -5,12 +5,9 @@ const HTTPError = require("../../utils/httpError");
 module.exports.ownershipRelationCreate = async event => {
   try {
     const db = await connectToDatabase();
-    console.log(JSON.stringify(event.body));
-    console.log(process.env.TABLE_NAME);
     const ownershipRelation = await db[process.env.TABLE_NAME].create(
       JSON.parse(event.body)
     );
-    console.log(JSON.stringify(ownershipRelation));
     return {
       statusCode: 200,
       body: JSON.stringify(ownershipRelation)
