@@ -98,7 +98,6 @@ describe("ownership-relation", async () => {
         .request(url + ownershipRelationPort)
         .get("/userCommunityOwnershipRelations/2/8")
         .end((err, res) => {
-          console.log(res.body);
           if (err) done(err);
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("object");
@@ -108,6 +107,61 @@ describe("ownership-relation", async () => {
             OwnershipTypeId: 1
           });
           done();
+        });
+    });
+  });
+
+  describe("Put /ownershipRelations/x/y", () => {
+    it("should Put specific values in relations", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .put("/userCommunityOwnershipRelations/8/2")
+        .send({
+          UserId: 8,
+          CommunityId: 2,
+          OwnershipTypeId: 5
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.containSubset({
+            UserId: 8,
+            CommunityId: 2,
+            OwnershipTypeId: 5
+          });
+          done();
+        });
+    });
+  });
+
+  describe("Delete /ownershipRelations/x/y", () => {
+    it("should Delete specific relations", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .delete("/userCommunityOwnershipRelations/8/2")
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.containSubset({
+            UserId: 8,
+            CommunityId: 2,
+            OwnershipTypeId: 1
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+          done(err);
+        })
+        .then(function(res) {
+          chai
+            .request(url + ownershipRelationPort)
+            .get("/userCommunityOwnershipRelations/8/2")
+            .end((err, res) => {
+              if (err) done(err);
+              expect(res).to.have.status(404);
+              done();
+            });
         });
     });
   });
