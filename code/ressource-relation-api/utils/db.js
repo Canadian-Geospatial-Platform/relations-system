@@ -125,6 +125,21 @@ User.belongsToMany(Tag, {
   through: UserTagOwnershipRelation
 });
 
+const UserCollectionOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "UserCollectionOwnershipRelation",
+  "UserId",
+  "CollectionId"
+);
+
+Collection.belongsToMany(User, {
+  through: UserCollectionOwnershipRelation
+});
+User.belongsToMany(Collection, {
+  through: UserCollectionOwnershipRelation
+});
+
 const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
@@ -142,6 +157,7 @@ const Models = {
   UserCommunityOwnershipRelation,
   UserResourceOwnershipRelation,
   UserTagOwnershipRelation,
+  UserCollectionOwnershipRelation,
   sequelize
 };
 
