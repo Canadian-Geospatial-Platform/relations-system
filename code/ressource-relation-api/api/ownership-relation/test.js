@@ -1,13 +1,15 @@
 const connectToDatabase = require("../../utils/db");
 const assert = require("assert");
 const chai = require("chai");
-const chaiHttp = require("chai-http");
 const Sequelize = require("sequelize");
 const url = "127.0.0.1:";
 const userPort = 3006;
 const ownershipRelationPort = 3007;
 
-chai.use(chaiHttp);
+chai.use(require("chai-shallow-deep-equal"));
+chai.use(require("chai-subset"));
+chai.use(require("chai-http"));
+
 const { expect } = chai;
 
 describe("ownership-relation", async () => {
@@ -19,20 +21,28 @@ describe("ownership-relation", async () => {
     } = await connectToDatabase();
 
     for (let i = 0; i < 10; i++) {
-      await User.create({
-        Name: "name " + i,
-        Description: "desc " + i
-      });
-      await Community.create({
-        Name: "name " + i,
-        Description: "desc " + i
-      });
+      try {
+        await User.create({
+          Name: "name " + i,
+          Description: "desc " + i
+        });
+      } catch (err) {}
+      try {
+        await Community.create({
+          Name: "name " + i,
+          Description: "desc " + i
+        });
+      } catch (err) {}
     }
-    await UserCommunityOwnershipRelation.create({
-      UserId: 3,
-      CommunityId: 7,
-      OwnershipTypeId: 1
-    });
+    for (let i = 0; i < 10; i++) {
+      try {
+        await UserCommunityOwnershipRelation.create({
+          UserId: i,
+          CommunityId: 10 - i,
+          OwnershipTypeId: 1
+        });
+      } catch (err) {}
+    }
   });
   describe("Get /ownershipRelations", () => {
     it("should match responses with matching bodies", done => {
@@ -44,6 +54,14 @@ describe("ownership-relation", async () => {
           if (err) done(err);
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("array");
+          expect(res.body).to.containSubset([
+            {
+              Id: 10,
+              UserId: 8,
+              CommunityId: 2,
+              OwnershipTypeId: 1
+            }
+          ]);
           done();
         });
     });
