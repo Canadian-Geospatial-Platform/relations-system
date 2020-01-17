@@ -1,35 +1,30 @@
-service: ${file(../../secrets.json):API_NAME}-resource
+service: ${env:API_NAME}-collection
 
 custom:
-  secrets: ${file(../../secrets.json)}
+  dotenv:
+    path: ../../.env
   webpack:
-    webpackConfig: "../../webpack.config.js"
+    webpackConfig: ../../webpack.config.js
     includeModules: false
 
 plugins:
   - serverless-offline
   - serverless-webpack
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
-  region: ${self:custom.secrets.REGION}
+  region: ${env:REGION}
   runtime: nodejs12.x
   timeout: 30
-  stage: ${self:custom.secrets.NODE_ENV}
+  stage: ${env:NODE_ENV}
   versionFunctions: false
-  environment:
-    NODE_ENV: ${self:custom.secrets.NODE_ENV}
-    DB_HOST: ${self:custom.secrets.DB_HOST}
-    DB_NAME: ${self:custom.secrets.DB_NAME}
-    DB_PORT: ${self:custom.secrets.DB_PORT}
-    DB_USER: ${self:custom.secrets.DB_USER}
-    DB_PASSWORD: ${self:custom.secrets.DB_PASSWORD}
   vpc:
     securityGroupIds:
-      - ${self:custom.secrets.SECURITY_GROUP_ID}
+      - ${env:SECURITY_GROUP_ID}
     subnetIds:
-      - ${self:custom.secrets.SUBNET1_ID}
-      - ${self:custom.secrets.SUBNET2_ID}
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
 
 package:
   individually: true

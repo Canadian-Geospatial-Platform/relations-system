@@ -1,8 +1,9 @@
 "use strict";
+
 require("dotenv").config({ path: "../../.env" });
 const Sequelize = require("sequelize");
 const Gendoc = require("apidoc-sequelize-generator");
-const Mysql2 = require("mysql2"); // Needed to fix sequelize issues with WebPack
+const Mysql2 = require("mysql2");
 
 const CollectionModel = require("../models/Collection");
 const ResourceModel = require("../models/Resource");
@@ -19,7 +20,7 @@ const sequelize = new Sequelize(
   {
     logging: false,
     dialect: "mysql",
-    dialectModule: Mysql2, // Needed to fix sequelize issues with WebPack
+    dialectModule: Mysql2,
     dialectOptions: {
       connectTimeout: 60000
     },

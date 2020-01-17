@@ -1,3 +1,5 @@
+"use strict";
+
 const TerserPlugin = require("terser-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
 const slsw = require("serverless-webpack");

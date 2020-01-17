@@ -1,10 +1,8 @@
+"use strict";
+
 const connectToDatabase = require("../../utils/db");
-const assert = require("assert");
 const chai = require("chai");
-const Sequelize = require("sequelize");
 const url = "127.0.0.1:";
-const resourcePort = 3004;
-const userPort = 3006;
 const ownershipRelationPort = 3007;
 
 chai.use(require("chai-subset"));
