@@ -6,7 +6,6 @@ const url = "127.0.0.1:";
 const userPort = 3006;
 const ownershipRelationPort = 3007;
 
-chai.use(require("chai-shallow-deep-equal"));
 chai.use(require("chai-subset"));
 chai.use(require("chai-http"));
 
@@ -17,10 +16,13 @@ describe("ownership-relation", async () => {
     const {
       User,
       Community,
-      UserCommunityOwnershipRelation
+      UserCommunityOwnershipRelation,
+      sequelize
     } = await connectToDatabase();
 
-    for (let i = 0; i < 10; i++) {
+    await sequelize.sync({ force: true });
+
+    for (let i = 1; i < 10; i++) {
       try {
         await User.create({
           Name: "name " + i,
@@ -34,7 +36,7 @@ describe("ownership-relation", async () => {
         });
       } catch (err) {}
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i < 10; i++) {
       try {
         await UserCommunityOwnershipRelation.create({
           UserId: i,
@@ -44,24 +46,67 @@ describe("ownership-relation", async () => {
       } catch (err) {}
     }
   });
+
   describe("Get /ownershipRelations", () => {
-    it("should match responses with matching bodies", done => {
+    it("should Get ownershipRelations", done => {
       chai
         .request(url + ownershipRelationPort)
         .get("/userCommunityOwnershipRelations")
         .end((err, res) => {
-          console.log(res.body);
           if (err) done(err);
           expect(res).to.have.status(200);
           expect(res.body).to.be.an("array");
           expect(res.body).to.containSubset([
             {
-              Id: 10,
               UserId: 8,
               CommunityId: 2,
               OwnershipTypeId: 1
             }
           ]);
+          done();
+        });
+    });
+  });
+
+  describe("Post /ownershipRelations", () => {
+    it("should Post ownershipRelations", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .post("/userCommunityOwnershipRelations")
+        .send({
+          UserId: 6,
+          CommunityId: 3,
+          OwnershipTypeId: 1
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.containSubset({
+            UserId: 6,
+            CommunityId: 3,
+            OwnershipTypeId: 1
+          });
+          done();
+        });
+    });
+  });
+
+  describe("Get /ownershipRelations/x/y", () => {
+    it("should Get specific relations", done => {
+      chai
+        .request(url + ownershipRelationPort)
+        .get("/userCommunityOwnershipRelations/2/8")
+        .end((err, res) => {
+          console.log(res.body);
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          expect(res.body).to.containSubset({
+            UserId: 2,
+            CommunityId: 8,
+            OwnershipTypeId: 1
+          });
           done();
         });
     });

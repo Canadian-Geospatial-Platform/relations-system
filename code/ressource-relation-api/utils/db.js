@@ -17,6 +17,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
+    logging: false,
     dialect: "mysql",
     dialectModule: Mysql2, // Needed to fix sequelize issues with WebPack
     dialectOptions: {
@@ -124,7 +125,8 @@ const Models = {
   CollectionResourceRelation,
   CollectionCollectionRelation,
   UserCommunityOwnershipRelation,
-  UserResourceOwnershipRelation
+  UserResourceOwnershipRelation,
+  sequelize
 };
 
 const connection = {};
