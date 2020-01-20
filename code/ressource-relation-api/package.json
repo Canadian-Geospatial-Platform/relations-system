@@ -6,6 +6,7 @@
   "scripts": {
     "all:deploy": "npm run collection:deploy && npm run community:deploy && npm run relation:deploy && npm run resource:deploy && npm run tag:deploy && npm run user:deploy && npm run ownership-relation:deploy",
     "all:offline": "npm run collection:offline & npm run community:offline & npm run relation:offline & npm run resource:offline & npm run tag:offline & npm run user:offline & npm run ownership-relation:offline",
+    "all:test": "npm run relation:test && npm run ownership-relation:test",
     "collection:deploy": "cd ./api/collection && sls deploy",
     "collection:offline": "cd ./api/collection && sls offline --watch --port 3001 start  --skipCacheInvalidation",
     "community:deploy": "cd ./api/community && sls deploy",
