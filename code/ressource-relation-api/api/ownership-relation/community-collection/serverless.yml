@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-community-collection
+service: ${env:API_NAME}-own-rel-com-col
 
 custom:
   dotenv:

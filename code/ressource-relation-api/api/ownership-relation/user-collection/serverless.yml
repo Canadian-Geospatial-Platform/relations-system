@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-own-rel-com-tag
+service: ${env:API_NAME}-own-rel-use-col
 
 custom:
   dotenv:
