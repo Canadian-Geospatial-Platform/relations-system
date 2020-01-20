@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-rel-com-col
+service: ${env:API_NAME}-rel-col-col
 
 custom:
   dotenv:
@@ -26,55 +26,54 @@ package:
   individually: true
 
 functions:
-  # collectionResource
-  collectionResourceRelationCreate:
+  collectionCollectionRelationCreate:
     handler: ../handler.relationCreate
     events:
       - http:
-          path: collectionResourceRelations
+          path: collectionCollectionRelations
           method: post
           cors: true
     environment:
-      TABLE_NAME: "CollectionResourceRelation"
-  collectionResourceRelationGetOne:
+      TABLE_NAME: "CollectionCollectionRelation"
+  collectionCollectionRelationGetOne:
     handler: ../handler.relationGetOne
     events:
       - http:
-          path: collectionResourceRelations/{id1}/{id2}
+          path: collectionCollectionRelations/{id1}/{id2}
           method: get
           cors: true
     environment:
-      TABLE_NAME: "CollectionResourceRelation"
-      FK_NAME_1: "CollectionId"
-      FK_NAME_2: "ResourceId"
-  collectionResourceRelationGetAll:
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
+  collectionCollectionRelationGetAll:
     handler: ../handler.relationGetAll
     events:
       - http:
-          path: collectionResourceRelations
+          path: collectionCollectionRelations
           method: get
           cors: true
     environment:
-      TABLE_NAME: "CollectionResourceRelation"
-  collectionResourceRelationUpdate:
+      TABLE_NAME: "CollectionCollectionRelation"
+  collectionCollectionRelationUpdate:
     handler: ../handler.relationUpdate
     events:
       - http:
-          path: collectionResourceRelations/{id1}/{id2}
+          path: collectionCollectionRelations/{id1}/{id2}
           method: put
           cors: true
     environment:
-      TABLE_NAME: "CollectionResourceRelation"
-      FK_NAME_1: "CollectionId"
-      FK_NAME_2: "ResourceId"
-  collectionResourceRelationDestroy:
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
+  collectionCollectionRelationDestroy:
     handler: ../handler.relationDestroy
     events:
       - http:
-          path: collectionResourceRelations/{id1}/{id2}
+          path: collectionCollectionRelations/{id1}/{id2}
           method: delete
           cors: true
     environment:
-      TABLE_NAME: "CollectionResourceRelation"
-      FK_NAME_1: "CollectionId"
-      FK_NAME_2: "ResourceId"
+      TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
