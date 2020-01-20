@@ -238,3 +238,57 @@ functions:
       TABLE_NAME: "UserCollectionOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "CollectionId"
+
+  ###
+
+  communityCollectionOwnershipRelationCreate:
+    handler: handler.ownershipRelationCreate
+    events:
+      - http:
+          path: communityCollectionOwnershipRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityCollectionOwnershipRelation"
+  communityCollectionOwnershipRelationGetOne:
+    handler: handler.ownershipRelationGetOne
+    events:
+      - http:
+          path: communityCollectionOwnershipRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityCollectionOwnershipRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "CollectionId"
+  communityCollectionOwnershipRelationGetAll:
+    handler: handler.ownershipRelationGetAll
+    events:
+      - http:
+          path: communityCollectionOwnershipRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityCollectionOwnershipRelation"
+  communityCollectionOwnershipRelationUpdate:
+    handler: handler.ownershipRelationUpdate
+    events:
+      - http:
+          path: communityCollectionOwnershipRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityCollectionOwnershipRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "CollectionId"
+  communityCollectionOwnershipRelationDestroy:
+    handler: handler.ownershipRelationDestroy
+    events:
+      - http:
+          path: communityCollectionOwnershipRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityCollectionOwnershipRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "CollectionId"

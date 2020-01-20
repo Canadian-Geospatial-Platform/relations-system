@@ -13,6 +13,11 @@ const CommunityModel = require("../models/Community");
 const RelationModel = require("../models/Relation");
 const OwnershipRelationModel = require("../models/OwnershipRelation");
 
+console.log("process.env.DB_NAME");
+console.log(process.env.DB_NAME);
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASSWORD);
+
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -28,6 +33,7 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT
   }
 );
+
 const Collection = CollectionModel(sequelize, Sequelize);
 const Resource = ResourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
@@ -141,6 +147,36 @@ User.belongsToMany(Collection, {
   through: UserCollectionOwnershipRelation
 });
 
+const CommunityCollectionOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "CommunityCollectionOwnershipRelation",
+  "CommunityId",
+  "CollectionId"
+);
+
+Collection.belongsToMany(Community, {
+  through: CommunityCollectionOwnershipRelation
+});
+Community.belongsToMany(Collection, {
+  through: CommunityCollectionOwnershipRelation
+});
+
+const CommunityTagOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "CommunityTagOwnershipRelation",
+  "CommunityId",
+  "TagId"
+);
+
+Tag.belongsToMany(Community, {
+  through: CommunityTagOwnershipRelation
+});
+Community.belongsToMany(Tag, {
+  through: CommunityTagOwnershipRelation
+});
+
 const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
@@ -159,6 +195,8 @@ const Models = {
   UserResourceOwnershipRelation,
   UserTagOwnershipRelation,
   UserCollectionOwnershipRelation,
+  CommunityCollectionOwnershipRelation,
+  CommunityTagOwnershipRelation,
   sequelize
 };
 
