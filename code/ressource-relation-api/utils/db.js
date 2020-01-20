@@ -1,6 +1,6 @@
 "use strict";
 
-// require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "../.env" });
 const Sequelize = require("sequelize");
 const Gendoc = require("apidoc-sequelize-generator");
 const Mysql2 = require("mysql2");
@@ -177,6 +177,21 @@ Community.belongsToMany(Tag, {
   through: CommunityTagOwnershipRelation
 });
 
+const CommunityResourceOwnershipRelation = OwnershipRelationModel(
+  sequelize,
+  Sequelize,
+  "CommunityResourceOwnershipRelation",
+  "CommunityId",
+  "ResourceId"
+);
+
+Resource.belongsToMany(Community, {
+  through: CommunityResourceOwnershipRelation
+});
+Community.belongsToMany(Resource, {
+  through: CommunityResourceOwnershipRelation
+});
+
 const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
@@ -197,6 +212,7 @@ const Models = {
   UserCollectionOwnershipRelation,
   CommunityCollectionOwnershipRelation,
   CommunityTagOwnershipRelation,
+  CommunityResourceOwnershipRelation,
   sequelize
 };
 
