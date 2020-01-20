@@ -1,6 +1,6 @@
 "use strict";
 
-require("dotenv").config({ path: "../../.env" });
+// require("dotenv").config({ path: "../.env" });
 const Sequelize = require("sequelize");
 const Gendoc = require("apidoc-sequelize-generator");
 const Mysql2 = require("mysql2");
