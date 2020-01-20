@@ -1,0 +1,79 @@
+service: ${env:API_NAME}-own-rel-com-tag
+
+custom:
+  dotenv:
+    path: ../../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  userTagOwnershipRelationCreate:
+    handler: handler.ownershipRelationCreate
+    events:
+      - http:
+          path: userTagOwnershipRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+  userTagOwnershipRelationGetOne:
+    handler: handler.ownershipRelationGetOne
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"
+  userTagOwnershipRelationGetAll:
+    handler: handler.ownershipRelationGetAll
+    events:
+      - http:
+          path: userTagOwnershipRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+  userTagOwnershipRelationUpdate:
+    handler: handler.ownershipRelationUpdate
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"
+  userTagOwnershipRelationDestroy:
+    handler: handler.ownershipRelationDestroy
+    events:
+      - http:
+          path: userTagOwnershipRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "UserTagOwnershipRelation"
+      FK_NAME_1: "UserId"
+      FK_NAME_2: "TagId"

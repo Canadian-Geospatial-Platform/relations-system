@@ -26,7 +26,6 @@ package:
   individually: true
 
 functions:
-  # communityTagOwnership
   communityTagOwnershipRelationCreate:
     handler: ../handler.ownershipRelationCreate
     events:
