@@ -28,7 +28,9 @@ describe("relation-collection-collection", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
     for (let i = 1; i < 10; i++) {
       try {

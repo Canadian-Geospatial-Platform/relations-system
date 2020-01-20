@@ -29,7 +29,9 @@ describe("ownership-relation-user-collection", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
       try {
         await Collection.create({
           Title: "title " + i,

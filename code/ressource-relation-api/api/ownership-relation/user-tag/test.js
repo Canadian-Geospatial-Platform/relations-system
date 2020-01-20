@@ -29,7 +29,9 @@ describe("ownership-relation-user-tag", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
       try {
         await Tag.create({
           Title: "title " + i,

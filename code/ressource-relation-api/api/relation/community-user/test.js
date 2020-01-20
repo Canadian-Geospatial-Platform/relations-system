@@ -29,7 +29,9 @@ describe("relation-community-user", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
       try {
         await User.create({
           Title: "title " + i,

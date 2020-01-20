@@ -29,7 +29,9 @@ describe("ownership-relation-community-resource", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
       try {
         await Resource.create({
           Title: "title " + i,

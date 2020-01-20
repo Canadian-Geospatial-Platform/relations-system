@@ -28,7 +28,9 @@ describe("ownership-relation-tag-community", async () => {
           Name: "name " + i,
           Description: "desc " + i
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
       try {
         await Community.create({
           Name: "name " + i,
