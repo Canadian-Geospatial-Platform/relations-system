@@ -13,11 +13,6 @@ const CommunityModel = require("../models/Community");
 const RelationModel = require("../models/Relation");
 const OwnershipRelationModel = require("../models/OwnershipRelation");
 
-console.log("process.env.DB_NAME");
-console.log(process.env.DB_NAME);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PASSWORD);
-
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
