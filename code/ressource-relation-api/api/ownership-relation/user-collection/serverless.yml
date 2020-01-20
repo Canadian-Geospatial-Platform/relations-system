@@ -28,7 +28,7 @@ package:
 functions:
   # userCollection
   userCollectionOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: userCollectionOwnershipRelations
@@ -37,7 +37,7 @@ functions:
     environment:
       TABLE_NAME: "UserCollectionOwnershipRelation"
   userCollectionOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: userCollectionOwnershipRelations/{id1}/{id2}
@@ -48,7 +48,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "CollectionId"
   userCollectionOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: userCollectionOwnershipRelations
@@ -57,7 +57,7 @@ functions:
     environment:
       TABLE_NAME: "UserCollectionOwnershipRelation"
   userCollectionOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: userCollectionOwnershipRelations/{id1}/{id2}
@@ -68,7 +68,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "CollectionId"
   userCollectionOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: userCollectionOwnershipRelations/{id1}/{id2}

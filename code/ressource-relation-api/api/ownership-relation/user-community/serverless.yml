@@ -27,7 +27,7 @@ package:
 
 functions:
   userCommunityOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: userCommunityOwnershipRelations
@@ -36,7 +36,7 @@ functions:
     environment:
       TABLE_NAME: "UserCommunityOwnershipRelation"
   userCommunityOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: userCommunityOwnershipRelations/{id1}/{id2}
@@ -47,7 +47,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "CommunityId"
   userCommunityOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: userCommunityOwnershipRelations
@@ -56,7 +56,7 @@ functions:
     environment:
       TABLE_NAME: "UserCommunityOwnershipRelation"
   userCommunityOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: userCommunityOwnershipRelations/{id1}/{id2}
@@ -67,7 +67,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "CommunityId"
   userCommunityOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: userCommunityOwnershipRelations/{id1}/{id2}

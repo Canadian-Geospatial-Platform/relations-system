@@ -4,7 +4,7 @@ require("dotenv").config({ path: "../../../.env" });
 const connectToDatabase = require("../../../utils/db");
 const chai = require("chai");
 const url = "127.0.0.1:";
-const ownershipRelationPort = 3000;
+const ownershipRelationPort = 3008;
 
 chai.use(require("chai-subset"));
 chai.use(require("chai-http"));

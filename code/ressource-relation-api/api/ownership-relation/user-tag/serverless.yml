@@ -27,7 +27,7 @@ package:
 
 functions:
   userTagOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: userTagOwnershipRelations
@@ -36,7 +36,7 @@ functions:
     environment:
       TABLE_NAME: "UserTagOwnershipRelation"
   userTagOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: userTagOwnershipRelations/{id1}/{id2}
@@ -47,7 +47,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "TagId"
   userTagOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: userTagOwnershipRelations
@@ -56,7 +56,7 @@ functions:
     environment:
       TABLE_NAME: "UserTagOwnershipRelation"
   userTagOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: userTagOwnershipRelations/{id1}/{id2}
@@ -67,7 +67,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "TagId"
   userTagOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: userTagOwnershipRelations/{id1}/{id2}

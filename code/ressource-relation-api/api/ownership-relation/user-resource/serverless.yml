@@ -27,7 +27,7 @@ package:
 
 functions:
   userResourceOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: userResourceOwnershipRelations
@@ -36,7 +36,7 @@ functions:
     environment:
       TABLE_NAME: "UserResourceOwnershipRelation"
   userResourceOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: userResourceOwnershipRelations/{id1}/{id2}
@@ -47,7 +47,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "ResourceId"
   userResourceOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: userResourceOwnershipRelations
@@ -56,7 +56,7 @@ functions:
     environment:
       TABLE_NAME: "UserResourceOwnershipRelation"
   userResourceOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: userResourceOwnershipRelations/{id1}/{id2}
@@ -67,7 +67,7 @@ functions:
       FK_NAME_1: "UserId"
       FK_NAME_2: "ResourceId"
   userResourceOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: userResourceOwnershipRelations/{id1}/{id2}

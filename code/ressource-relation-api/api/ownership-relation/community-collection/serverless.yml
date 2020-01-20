@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-own-rel-com-tag
+service: ${env:API_NAME}-community-collection
 
 custom:
   dotenv:
@@ -27,7 +27,7 @@ package:
 
 functions:
  communityCollectionOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: communityCollectionOwnershipRelations
@@ -36,7 +36,7 @@ functions:
     environment:
       TABLE_NAME: "CommunityCollectionOwnershipRelation"
   communityCollectionOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: communityCollectionOwnershipRelations/{id1}/{id2}
@@ -47,7 +47,7 @@ functions:
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "CollectionId"
   communityCollectionOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: communityCollectionOwnershipRelations
@@ -56,7 +56,7 @@ functions:
     environment:
       TABLE_NAME: "CommunityCollectionOwnershipRelation"
   communityCollectionOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: communityCollectionOwnershipRelations/{id1}/{id2}
@@ -67,7 +67,7 @@ functions:
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "CollectionId"
   communityCollectionOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: communityCollectionOwnershipRelations/{id1}/{id2}

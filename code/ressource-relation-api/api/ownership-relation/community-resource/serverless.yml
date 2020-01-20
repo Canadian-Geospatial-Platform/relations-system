@@ -27,7 +27,7 @@ package:
 
 functions:
   communityResourceOwnershipRelationCreate:
-    handler: handler.ownershipRelationCreate
+    handler: ../handler.ownershipRelationCreate
     events:
       - http:
           path: communityResourceOwnershipRelations
@@ -36,7 +36,7 @@ functions:
     environment:
       TABLE_NAME: "CommunityResourceOwnershipRelation"
   communityResourceOwnershipRelationGetOne:
-    handler: handler.ownershipRelationGetOne
+    handler: ../handler.ownershipRelationGetOne
     events:
       - http:
           path: communityResourceOwnershipRelations/{id1}/{id2}
@@ -47,7 +47,7 @@ functions:
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "ResourceId"
   communityResourceOwnershipRelationGetAll:
-    handler: handler.ownershipRelationGetAll
+    handler: ../handler.ownershipRelationGetAll
     events:
       - http:
           path: communityResourceOwnershipRelations
@@ -56,7 +56,7 @@ functions:
     environment:
       TABLE_NAME: "CommunityResourceOwnershipRelation"
   communityResourceOwnershipRelationUpdate:
-    handler: handler.ownershipRelationUpdate
+    handler: ../handler.ownershipRelationUpdate
     events:
       - http:
           path: communityResourceOwnershipRelations/{id1}/{id2}
@@ -67,7 +67,7 @@ functions:
       FK_NAME_1: "CommunityId"
       FK_NAME_2: "ResourceId"
   communityResourceOwnershipRelationDestroy:
-    handler: handler.ownershipRelationDestroy
+    handler: ../handler.ownershipRelationDestroy
     events:
       - http:
           path: communityResourceOwnershipRelations/{id1}/{id2}
