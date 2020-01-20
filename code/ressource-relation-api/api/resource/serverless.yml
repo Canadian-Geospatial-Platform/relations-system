@@ -3,13 +3,9 @@ service: ${env:API_NAME}-collection
 custom:
   dotenv:
     path: ../../.env
-  webpack:
-    webpackConfig: ../../webpack.config.js
-    includeModules: false
 
 plugins:
   - serverless-offline
-  - serverless-webpack
   - serverless-dotenv-plugin
 
 provider:

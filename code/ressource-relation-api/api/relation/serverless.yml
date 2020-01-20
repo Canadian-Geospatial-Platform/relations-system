@@ -6,7 +6,6 @@ custom:
 
 plugins:
   - serverless-offline
-  - serverless-webpack
   - serverless-dotenv-plugin
 
 provider:

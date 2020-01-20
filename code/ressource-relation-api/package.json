@@ -42,11 +42,7 @@
     "serverless": "^1.61.1",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.12.1",
-    "serverless-pseudo-parameters": "^2.5.0",
-    "serverless-webpack": "^5.3.1",
-    "terser-webpack-plugin": "^2.3.2",
-    "webpack": "^4.41.5",
-    "webpack-node-externals": "^1.7.2"
+    "serverless-pseudo-parameters": "^2.5.0"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
