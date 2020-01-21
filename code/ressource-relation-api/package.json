@@ -30,6 +30,7 @@
     "resource:test": "cd ./api/resource && mocha",
     "tag:deploy": "cd ./api/tag && sls deploy",
     "tag:offline": "cd ./api/tag && sls offline start --watch --port 3005 --skipCacheInvalidation",
+    "tag:test": "cd ./api/tag && mocha",
     "user:deploy": "cd ./api/user && sls deploy",
     "user:offline": "cd ./api/user && sls offline start --watch --port 3006 --skipCacheInvalidation",
     "ownership-relation:deploy": "npm run ownership-relation:community-resource:deploy && npm run ownership-relation:community-resource:deploy && npm run ownership-relation:community-tag:deploy && npm run ownership-relation:user-collection:deploy && npm run ownership-relation:user-community:deploy && npm run ownership-relation:user-resource:deploy && npm run ownership-relation:user-tag:deploy",

@@ -70,8 +70,8 @@ module.exports.tagUpdate = async event => {
         `Tag with id: ${event.pathParameters.id} was not found`
       );
     if (input.PopularityIndex) tag.PopularityIndex = input.PopularityIndex;
-    if (input.title) tag.title = input.title;
-    if (input.description) tag.description = input.description;
+    if (input.Title) tag.Title = input.Title;
+    if (input.Description) tag.Description = input.Description;
     await tag.save();
     return {
       statusCode: 200,
