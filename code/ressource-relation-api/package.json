@@ -27,6 +27,7 @@
     "relation:community-user:test": "cd ./api/relation/community-user && mocha",
     "resource:deploy": "cd ./api/resource && sls deploy",
     "resource:offline": "cd ./api/resource && sls offline start --watch --port 3004 --skipCacheInvalidation",
+    "resource:test": "cd ./api/resource && mocha",
     "tag:deploy": "cd ./api/tag && sls deploy",
     "tag:offline": "cd ./api/tag && sls offline start --watch --port 3005 --skipCacheInvalidation",
     "user:deploy": "cd ./api/user && sls deploy",

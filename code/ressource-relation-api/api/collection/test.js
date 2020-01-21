@@ -110,7 +110,7 @@ describe("collection", async () => {
     });
 
     describe("Get /collections/x", () => {
-      it("should Get specific relations", done => {
+      it("should Get specific collections", done => {
         chai
           .request(url + port)
           .get("/collections/2")
@@ -151,7 +151,7 @@ describe("collection", async () => {
     });
 
     describe("Put /collections/x", () => {
-      it("should Put specific values in relations", done => {
+      it("should Put specific values in collections", done => {
         chai
           .request(url + port)
           .put("/collections/8")
@@ -194,7 +194,7 @@ describe("collection", async () => {
     });
 
     describe("Delete /collections/x", () => {
-      it("should Delete specific relations", done => {
+      it("should Delete specific collections", done => {
         chai
           .request(url + port)
           .delete("/collections/8")
@@ -221,7 +221,7 @@ describe("collection", async () => {
           });
       });
 
-      it("should return 404 on inexisting realtion Delete specific relations", done => {
+      it("should return 404 on inexisting realtion Delete specific collections", done => {
         chai
           .request(url + port)
           .delete("/collections/55")
