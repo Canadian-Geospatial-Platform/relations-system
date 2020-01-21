@@ -14,7 +14,7 @@ This project was created following the instructions provided at this url: https:
 
 #### Dependencies
 
-- nodejs (v10.x): https://github.com/nvm-sh/nvm#installing-and-updating
+- nodejs (v12.x): https://github.com/nvm-sh/nvm#installing-and-updating
 - serverless framework cli: https://serverless.com/framework/docs/getting-started#installing-via-npm
 - configure aws credentials: https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
@@ -23,7 +23,7 @@ This project was created following the instructions provided at this url: https:
 - Spin up a mysql 5 docker container with info mirroring your secrets.json file:
 
 ```
-sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test -e MYSQL_USER=root -d mysql:5
+npm run database:offline
 ```
 
 - Install project
@@ -41,7 +41,7 @@ cp sample.secrets.json secrets.json
 - Enter the following command at root of project to run
 
 ```
-npm run offline
+npm run all:offline
 ```
 
 - Connecting to the database manually to inspect and drop tables when required by orm modifications
@@ -80,7 +80,7 @@ curl localhost:3000
 - Enter the following command at root of project to deploy
 
 ```
-npm run deploy
+npm run all:deploy
 ```
 
 - The routes to access you project should appear in the terminal

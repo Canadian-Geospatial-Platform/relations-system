@@ -1,0 +1,80 @@
+service: ${env:API_NAME}-rel-com-col
+
+custom:
+  dotenv:
+    path: ../../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  # collectionResource
+  collectionResourceRelationCreate:
+    handler: ../handler.relationCreate
+    events:
+      - http:
+          path: collectionResourceRelations
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionResourceRelation"
+  collectionResourceRelationGetOne:
+    handler: ../handler.relationGetOne
+    events:
+      - http:
+          path: collectionResourceRelations/{id1}/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionResourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "ResourceId"
+  collectionResourceRelationGetAll:
+    handler: ../handler.relationGetAll
+    events:
+      - http:
+          path: collectionResourceRelations
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionResourceRelation"
+  collectionResourceRelationUpdate:
+    handler: ../handler.relationUpdate
+    events:
+      - http:
+          path: collectionResourceRelations/{id1}/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionResourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "ResourceId"
+  collectionResourceRelationDestroy:
+    handler: ../handler.relationDestroy
+    events:
+      - http:
+          path: collectionResourceRelations/{id1}/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CollectionResourceRelation"
+      FK_NAME_1: "CollectionId"
+      FK_NAME_2: "ResourceId"

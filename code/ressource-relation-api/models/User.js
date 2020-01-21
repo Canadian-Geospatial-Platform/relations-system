@@ -1,15 +1,17 @@
+"use strict";
+
 module.exports = (sequelize, type) => {
-  return sequelize.define("Ressource", {
+  return sequelize.define("User", {
     Id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    Title: type.STRING,
+    Name: type.STRING,
     Description: type.STRING,
-    RessourceUrl: type.STRING,
     PopularityIndex: {
       type: type.INTEGER,
+      allowNull: false,
       defaultValue: 0
     }
   });

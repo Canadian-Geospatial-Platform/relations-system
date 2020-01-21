@@ -1,0 +1,63 @@
+service: ${env:API_NAME}-collection
+
+custom:
+  dotenv:
+    path: ../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  resourceCreate:
+    handler: handler.resourceCreate
+    events:
+      - http:
+          path: resources
+          method: post
+          cors: true
+  resourceGetOne:
+    handler: handler.resourceGetOne
+    events:
+      - http:
+          path: resources/{id}
+          method: get
+          cors: true
+  resourceGetAll:
+    handler: handler.resourceGetAll
+    events:
+      - http:
+          path: resources
+          method: get
+          cors: true
+  resourceUpdate:
+    handler: handler.resourceUpdate
+    events:
+      - http:
+          path: resources/{id}
+          method: put
+          cors: true
+  resourceDestroy:
+    handler: handler.resourceDestroy
+    events:
+      - http:
+          path: resources/{id}
+          method: delete
+          cors: true

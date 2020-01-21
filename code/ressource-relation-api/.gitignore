@@ -6,7 +6,10 @@ jspm_packages
 .serverless
 
 # Environment Variables
-variables.env
+.env
 secrets*.json
+
+# Generated directories
+*.webpack
 
 .vscode

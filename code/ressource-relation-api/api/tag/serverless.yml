@@ -1,0 +1,63 @@
+service: ${env:API_NAME}-collection
+
+custom:
+  dotenv:
+    path: ../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  tagCreate:
+    handler: handler.tagCreate
+    events:
+      - http:
+          path: tags
+          method: post
+          cors: true
+  tagGetOne:
+    handler: handler.tagGetOne
+    events:
+      - http:
+          path: tags/{id}
+          method: get
+          cors: true
+  tagGetAll:
+    handler: handler.tagGetAll
+    events:
+      - http:
+          path: tags
+          method: get
+          cors: true
+  tagUpdate:
+    handler: handler.tagUpdate
+    events:
+      - http:
+          path: tags/{id}
+          method: put
+          cors: true
+  tagDestroy:
+    handler: handler.tagDestroy
+    events:
+      - http:
+          path: tags/{id}
+          method: delete
+          cors: true

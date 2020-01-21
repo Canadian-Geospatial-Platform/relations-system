@@ -1,0 +1,35 @@
+service: ${env:API_NAME}-collection
+
+custom:
+  dotenv:
+    path: ../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  docs:
+    handler: handler.docs
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
