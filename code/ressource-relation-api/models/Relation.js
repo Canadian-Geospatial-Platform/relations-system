@@ -11,6 +11,7 @@ module.exports = (sequelize, type, tableName, keyName1, keyName2) => {
       },
       PopularityIndex: {
         type: type.INTEGER,
+        notNull: true,
         defaultValue: 0
       },
       [keyName1]: {

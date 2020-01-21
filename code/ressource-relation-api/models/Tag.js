@@ -11,6 +11,7 @@ module.exports = (sequelize, type) => {
     Description: type.STRING,
     PopularityIndex: {
       type: type.INTEGER,
+      allowNull: false,
       defaultValue: 0
     }
   });

@@ -9,6 +9,7 @@
     "all:test": "npm run relation:test && npm run ownership-relation:test",
     "collection:deploy": "cd ./api/collection && sls deploy",
     "collection:offline": "cd ./api/collection && sls offline --watch --port 3001 start  --skipCacheInvalidation",
+    "collection:test": "cd ./api/collection && mocha",
     "community:deploy": "cd ./api/community && sls deploy",
     "community:offline": "cd ./api/community && sls offline start --watch --port 3002 --skipCacheInvalidation",
     "relation:deploy": "npm run relation:collection-resource:deploy && npm run relation:collection-collection:deploy && npm run relation:community-user:deploy",
