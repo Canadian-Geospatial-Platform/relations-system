@@ -8,6 +8,11 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     Name: type.STRING,
-    Description: type.STRING
+    Description: type.STRING,
+    PopularityIndex: {
+      type: type.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    }
   });
 };

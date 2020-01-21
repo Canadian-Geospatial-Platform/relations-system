@@ -12,6 +12,7 @@
     "collection:test": "cd ./api/collection && mocha",
     "community:deploy": "cd ./api/community && sls deploy",
     "community:offline": "cd ./api/community && sls offline start --watch --port 3002 --skipCacheInvalidation",
+    "community:test": "cd ./api/community && mocha",
     "relation:deploy": "npm run relation:collection-resource:deploy && npm run relation:collection-collection:deploy && npm run relation:community-user:deploy",
     "relation:offline": "npm run relation:collection-resource:offline & npm run relation:collection-collection:offline & npm run relation:community-user:offline",
     "relation:test": "npm run relation:collection-resource:test && npm run relation:collection-collection:test && npm run relation:community-user:test",
