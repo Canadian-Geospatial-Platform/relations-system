@@ -6,7 +6,7 @@
   "scripts": {
     "all:deploy": "npm run collection:deploy && npm run community:deploy && npm run relation:deploy && npm run resource:deploy && npm run tag:deploy && npm run user:deploy && npm run ownership-relation:deploy",
     "all:offline": "npm run collection:offline & npm run community:offline & npm run relation:offline & npm run resource:offline & npm run tag:offline & npm run user:offline & npm run ownership-relation:offline",
-    "all:test": "npm run relation:test && npm run ownership-relation:test",
+    "all:test": "npm run collection:test && npm run community:test && npm run relation:test && npm run resource:test && npm run tag:test && npm run user:test && npm run ownership-relation:test",
     "collection:deploy": "cd ./api/collection && sls deploy",
     "collection:offline": "cd ./api/collection && sls offline --watch --port 3001 start  --skipCacheInvalidation",
     "collection:test": "cd ./api/collection && mocha",
@@ -33,6 +33,7 @@
     "tag:test": "cd ./api/tag && mocha",
     "user:deploy": "cd ./api/user && sls deploy",
     "user:offline": "cd ./api/user && sls offline start --watch --port 3006 --skipCacheInvalidation",
+    "user:test": "cd ./api/user && mocha",
     "ownership-relation:deploy": "npm run ownership-relation:community-resource:deploy && npm run ownership-relation:community-resource:deploy && npm run ownership-relation:community-tag:deploy && npm run ownership-relation:user-collection:deploy && npm run ownership-relation:user-community:deploy && npm run ownership-relation:user-resource:deploy && npm run ownership-relation:user-tag:deploy",
     "ownership-relation:offline": "npm run ownership-relation:community-resource:offline & npm run ownership-relation:community-tag:offline & npm run ownership-relation:user-collection:offline & npm run ownership-relation:user-community:offline & npm run ownership-relation:user-resource:offline & npm run ownership-relation:user-tag:offline",
     "ownership-relation:test": "npm run ownership-relation:community-resource:test && npm run ownership-relation:community-resource:test && npm run ownership-relation:community-tag:test && npm run ownership-relation:user-collection:test && npm run ownership-relation:user-community:test && npm run ownership-relation:user-resource:test && npm run ownership-relation:user-tag:test",
