@@ -1,0 +1,79 @@
+service: ${env:API_NAME}-rel-con-com-use
+
+custom:
+  dotenv:
+    path: ../../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  stage: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  communityUserRelationCreate:
+    handler: ../handler.relationCreate
+    events:
+      - http:
+          path: relations/containers/community/user
+          method: post
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+  communityUserRelationGetOne:
+    handler: ../handler.relationGetOne
+    events:
+      - http:
+          path: relations/containers/community/{id1}/user/{id2}
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  communityUserRelationGetAll:
+    handler: ../handler.relationGetAll
+    events:
+      - http:
+          path: relations/containers/community/user
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+  communityUserRelationUpdate:
+    handler: ../handler.relationUpdate
+    events:
+      - http:
+          path: relations/containers/community/{id1}/user/{id2}
+          method: put
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"
+  communityUserRelationDestroy:
+    handler: ../handler.relationDestroy
+    events:
+      - http:
+          path: relations/containers/community/{id1}/user/{id2}
+          method: delete
+          cors: true
+    environment:
+      TABLE_NAME: "CommunityUserRelation"
+      FK_NAME_1: "CommunityId"
+      FK_NAME_2: "UserId"

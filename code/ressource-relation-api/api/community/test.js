@@ -32,10 +32,10 @@ describe("community", async () => {
   });
 
   describe("Get /community", () => {
-    it("should Get Communitys", done => {
+    it("should Get Communities", done => {
       chai
         .request(url + port)
-        .get("/communitys")
+        .get("/communities")
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -50,11 +50,11 @@ describe("community", async () => {
     });
   });
 
-  describe("Post /communitys", () => {
-    it("should Post Communitys", done => {
+  describe("Post /communities", () => {
+    it("should Post Communities", done => {
       chai
         .request(url + port)
-        .post("/communitys")
+        .post("/communities")
         .send({
           Name: "a posted name",
           Description: "a posted description",
@@ -73,10 +73,10 @@ describe("community", async () => {
         });
     });
 
-    it("should Post Communitys with valid info", done => {
+    it("should Post Communities with valid info", done => {
       chai
         .request(url + port)
-        .post("/communitys")
+        .post("/communities")
         .send({
           Name: "a posted name",
           Description: "a posted description",
@@ -95,10 +95,10 @@ describe("community", async () => {
         });
     });
 
-    it("should not Post Communitys with null PopularityIndex", done => {
+    it("should not Post Communities with null PopularityIndex", done => {
       chai
         .request(url + port)
-        .post("/communitys")
+        .post("/communities")
         .send({
           PopularityIndex: null
         })
@@ -109,11 +109,11 @@ describe("community", async () => {
         });
     });
 
-    describe("Get /communitys/x", () => {
-      it("should Get specific communitys", done => {
+    describe("Get /communities/x", () => {
+      it("should Get specific communities", done => {
         chai
           .request(url + port)
-          .get("/communitys/2")
+          .get("/communities/2")
           .end((err, res) => {
             if (err) done(err);
             expect(res).to.have.status(200);
@@ -128,7 +128,7 @@ describe("community", async () => {
       it("should return 404 on inexistant community", done => {
         chai
           .request(url + port)
-          .get("/communitys/20")
+          .get("/communities/20")
           .end((err, res) => {
             if (err) done(err);
             expect(res).to.have.status(404);
@@ -140,7 +140,7 @@ describe("community", async () => {
       it("should return 404 on invalid url", done => {
         chai
           .request(url + port)
-          .get("/communitys/null")
+          .get("/communities/null")
           .end((err, res) => {
             if (err) done(err);
             expect(res).to.have.status(404);
@@ -150,11 +150,11 @@ describe("community", async () => {
       });
     });
 
-    describe("Put /communitys/x", () => {
-      it("should Put specific values in communitys", done => {
+    describe("Put /communities/x", () => {
+      it("should Put specific values in communities", done => {
         chai
           .request(url + port)
-          .put("/communitys/8")
+          .put("/communities/8")
           .send({
             Name: "a posted name",
             Description: "a posted description",
@@ -177,7 +177,7 @@ describe("community", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/communitys/8")
+          .put("/communities/8")
           .send({
             Id: 22
           })
@@ -193,11 +193,11 @@ describe("community", async () => {
       });
     });
 
-    describe("Delete /communitys/x", () => {
-      it("should Delete specific communitys", done => {
+    describe("Delete /communities/x", () => {
+      it("should Delete specific communities", done => {
         chai
           .request(url + port)
-          .delete("/communitys/8")
+          .delete("/communities/8")
           .then(res => {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an("object");
@@ -212,7 +212,7 @@ describe("community", async () => {
           .then(function(res) {
             chai
               .request(url + port)
-              .get("/communitys/8")
+              .get("/communities/8")
               .end((err, res) => {
                 if (err) done(err);
                 expect(res).to.have.status(404);
@@ -221,10 +221,10 @@ describe("community", async () => {
           });
       });
 
-      it("should return 404 on inexisting realtion Delete specific communitys", done => {
+      it("should return 404 on inexisting realtion Delete specific communities", done => {
         chai
           .request(url + port)
-          .delete("/communitys/55")
+          .delete("/communities/55")
           .end((err, res) => {
             if (err) done(err);
             expect(res).to.have.status(404);

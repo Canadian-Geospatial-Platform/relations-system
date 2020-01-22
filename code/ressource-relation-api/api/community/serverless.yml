@@ -30,34 +30,34 @@ functions:
     handler: handler.communityCreate
     events:
       - http:
-          path: communitys
+          path: communities
           method: post
           cors: true
   communityGetOne:
     handler: handler.communityGetOne
     events:
       - http:
-          path: communitys/{id}
+          path: communities/{id}
           method: get
           cors: true
   communityGetAll:
     handler: handler.communityGetAll
     events:
       - http:
-          path: communitys
+          path: communities
           method: get
           cors: true
   communityUpdate:
     handler: handler.communityUpdate
     events:
       - http:
-          path: communitys/{id}
+          path: communities/{id}
           method: put
           cors: true
   communityDestroy:
     handler: handler.communityDestroy
     events:
       - http:
-          path: communitys/{id}
+          path: communities/{id}
           method: delete
           cors: true

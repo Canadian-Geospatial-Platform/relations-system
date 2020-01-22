@@ -45,16 +45,16 @@ module.exports.communityGetOne = async event => {
 module.exports.communityGetAll = async () => {
   try {
     const { Community } = await connectToDatabase();
-    const communitys = await Community.findAll();
+    const communities = await Community.findAll();
     return {
       statusCode: 200,
-      body: JSON.stringify(communitys)
+      body: JSON.stringify(communities)
     };
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
       headers: { "Content-Type": "text/plain" },
-      body: "Could not fetch the communitys."
+      body: "Could not fetch the communities."
     };
   }
 };
