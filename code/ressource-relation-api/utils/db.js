@@ -10,6 +10,7 @@ const ResourceModel = require("../models/Resource");
 const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
+const ThemeModel = require("../models/Theme");
 const RelationModel = require("../models/Relation");
 const OwnershipRelationModel = require("../models/OwnershipRelation");
 
@@ -34,6 +35,9 @@ const Resource = ResourceModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
+const Theme = ThemeModel(sequelize, Sequelize);
+
+Theme.belongsTo(Community, { onDelete: "cascade" });
 
 const CommunityUserRelation = RelationModel(
   sequelize,
@@ -196,6 +200,7 @@ const Models = {
   ModelDocs, // The docs detailing the Models
   Resource,
   Tag,
+  Theme,
   User,
   Community,
   CommunityUserRelation,

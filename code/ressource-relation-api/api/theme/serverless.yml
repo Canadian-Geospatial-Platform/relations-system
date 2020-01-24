@@ -1,0 +1,63 @@
+service: ${env:API_NAME}-collection
+
+custom:
+  dotenv:
+    path: ../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  sthemee: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  themeCreate:
+    handler: handler.themeCreate
+    events:
+      - http:
+          path: themes
+          method: post
+          cors: true
+  themeGetOne:
+    handler: handler.themeGetOne
+    events:
+      - http:
+          path: themes/{id}
+          method: get
+          cors: true
+  themeGetAll:
+    handler: handler.themeGetAll
+    events:
+      - http:
+          path: themes
+          method: get
+          cors: true
+  themeUpdate:
+    handler: handler.themeUpdate
+    events:
+      - http:
+          path: themes/{id}
+          method: put
+          cors: true
+  themeDestroy:
+    handler: handler.themeDestroy
+    events:
+      - http:
+          path: themes/{id}
+          method: delete
+          cors: true
