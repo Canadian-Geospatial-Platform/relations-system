@@ -198,7 +198,7 @@ describe("relation-community-user", async () => {
       it("should Put specific values in relations", done => {
         chai
           .request(url + relationPort)
-          .put("/relations/containers/community/8/user/2")
+          .patch("/relations/containers/community/8/user/2")
           .send({
             CommunityId: 8,
             UserId: 2
@@ -218,7 +218,7 @@ describe("relation-community-user", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + relationPort)
-          .put("/relations/containers/community/8/user/2")
+          .patch("/relations/containers/community/8/user/2")
           .send({
             CommunityId: 22,
             UserId: 22

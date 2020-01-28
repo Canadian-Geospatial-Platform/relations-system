@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: communities/{id}
-          method: put
+          method: patch
           cors: true
   communityDestroy:
     handler: handler.communityDestroy

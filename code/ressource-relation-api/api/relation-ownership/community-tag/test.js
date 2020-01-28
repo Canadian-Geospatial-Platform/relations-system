@@ -221,7 +221,7 @@ describe("ownership-relation-tag-community", async () => {
     it("should Put specific values in relations", done => {
       chai
         .request(url + ownershipRelationPort)
-        .put("/relations/ownerships/community/8/tag/2")
+        .patch("/relations/ownerships/community/8/tag/2")
         .send({
           TagId: 2,
           CommunityId: 8,
@@ -243,7 +243,7 @@ describe("ownership-relation-tag-community", async () => {
     it("should not Put values in Id fields", done => {
       chai
         .request(url + ownershipRelationPort)
-        .put("/relations/ownerships/community/8/tag/2")
+        .patch("/relations/ownerships/community/8/tag/2")
         .send({
           TagId: 22,
           CommunityId: 22

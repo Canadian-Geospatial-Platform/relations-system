@@ -135,7 +135,7 @@ describe("resource", async () => {
       it("should Put specific values in resources", done => {
         chai
           .request(url + port)
-          .put("/resources/8")
+          .patch("/resources/8")
           .send({
             Title: "a posted title",
             Description: "a posted description",
@@ -158,7 +158,7 @@ describe("resource", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/resources/8")
+          .patch("/resources/8")
           .send({
             Id: 22
           })

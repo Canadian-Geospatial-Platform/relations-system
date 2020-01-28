@@ -132,7 +132,7 @@ describe("user", async () => {
       it("should Put specific values in users", done => {
         chai
           .request(url + port)
-          .put("/users/8")
+          .patch("/users/8")
           .send({
             Name: "a posted name",
             Description: "a posted description",
@@ -155,7 +155,7 @@ describe("user", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/users/8")
+          .patch("/users/8")
           .send({
             Id: 22
           })

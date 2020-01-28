@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: themes/{id}
-          method: put
+          method: patch
           cors: true
   themeDestroy:
     handler: handler.themeDestroy

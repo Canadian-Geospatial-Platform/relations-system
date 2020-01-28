@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: search-records/{id}
-          method: put
+          method: patch
           cors: true
   searchRecordDestroy:
     handler: handler.searchRecordDestroy

@@ -4,7 +4,7 @@ require("dotenv").config({ path: "../../.env" });
 const connectToDatabase = require("../../utils/db");
 const chai = require("chai");
 const url = "127.0.0.1:";
-const port = 3016;
+const port = 3017;
 const communityPort = 3002;
 
 chai.use(require("chai-subset"));
@@ -139,7 +139,7 @@ describe("theme", async () => {
       it("should Put specific values in themes", done => {
         chai
           .request(url + port)
-          .put("/themes/8")
+          .patch("/themes/8")
           .send({
             Title: "a posted title",
             Description: "a posted description",
@@ -162,7 +162,7 @@ describe("theme", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/themes/8")
+          .patch("/themes/8")
           .send({
             Id: 22
           })

@@ -60,7 +60,7 @@ functions:
     events:
       - http:
           path: relations/ownerships/user/{id1}/tag/{id2}
-          method: put
+          method: patch
           cors: true
     environment:
       TABLE_NAME: "UserTagOwnershipRelation"

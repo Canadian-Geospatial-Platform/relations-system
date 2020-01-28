@@ -60,7 +60,7 @@ functions:
     events:
       - http:
           path: relations/containers/collection/{id1}/collection/{id2}
-          method: put
+          method: patch
           cors: true
     environment:
       TABLE_NAME: "CollectionCollectionRelation"

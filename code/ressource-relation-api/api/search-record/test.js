@@ -143,7 +143,7 @@ describe("searchRecord", async () => {
     it("should Put specific values in searchRecords", done => {
       chai
         .request(url + port)
-        .put("/search-records/8")
+        .patch("/search-records/8")
         .send({
           PopularityIndex: 123
         })
@@ -162,7 +162,7 @@ describe("searchRecord", async () => {
     it("should not Put values in Id fields", done => {
       chai
         .request(url + port)
-        .put("/search-records/8")
+        .patch("/search-records/8")
         .send({
           Id: 22
         })

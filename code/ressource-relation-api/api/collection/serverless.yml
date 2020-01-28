@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: collections/{id}
-          method: put
+          method: patch
           cors: true
   collectionDestroy:
     handler: handler.collectionDestroy

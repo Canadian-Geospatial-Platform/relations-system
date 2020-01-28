@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: resources/{id}
-          method: put
+          method: patch
           cors: true
   resourceDestroy:
     handler: handler.resourceDestroy

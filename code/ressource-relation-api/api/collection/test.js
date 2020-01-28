@@ -154,7 +154,7 @@ describe("collection", async () => {
       it("should Put specific values in collections", done => {
         chai
           .request(url + port)
-          .put("/collections/8")
+          .patch("/collections/8")
           .send({
             Title: "a posted title",
             Description: "a posted description",
@@ -177,7 +177,7 @@ describe("collection", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/collections/8")
+          .patch("/collections/8")
           .send({
             Id: 22
           })

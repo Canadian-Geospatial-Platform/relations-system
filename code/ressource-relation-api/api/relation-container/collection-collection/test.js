@@ -188,7 +188,7 @@ describe("relation-collection-collection", async () => {
       it("should Put specific values in relations", done => {
         chai
           .request(url + relationPort)
-          .put("/relations/containers/collection/8/collection/2")
+          .patch("/relations/containers/collection/8/collection/2")
           .send({
             ParentId: 8,
             ChildId: 2
@@ -208,7 +208,7 @@ describe("relation-collection-collection", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + relationPort)
-          .put("/relations/containers/collection/8/collection/2")
+          .patch("/relations/containers/collection/8/collection/2")
           .send({
             ParentId: 22,
             ChildId: 22

@@ -52,7 +52,7 @@ functions:
     events:
       - http:
           path: users/{id}
-          method: put
+          method: patch
           cors: true
   userDestroy:
     handler: handler.userDestroy

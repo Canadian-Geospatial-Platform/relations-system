@@ -132,7 +132,7 @@ describe("tag", async () => {
       it("should Put specific values in tags", done => {
         chai
           .request(url + port)
-          .put("/tags/8")
+          .patch("/tags/8")
           .send({
             Title: "a posted title",
             Description: "a posted description",
@@ -155,7 +155,7 @@ describe("tag", async () => {
       it("should not Put values in Id fields", done => {
         chai
           .request(url + port)
-          .put("/tags/8")
+          .patch("/tags/8")
           .send({
             Id: 22
           })
