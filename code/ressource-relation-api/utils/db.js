@@ -11,6 +11,7 @@ const TagModel = require("../models/Tag");
 const UserModel = require("../models/User");
 const CommunityModel = require("../models/Community");
 const ThemeModel = require("../models/Theme");
+const SearchRecordModel = require("../models/SearchRecord");
 const RelationModel = require("../models/Relation");
 const OwnershipRelationModel = require("../models/OwnershipRelation");
 
@@ -36,6 +37,7 @@ const Tag = TagModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Community = CommunityModel(sequelize, Sequelize);
 const Theme = ThemeModel(sequelize, Sequelize);
+const SearchRecord = SearchRecordModel(sequelize, Sequelize);
 
 Theme.belongsTo(Community, { onDelete: "cascade" });
 
@@ -191,6 +193,8 @@ Community.belongsToMany(Resource, {
   through: CommunityResourceOwnershipRelation
 });
 
+SearchRecord.belongsTo(User);
+
 const ModelDocs = Gendoc(sequelize)
   .auto()
   .toString();
@@ -201,6 +205,7 @@ const Models = {
   Resource,
   Tag,
   Theme,
+  SearchRecord,
   User,
   Community,
   CommunityUserRelation,

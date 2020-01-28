@@ -1,0 +1,63 @@
+service: ${env:API_NAME}-search-record
+
+custom:
+  dotenv:
+    path: ../../.env
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  region: ${env:REGION}
+  runtime: nodejs12.x
+  timeout: 30
+  ssearchRecorde: ${env:NODE_ENV}
+  versionFunctions: false
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+
+package:
+  individually: true
+
+functions:
+  searchRecordCreate:
+    handler: handler.searchRecordCreate
+    events:
+      - http:
+          path: search-records
+          method: post
+          cors: true
+  searchRecordGetOne:
+    handler: handler.searchRecordGetOne
+    events:
+      - http:
+          path: search-records/{id}
+          method: get
+          cors: true
+  searchRecordGetAll:
+    handler: handler.searchRecordGetAll
+    events:
+      - http:
+          path: search-records
+          method: get
+          cors: true
+  searchRecordUpdate:
+    handler: handler.searchRecordUpdate
+    events:
+      - http:
+          path: search-records/{id}
+          method: put
+          cors: true
+  searchRecordDestroy:
+    handler: handler.searchRecordDestroy
+    events:
+      - http:
+          path: search-records/{id}
+          method: delete
+          cors: true
