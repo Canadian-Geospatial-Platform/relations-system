@@ -87,6 +87,11 @@ npm run all:deploy
 
 ```
 curl https://*.execute-api.ca-central-1.amazonaws.com/dev/
+```
+
+Outputs:
+
+```
 /**
  * @apiDefine CollectionParam
  * @apiParam {integer} Id
@@ -99,5 +104,3 @@ curl https://*.execute-api.ca-central-1.amazonaws.com/dev/
 /**
 ...
 ```
-
-Outputs:
