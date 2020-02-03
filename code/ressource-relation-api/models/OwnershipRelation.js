@@ -1,4 +1,4 @@
-"use strict";
+
 
 module.exports = (sequelize, type, tableName, keyName1, keyName2) => {
   return sequelize.define(

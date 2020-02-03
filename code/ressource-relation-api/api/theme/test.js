@@ -1,4 +1,4 @@
-"use strict";
+
 
 require("dotenv").config({ path: "../../.env" });
 const connectToDatabase = require("../../utils/db");

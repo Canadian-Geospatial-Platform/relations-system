@@ -1,4 +1,3 @@
-"use strict";
 const connectToDatabase = require("../../utils/db");
 const HTTPError = require("../../utils/httpError");
 

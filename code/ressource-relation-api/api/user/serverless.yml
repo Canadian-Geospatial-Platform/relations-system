@@ -3,10 +3,17 @@ service: ${env:API_NAME}-use
 custom:
   dotenv:
     path: ../../.env
+  bundle:
+    copyFiles: # Copy any additional files to the generated package
+      - from: "./" # Where the files are currently
+        to: "./api/user/"
+      - from: "../../utils/*" # Where the files are currently
+        to: "./"
 
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
