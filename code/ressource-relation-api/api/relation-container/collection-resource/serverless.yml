@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-rel-con-com-col
+service: ${env:API_NAME}-rel-con-col-res
 
 custom:
   dotenv:

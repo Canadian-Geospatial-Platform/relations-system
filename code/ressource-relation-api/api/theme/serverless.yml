@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-collection
+service: ${env:API_NAME}-the
 
 custom:
   dotenv:

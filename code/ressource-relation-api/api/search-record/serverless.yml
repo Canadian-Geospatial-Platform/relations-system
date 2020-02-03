@@ -1,4 +1,4 @@
-service: ${env:API_NAME}-search-record
+service: ${env:API_NAME}-sea
 
 custom:
   dotenv:
