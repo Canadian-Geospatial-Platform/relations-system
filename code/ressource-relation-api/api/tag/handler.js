@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.tagCreate = async event => {
+export async function create(event) {
   try {
     const { Tag } = await connectToDatabase();
     const tag = await Tag.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.tagCreate = async event => {
       body: "Could not create the tag. " + err
     };
   }
-};
+}
 
-module.exports.tagGetOne = async event => {
+export async function getOne(event) {
   try {
     const { Tag } = await connectToDatabase();
     const tag = await Tag.findByPk(event.pathParameters.id);
@@ -40,9 +39,9 @@ module.exports.tagGetOne = async event => {
       body: err.message || "Could not fetch the Tag."
     };
   }
-};
+}
 
-module.exports.tagGetAll = async () => {
+export async function getAll() {
   try {
     const { Tag } = await connectToDatabase();
     const tags = await Tag.findAll();
@@ -57,9 +56,9 @@ module.exports.tagGetAll = async () => {
       body: "Could not fetch the tags."
     };
   }
-};
+}
 
-module.exports.tagUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { Tag } = await connectToDatabase();
@@ -84,9 +83,9 @@ module.exports.tagUpdate = async event => {
       body: err.message || "Could not update the Tag."
     };
   }
-};
+}
 
-module.exports.tagDestroy = async event => {
+export async function destroy(event) {
   try {
     const { Tag } = await connectToDatabase();
     const tag = await Tag.findByPk(event.pathParameters.id);
@@ -107,4 +106,6 @@ module.exports.tagDestroy = async event => {
       body: err.message || "Could not destroy the Tag."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

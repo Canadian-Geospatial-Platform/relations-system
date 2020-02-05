@@ -1,16 +1,19 @@
-import Sequelize from "sequelize";
-import Gendoc from "apidoc-sequelize-generator";
-import Mysql2 from "mysql2";
 
-import CollectionModel from "../models/Collection";
-import ResourceModel from "../models/Resource";
-import TagModel from "../models/Tag";
-import UserModel from "../models/User";
-import CommunityModel from "../models/Community";
-import ThemeModel from "../models/Theme";
-import SearchRecordModel from "../models/SearchRecord";
-import RelationModel from "../models/Relation";
-import OwnershipRelationModel from "../models/OwnershipRelation";
+
+require("dotenv").config({ path: "../.env" });
+const Sequelize = require("sequelize");
+const Gendoc = require("apidoc-sequelize-generator");
+const Mysql2 = require("mysql2");
+
+const CollectionModel = require("../models/Collection");
+const ResourceModel = require("../models/Resource");
+const TagModel = require("../models/Tag");
+const UserModel = require("../models/User");
+const CommunityModel = require("../models/Community");
+const ThemeModel = require("../models/Theme");
+const SearchRecordModel = require("../models/SearchRecord");
+const RelationModel = require("../models/Relation");
+const OwnershipRelationModel = require("../models/OwnershipRelation");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -220,13 +223,13 @@ const Models = {
 
 const connection = {};
 
-export default async () => {
+module.exports = async () => {
   if (connection.isConnected) {
     console.log("=> Using existing connection.");
     return Models;
   }
 
-  await sequelize.sync({ alter: { drop: false } });
+  await sequelize.sync();
   await sequelize.authenticate();
   connection.isConnected = true;
   console.log("=> Created a new connection.");

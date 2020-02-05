@@ -7,13 +7,14 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
   region: ${env:REGION}
   runtime: nodejs12.x
   timeout: 30
-  sthemee: ${env:NODE_ENV}
+  stage: ${env:NODE_ENV}
   versionFunctions: false
   vpc:
     securityGroupIds:
@@ -26,36 +27,36 @@ package:
   individually: true
 
 functions:
-  themeCreate:
-    handler: handler.themeCreate
+  create:
+    handler: handler.create
     events:
       - http:
           path: themes
           method: post
           cors: true
-  themeGetOne:
-    handler: handler.themeGetOne
+  getOne:
+    handler: handler.getOne
     events:
       - http:
           path: themes/{id}
           method: get
           cors: true
-  themeGetAll:
-    handler: handler.themeGetAll
+  getAll:
+    handler: handler.getAll
     events:
       - http:
           path: themes
           method: get
           cors: true
-  themeUpdate:
-    handler: handler.themeUpdate
+  update:
+    handler: handler.update
     events:
       - http:
           path: themes/{id}
           method: patch
           cors: true
-  themeDestroy:
-    handler: handler.themeDestroy
+  destroy:
+    handler: handler.destroy
     events:
       - http:
           path: themes/{id}

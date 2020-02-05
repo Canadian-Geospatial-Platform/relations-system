@@ -79,6 +79,7 @@
     "chai-subset": "^1.6.0",
     "mocha": "^7.0.0",
     "serverless": "^1.61.1",
+    "serverless-bundle": "^1.2.5",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.12.1",
     "serverless-pseudo-parameters": "^2.5.0"
@@ -87,6 +88,7 @@
     "apidoc-sequelize-generator": "^1.0.5",
     "dotenv": "^8.2.0",
     "mysql2": "^2.1.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3"
   }
 }

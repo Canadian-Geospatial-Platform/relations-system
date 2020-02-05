@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -26,36 +27,36 @@ package:
   individually: true
 
 functions:
-  collectionCreate:
-    handler: handler.collectionCreate
+  create:
+    handler: handler.create
     events:
       - http:
           path: collections
           method: post
           cors: true
-  collectionGetOne:
-    handler: handler.collectionGetOne
+  getOne:
+    handler: handler.getOne
     events:
       - http:
           path: collections/{id}
           method: get
           cors: true
-  collectionGetAll:
-    handler: handler.collectionGetAll
+  getAll:
+    handler: handler.getAll
     events:
       - http:
           path: collections
           method: get
           cors: true
-  collectionUpdate:
-    handler: handler.collectionUpdate
+  update:
+    handler: handler.update
     events:
       - http:
           path: collections/{id}
           method: patch
           cors: true
-  collectionDestroy:
-    handler: handler.collectionDestroy
+  destroy:
+    handler: handler.destroy
     events:
       - http:
           path: collections/{id}

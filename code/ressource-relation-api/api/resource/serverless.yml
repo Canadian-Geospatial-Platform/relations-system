@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -26,36 +27,36 @@ package:
   individually: true
 
 functions:
-  resourceCreate:
-    handler: handler.resourceCreate
+  create:
+    handler: handler.create
     events:
       - http:
           path: resources
           method: post
           cors: true
-  resourceGetOne:
-    handler: handler.resourceGetOne
+  getOne:
+    handler: handler.getOne
     events:
       - http:
           path: resources/{id}
           method: get
           cors: true
-  resourceGetAll:
-    handler: handler.resourceGetAll
+  getAll:
+    handler: handler.getAll
     events:
       - http:
           path: resources
           method: get
           cors: true
-  resourceUpdate:
-    handler: handler.resourceUpdate
+  update:
+    handler: handler.update
     events:
       - http:
           path: resources/{id}
           method: patch
           cors: true
-  resourceDestroy:
-    handler: handler.resourceDestroy
+  destroy:
+    handler: handler.destroy
     events:
       - http:
           path: resources/{id}

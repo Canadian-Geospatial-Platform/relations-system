@@ -1,7 +1,5 @@
-"use strict";
-
 require("dotenv").config({ path: "../../.env" });
-const connectToDatabase = require("../../utils/db");
+import connectToDatabase from "../../utils/db";
 const chai = require("chai");
 const url = "127.0.0.1:";
 const port = 3002;

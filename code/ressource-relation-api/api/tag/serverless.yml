@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -26,36 +27,36 @@ package:
   individually: true
 
 functions:
-  tagCreate:
-    handler: handler.tagCreate
+  create:
+    handler: handler.create
     events:
       - http:
           path: tags
           method: post
           cors: true
-  tagGetOne:
-    handler: handler.tagGetOne
+  getOne:
+    handler: handler.getOne
     events:
       - http:
           path: tags/{id}
           method: get
           cors: true
-  tagGetAll:
-    handler: handler.tagGetAll
+  getAll:
+    handler: handler.getAll
     events:
       - http:
           path: tags
           method: get
           cors: true
-  tagUpdate:
-    handler: handler.tagUpdate
+  update:
+    handler: handler.update
     events:
       - http:
           path: tags/{id}
           method: patch
           cors: true
-  tagDestroy:
-    handler: handler.tagDestroy
+  destroy:
+    handler: handler.destroy
     events:
       - http:
           path: tags/{id}

@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.userCreate = async event => {
+export async function create(event) {
   try {
     const { User } = await connectToDatabase();
     const user = await User.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.userCreate = async event => {
       body: "Could not create the user. " + err
     };
   }
-};
+}
 
-module.exports.userGetOne = async event => {
+export async function getOne(event) {
   try {
     const { User } = await connectToDatabase();
     const user = await User.findByPk(event.pathParameters.id);
@@ -40,9 +39,9 @@ module.exports.userGetOne = async event => {
       body: err.message || "Could not fetch the User."
     };
   }
-};
+}
 
-module.exports.userGetAll = async () => {
+export async function getAll() {
   try {
     const { User } = await connectToDatabase();
     const users = await User.findAll();
@@ -57,9 +56,9 @@ module.exports.userGetAll = async () => {
       body: "Could not fetch the users."
     };
   }
-};
+}
 
-module.exports.userUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { User } = await connectToDatabase();
@@ -84,9 +83,9 @@ module.exports.userUpdate = async event => {
       body: err.message || "Could not update the User."
     };
   }
-};
+}
 
-module.exports.userDestroy = async event => {
+export async function destroy(event) {
   try {
     const { User } = await connectToDatabase();
     const user = await User.findByPk(event.pathParameters.id);
@@ -107,4 +106,6 @@ module.exports.userDestroy = async event => {
       body: err.message || "Could not destroy the User."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

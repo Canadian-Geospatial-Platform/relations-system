@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -26,36 +27,36 @@ package:
   individually: true
 
 functions:
-  communityCreate:
-    handler: handler.communityCreate
+  create:
+    handler: handler.create
     events:
       - http:
           path: communities
           method: post
           cors: true
-  communityGetOne:
-    handler: handler.communityGetOne
+  getOne:
+    handler: handler.getOne
     events:
       - http:
           path: communities/{id}
           method: get
           cors: true
-  communityGetAll:
-    handler: handler.communityGetAll
+  getAll:
+    handler: handler.getAll
     events:
       - http:
           path: communities
           method: get
           cors: true
-  communityUpdate:
-    handler: handler.communityUpdate
+  update:
+    handler: handler.update
     events:
       - http:
           path: communities/{id}
           method: patch
           cors: true
-  communityDestroy:
-    handler: handler.communityDestroy
+  destroy:
+    handler: handler.destroy
     events:
       - http:
           path: communities/{id}

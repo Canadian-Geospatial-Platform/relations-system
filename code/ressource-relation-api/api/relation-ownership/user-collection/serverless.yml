@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -27,7 +28,7 @@ package:
 
 functions:
   # userCollection
-  userCollectionOwnershipRelationCreate:
+  create:
     handler: ../handler.ownershipRelationCreate
     events:
       - http:
@@ -36,7 +37,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "UserCollectionOwnershipRelation"
-  userCollectionOwnershipRelationGetOne:
+  getOne:
     handler: ../handler.ownershipRelationGetOne
     events:
       - http:
@@ -47,7 +48,7 @@ functions:
       TABLE_NAME: "UserCollectionOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "CollectionId"
-  userCollectionOwnershipRelationGetAll:
+  getAll:
     handler: ../handler.ownershipRelationGetAll
     events:
       - http:
@@ -56,7 +57,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "UserCollectionOwnershipRelation"
-  userCollectionOwnershipRelationUpdate:
+  update:
     handler: ../handler.ownershipRelationUpdate
     events:
       - http:
@@ -67,7 +68,7 @@ functions:
       TABLE_NAME: "UserCollectionOwnershipRelation"
       FK_NAME_1: "UserId"
       FK_NAME_2: "CollectionId"
-  userCollectionOwnershipRelationDestroy:
+  destroy:
     handler: ../handler.ownershipRelationDestroy
     events:
       - http:

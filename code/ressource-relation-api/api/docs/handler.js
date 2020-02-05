@@ -1,8 +1,6 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
 
-module.exports.docs = async () => {
+docs = async () => {
   const { ModelDocs } = await connectToDatabase();
   console.log("Connection successful.");
 
@@ -11,3 +9,5 @@ module.exports.docs = async () => {
     body: ModelDocs
   };
 };
+
+export default docs;

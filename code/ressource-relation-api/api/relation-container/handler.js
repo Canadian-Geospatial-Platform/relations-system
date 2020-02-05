@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.relationCreate = async event => {
+export async function create(event) {
   try {
     const db = await connectToDatabase();
     console.log(JSON.stringify(event.body));
@@ -23,9 +22,9 @@ module.exports.relationCreate = async event => {
       body: "Could not create the relation. " + err
     };
   }
-};
+}
 
-module.exports.relationGetOne = async event => {
+export async function getOne(event) {
   try {
     const db = await connectToDatabase();
     const relation = await db[process.env.TABLE_NAME].findOne({
@@ -50,7 +49,7 @@ module.exports.relationGetOne = async event => {
       body: err.message || "Could not fetch the Relation."
     };
   }
-};
+}
 
 module.exports.relationGetAll = async () => {
   try {
@@ -69,7 +68,7 @@ module.exports.relationGetAll = async () => {
   }
 };
 
-module.exports.relationUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const db = await connectToDatabase();
@@ -97,9 +96,9 @@ module.exports.relationUpdate = async event => {
       body: err.message || "Could not update the Relation."
     };
   }
-};
+}
 
-module.exports.relationDestroy = async event => {
+export async function destroy(event) {
   try {
     const db = await connectToDatabase();
     const relation = await db[process.env.TABLE_NAME].findOne({
@@ -125,4 +124,6 @@ module.exports.relationDestroy = async event => {
       body: err.message || "Could not destroy the Relation."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.resourceCreate = async event => {
+export async function create(event) {
   try {
     const { Resource } = await connectToDatabase();
     const resource = await Resource.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.resourceCreate = async event => {
       body: "Could not create the resource. " + err
     };
   }
-};
+}
 
-module.exports.resourceGetOne = async event => {
+export async function getOne(event) {
   try {
     const { Resource } = await connectToDatabase();
     const resource = await Resource.findByPk(event.pathParameters.id);
@@ -40,7 +39,7 @@ module.exports.resourceGetOne = async event => {
       body: err.message || "Could not fetch the Resource."
     };
   }
-};
+}
 
 module.exports.resourceGetAll = async () => {
   try {
@@ -59,7 +58,7 @@ module.exports.resourceGetAll = async () => {
   }
 };
 
-module.exports.resourceUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { Resource } = await connectToDatabase();
@@ -85,9 +84,9 @@ module.exports.resourceUpdate = async event => {
       body: err.message || "Could not update the Resource."
     };
   }
-};
+}
 
-module.exports.resourceDestroy = async event => {
+export async function destroy(event) {
   try {
     const { Resource } = await connectToDatabase();
     const resource = await Resource.findByPk(event.pathParameters.id);
@@ -108,4 +107,6 @@ module.exports.resourceDestroy = async event => {
       body: err.message || "Could not destroy the Resource."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

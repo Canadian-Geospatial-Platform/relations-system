@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.themeCreate = async event => {
+export async function create(event) {
   try {
     const { Theme } = await connectToDatabase();
     const theme = await Theme.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.themeCreate = async event => {
       body: "Could not create the theme. " + err
     };
   }
-};
+}
 
-module.exports.themeGetOne = async event => {
+export async function getOne(event) {
   try {
     const { Theme } = await connectToDatabase();
     const theme = await Theme.findByPk(event.pathParameters.id);
@@ -40,9 +39,9 @@ module.exports.themeGetOne = async event => {
       body: err.message || "Could not fetch the Theme."
     };
   }
-};
+}
 
-module.exports.themeGetAll = async () => {
+export async function getAll() {
   try {
     const { Theme } = await connectToDatabase();
     const themes = await Theme.findAll();
@@ -57,9 +56,9 @@ module.exports.themeGetAll = async () => {
       body: "Could not fetch the themes."
     };
   }
-};
+}
 
-module.exports.themeUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { Theme } = await connectToDatabase();
@@ -84,9 +83,9 @@ module.exports.themeUpdate = async event => {
       body: err.message || "Could not update the Theme."
     };
   }
-};
+}
 
-module.exports.themeDestroy = async event => {
+export async function destroy(event) {
   try {
     const { Theme } = await connectToDatabase();
     const theme = await Theme.findByPk(event.pathParameters.id);
@@ -107,4 +106,6 @@ module.exports.themeDestroy = async event => {
       body: err.message || "Could not destroy the Theme."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

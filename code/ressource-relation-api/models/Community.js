@@ -1,6 +1,4 @@
-"use strict";
-
-module.exports = (sequelize, type) => {
+export default (sequelize, type) => {
   return sequelize.define("Community", {
     Id: {
       type: type.INTEGER,

@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.communityCreate = async event => {
+export async function create(event) {
   try {
     const { Community } = await connectToDatabase();
     const community = await Community.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.communityCreate = async event => {
       body: "Could not create the community. " + err
     };
   }
-};
+}
 
-module.exports.communityGetOne = async event => {
+export async function getOne(event) {
   try {
     const { Community } = await connectToDatabase();
     const community = await Community.findByPk(event.pathParameters.id);
@@ -40,9 +39,9 @@ module.exports.communityGetOne = async event => {
       body: err.message || "Could not fetch the Community."
     };
   }
-};
+}
 
-module.exports.communityGetAll = async () => {
+export async function getAll() {
   try {
     const { Community } = await connectToDatabase();
     const communities = await Community.findAll();
@@ -57,9 +56,9 @@ module.exports.communityGetAll = async () => {
       body: "Could not fetch the communities."
     };
   }
-};
+}
 
-module.exports.communityUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { Community } = await connectToDatabase();
@@ -85,9 +84,9 @@ module.exports.communityUpdate = async event => {
       body: err.message || "Could not update the Community."
     };
   }
-};
+}
 
-module.exports.communityDestroy = async event => {
+export async function destroy(event) {
   try {
     const { Community } = await connectToDatabase();
     const community = await Community.findByPk(event.pathParameters.id);
@@ -108,4 +107,6 @@ module.exports.communityDestroy = async event => {
       body: err.message || "Could not destroy the Community."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

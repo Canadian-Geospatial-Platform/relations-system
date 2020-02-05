@@ -7,6 +7,7 @@ custom:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-bundle
 
 provider:
   name: aws
@@ -27,7 +28,7 @@ package:
 
 functions:
   # collectionResource
-  collectionResourceRelationCreate:
+  create:
     handler: ../handler.relationCreate
     events:
       - http:
@@ -36,7 +37,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionResourceRelation"
-  collectionResourceRelationGetOne:
+  getOne:
     handler: ../handler.relationGetOne
     events:
       - http:
@@ -47,7 +48,7 @@ functions:
       TABLE_NAME: "CollectionResourceRelation"
       FK_NAME_1: "CollectionId"
       FK_NAME_2: "ResourceId"
-  collectionResourceRelationGetAll:
+  getAll:
     handler: ../handler.relationGetAll
     events:
       - http:
@@ -56,7 +57,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "CollectionResourceRelation"
-  collectionResourceRelationUpdate:
+  update:
     handler: ../handler.relationUpdate
     events:
       - http:
@@ -67,7 +68,7 @@ functions:
       TABLE_NAME: "CollectionResourceRelation"
       FK_NAME_1: "CollectionId"
       FK_NAME_2: "ResourceId"
-  collectionResourceRelationDestroy:
+  destroy:
     handler: ../handler.relationDestroy
     events:
       - http:

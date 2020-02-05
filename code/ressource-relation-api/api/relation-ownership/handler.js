@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.ownershipRelationCreate = async event => {
+export async function create(event) {
   try {
     const db = await connectToDatabase();
     const ownershipRelation = await db[process.env.TABLE_NAME].create(
@@ -20,9 +19,9 @@ module.exports.ownershipRelationCreate = async event => {
       body: "Could not create the ownershipRelation. " + err
     };
   }
-};
+}
 
-module.exports.ownershipRelationGetOne = async event => {
+export async function getOne(event) {
   try {
     const db = await connectToDatabase();
     const ownershipRelation = await db[process.env.TABLE_NAME].findOne({
@@ -47,7 +46,7 @@ module.exports.ownershipRelationGetOne = async event => {
       body: err.message || "Could not fetch the OwnershipRelation."
     };
   }
-};
+}
 
 module.exports.ownershipRelationGetAll = async () => {
   try {
@@ -66,7 +65,7 @@ module.exports.ownershipRelationGetAll = async () => {
   }
 };
 
-module.exports.ownershipRelationUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const db = await connectToDatabase();
@@ -95,9 +94,9 @@ module.exports.ownershipRelationUpdate = async event => {
       body: err.message || "Could not update the OwnershipRelation."
     };
   }
-};
+}
 
-module.exports.ownershipRelationDestroy = async event => {
+export async function destroy(event) {
   try {
     const db = await connectToDatabase();
     const ownershipRelation = await db[process.env.TABLE_NAME].findOne({
@@ -123,4 +122,6 @@ module.exports.ownershipRelationDestroy = async event => {
       body: err.message || "Could not destroy the OwnershipRelation."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

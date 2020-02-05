@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.searchRecordCreate = async event => {
+export async function create(event) {
   try {
     const { SearchRecord } = await connectToDatabase();
     const searchRecord = await SearchRecord.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.searchRecordCreate = async event => {
       body: "Could not create the searchRecord. " + err
     };
   }
-};
+}
 
-module.exports.searchRecordGetOne = async event => {
+export async function getOne(event) {
   try {
     const { SearchRecord } = await connectToDatabase();
     const searchRecord = await SearchRecord.findByPk(event.pathParameters.id);
@@ -40,7 +39,7 @@ module.exports.searchRecordGetOne = async event => {
       body: err.message || "Could not fetch the SearchRecord."
     };
   }
-};
+}
 
 module.exports.searchRecordGetAll = async () => {
   try {
@@ -59,7 +58,7 @@ module.exports.searchRecordGetAll = async () => {
   }
 };
 
-module.exports.searchRecordUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { SearchRecord } = await connectToDatabase();
@@ -83,9 +82,9 @@ module.exports.searchRecordUpdate = async event => {
       body: err.message || "Could not update the SearchRecord."
     };
   }
-};
+}
 
-module.exports.searchRecordDestroy = async event => {
+export async function destroy(event) {
   try {
     const { SearchRecord } = await connectToDatabase();
     const searchRecord = await SearchRecord.findByPk(event.pathParameters.id);
@@ -106,4 +105,6 @@ module.exports.searchRecordDestroy = async event => {
       body: err.message || "Could not destroy the SearchRecord."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };

@@ -1,8 +1,7 @@
-"use strict";
-const connectToDatabase = require("../../utils/db");
-const HTTPError = require("../../utils/httpError");
+import connectToDatabase from "../../utils/db";
+import HTTPError from "../../utils/httpError";
 
-module.exports.collectionCreate = async event => {
+export async function create(event) {
   try {
     const { Collection } = await connectToDatabase();
     const collection = await Collection.create(JSON.parse(event.body));
@@ -18,9 +17,9 @@ module.exports.collectionCreate = async event => {
       body: "Could not create the collection. " + err
     };
   }
-};
+}
 
-module.exports.collectionGetOne = async event => {
+export async function getOne(event) {
   try {
     const { Collection } = await connectToDatabase();
     const collection = await Collection.findByPk(event.pathParameters.id);
@@ -40,7 +39,7 @@ module.exports.collectionGetOne = async event => {
       body: err.message || "Could not fetch the Collection."
     };
   }
-};
+}
 
 module.exports.collectionGetAll = async () => {
   try {
@@ -59,7 +58,7 @@ module.exports.collectionGetAll = async () => {
   }
 };
 
-module.exports.collectionUpdate = async event => {
+export async function update(event) {
   try {
     const input = JSON.parse(event.body);
     const { Collection } = await connectToDatabase();
@@ -85,9 +84,9 @@ module.exports.collectionUpdate = async event => {
       body: err.message || "Could not update the Collection."
     };
   }
-};
+}
 
-module.exports.collectionDestroy = async event => {
+export async function destroy(event) {
   try {
     const { Collection } = await connectToDatabase();
     const collection = await Collection.findByPk(event.pathParameters.id);
@@ -108,4 +107,6 @@ module.exports.collectionDestroy = async event => {
       body: err.message || "Could not destroy the Collection."
     };
   }
-};
+}
+
+export default { create, getOne, getAll, update, destroy };
