@@ -2,8 +2,8 @@
 / Caution: This file is referenced by symbolic link in children folders for packaging purposes
 **/
 
-import connectToDatabase from "../../utils/db";
-import HTTPError from "../../utils/httpError";
+import connectToDatabase from "../../../utils/db";
+import HTTPError from "../../../utils/httpError";
 
 export async function create(event) {
   try {
