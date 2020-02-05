@@ -41,7 +41,7 @@ export async function getOne(event) {
   }
 }
 
-module.exports.collectionGetAll = async () => {
+export async function getAll() {
   try {
     const { Collection } = await connectToDatabase();
     const collections = await Collection.findAll();
@@ -56,7 +56,7 @@ module.exports.collectionGetAll = async () => {
       body: "Could not fetch the collections."
     };
   }
-};
+}
 
 export async function update(event) {
   try {

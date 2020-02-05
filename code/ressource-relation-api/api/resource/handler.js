@@ -41,7 +41,7 @@ export async function getOne(event) {
   }
 }
 
-module.exports.resourceGetAll = async () => {
+export async function getAll() {
   try {
     const { Resource } = await connectToDatabase();
     const resources = await Resource.findAll();
@@ -56,7 +56,7 @@ module.exports.resourceGetAll = async () => {
       body: "Could not fetch the resources."
     };
   }
-};
+}
 
 export async function update(event) {
   try {

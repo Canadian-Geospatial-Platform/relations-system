@@ -48,7 +48,7 @@ export async function getOne(event) {
   }
 }
 
-module.exports.ownershipRelationGetAll = async () => {
+export async function getAll() {
   try {
     const db = await connectToDatabase();
     const ownershipRelations = await db[process.env.TABLE_NAME].findAll();
@@ -63,7 +63,7 @@ module.exports.ownershipRelationGetAll = async () => {
       body: "Could not fetch the ownershipRelations."
     };
   }
-};
+}
 
 export async function update(event) {
   try {

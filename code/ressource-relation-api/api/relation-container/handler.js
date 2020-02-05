@@ -51,7 +51,7 @@ export async function getOne(event) {
   }
 }
 
-module.exports.relationGetAll = async () => {
+export async function getAll() {
   try {
     const db = await connectToDatabase();
     const relations = await db[process.env.TABLE_NAME].findAll();
@@ -66,7 +66,7 @@ module.exports.relationGetAll = async () => {
       body: "Could not fetch the relations."
     };
   }
-};
+}
 
 export async function update(event) {
   try {

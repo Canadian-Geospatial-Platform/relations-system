@@ -41,7 +41,7 @@ export async function getOne(event) {
   }
 }
 
-module.exports.searchRecordGetAll = async () => {
+export async function getAll() {
   try {
     const { SearchRecord } = await connectToDatabase();
     const searchRecords = await SearchRecord.findAll();
@@ -56,7 +56,7 @@ module.exports.searchRecordGetAll = async () => {
       body: "Could not fetch the searchRecords."
     };
   }
-};
+}
 
 export async function update(event) {
   try {
