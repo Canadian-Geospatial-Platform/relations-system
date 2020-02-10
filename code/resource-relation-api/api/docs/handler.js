@@ -1,6 +1,6 @@
 import connectToDatabase from "../../utils/db";
 
-docs = async () => {
+export async function docs() {
   const { ModelDocs } = await connectToDatabase();
   console.log("Connection successful.");
 
@@ -8,6 +8,6 @@ docs = async () => {
     statusCode: 200,
     body: ModelDocs
   };
-};
+}
 
-export default docs;
+export default { docs };

@@ -190,6 +190,34 @@ Community.belongsToMany(Resource, {
   through: CommunityResourceOwnershipRelation
 });
 
+const TagResourceRelation = RelationModel(
+  sequelize,
+  Sequelize,
+  "TagResourceRelation",
+  "TagId",
+  "ResourceId"
+);
+Resource.belongsToMany(Tag, {
+  through: TagResourceRelation
+});
+Tag.belongsToMany(Resource, {
+  through: TagResourceRelation
+});
+
+const TagCollectionRelation = RelationModel(
+  sequelize,
+  Sequelize,
+  "TagCollectionRelation",
+  "TagId",
+  "CollectionId"
+);
+Collection.belongsToMany(Tag, {
+  through: TagCollectionRelation
+});
+Tag.belongsToMany(Collection, {
+  through: TagCollectionRelation
+});
+
 SearchRecord.belongsTo(User);
 
 const ModelDocs = Gendoc(sequelize)
@@ -198,23 +226,25 @@ const ModelDocs = Gendoc(sequelize)
 
 const Models = {
   Collection,
+  CollectionCollectionRelation,
+  CollectionResourceRelation,
+  Community,
+  CommunityCollectionOwnershipRelation,
+  CommunityResourceOwnershipRelation,
+  CommunityTagOwnershipRelation,
+  CommunityUserRelation,
   ModelDocs, // The docs detailing the Models
   Resource,
-  Tag,
-  Theme,
   SearchRecord,
+  Tag,
+  TagCollectionRelation,
+  TagResourceRelation,
+  Theme,
   User,
-  Community,
-  CommunityUserRelation,
-  CollectionResourceRelation,
-  CollectionCollectionRelation,
+  UserCollectionOwnershipRelation,
   UserCommunityOwnershipRelation,
   UserResourceOwnershipRelation,
   UserTagOwnershipRelation,
-  UserCollectionOwnershipRelation,
-  CommunityCollectionOwnershipRelation,
-  CommunityTagOwnershipRelation,
-  CommunityResourceOwnershipRelation,
   sequelize
 };
 
