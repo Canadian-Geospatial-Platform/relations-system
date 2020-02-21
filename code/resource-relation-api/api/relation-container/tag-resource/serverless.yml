@@ -11,6 +11,7 @@ plugins:
 
 provider:
   name: aws
+  profile: ${env:AWS_PROFILE}
   region: ${env:REGION}
   runtime: nodejs12.x
   timeout: 30
@@ -45,7 +46,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "TagResourceRelation"
-      FK_NAME_1: "tagId"
+      FK_NAME_1: "TagId"
       FK_NAME_2: "ResourceId"
   getAll:
     handler: handler.getAll
@@ -54,8 +55,16 @@ functions:
           path: relations/containers/tag/resource
           method: get
           cors: true
+          request:
+            parameters:
+              querystrings:
+                TagId: false
+                offset: false
+                limit: false
     environment:
       TABLE_NAME: "TagResourceRelation"
+      FK_NAME_1: "TagId"
+      FK_NAME_2: "ResourceId"
   update:
     handler: handler.update
     events:
@@ -65,7 +74,7 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "TagResourceRelation"
-      FK_NAME_1: "tagId"
+      FK_NAME_1: "TagId"
       FK_NAME_2: "ResourceId"
   destroy:
     handler: handler.destroy
@@ -76,5 +85,5 @@ functions:
           cors: true
     environment:
       TABLE_NAME: "TagResourceRelation"
-      FK_NAME_1: "tagId"
+      FK_NAME_1: "TagId"
       FK_NAME_2: "ResourceId"

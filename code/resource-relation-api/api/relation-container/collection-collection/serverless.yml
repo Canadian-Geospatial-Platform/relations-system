@@ -54,8 +54,16 @@ functions:
           path: relations/containers/collection/collection
           method: get
           cors: true
+          request:
+            parameters:
+              querystrings:
+                ParentId: false
+                offset: false
+                limit: false
     environment:
       TABLE_NAME: "CollectionCollectionRelation"
+      FK_NAME_1: "ParentId"
+      FK_NAME_2: "ChildId"
   update:
     handler: handler.update
     events:

@@ -4,6 +4,7 @@
 
 import connectToDatabase from "../../../utils/db";
 import HTTPError from "../../../utils/httpError";
+import { Op, fn, col } from "sequelize";
 
 export async function create(event) {
   try {
@@ -55,10 +56,26 @@ export async function getOne(event) {
   }
 }
 
-export async function getAll() {
+export async function getAll(event) {
   try {
     const db = await connectToDatabase();
-    const relations = await db[process.env.TABLE_NAME].findAll();
+    const relations = await db[process.env.TABLE_NAME].findAll({
+      attributes: [
+        process.env.FK_NAME_2,
+        [fn("sum", col("PopularityIndex")), "PopularityIndex"]
+      ],
+      order: [["PopularityIndex", "DESC"]],
+      offset: event["queryStringParameters"]["offset"],
+      limit: event["queryStringParameters"]["limit"],
+      group: process.env.FK_NAME_2,
+      where: {
+        [process.env.FK_NAME_1]: {
+          [Op.or]: JSON.parse(
+            event["queryStringParameters"][process.env.FK_NAME_1]
+          )
+        }
+      }
+    });
     return {
       statusCode: 200,
       body: JSON.stringify(relations)

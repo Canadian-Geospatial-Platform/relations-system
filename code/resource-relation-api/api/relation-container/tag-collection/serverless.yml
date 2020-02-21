@@ -54,8 +54,16 @@ functions:
           path: relations/containers/tag/collection
           method: get
           cors: true
+          request:
+            parameters:
+              querystrings:
+                TagId: false
+                offset: false
+                limit: false
     environment:
       TABLE_NAME: "TagCollectionRelation"
+      FK_NAME_1: "TagId"
+      FK_NAME_2: "CollectionId"
   update:
     handler: handler.update
     events:
