@@ -27,7 +27,6 @@ package:
   individually: true
 
 functions:
-  # userCollection
   create:
     handler: handler.create
     events:
