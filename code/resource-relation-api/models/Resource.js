@@ -1,9 +1,9 @@
 export default (sequelize, type) => {
   return sequelize.define("Resource", {
     Id: {
-      type: type.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+      allowNull: false,
+      type: type.STRING,
+      primaryKey: true
     },
     Title: type.STRING,
     Description: type.STRING,

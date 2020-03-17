@@ -256,7 +256,7 @@ export default async () => {
     return Models;
   }
 
-  await sequelize.sync({ alter: { drop: false } });
+  await sequelize.sync({ force: true /**alter: { drop: false }*/ });
   await sequelize.authenticate();
   connection.isConnected = true;
   console.log("=> Created a new connection.");
