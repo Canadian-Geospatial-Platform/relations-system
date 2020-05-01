@@ -50,7 +50,7 @@ npm run all:offline
 mysql -h 127.0.0.1 -P 3306 --protocol=tcp -u root -p
 ```
 
-- A description of database objects shoud appear when you visit localhost:3000
+- A description of database objects should appear when you visit localhost:3000
 
 ```
 curl localhost:3000
@@ -58,7 +58,7 @@ curl localhost:3000
 
 ### Deployment
 
-- Create a MySql amazon Aurora database throught the aws console with desired settings
+- Create a MySql amazon Aurora database through the aws console with desired settings
 
 - Create a secrets.json file containing it's information from RDS/Databases/id-of-database-cluster
 
@@ -77,7 +77,7 @@ curl localhost:3000
 }
 ```
 
-- Enter the following command at root of project to deploy
+- Enter the following command at root of project to deploy the whole project
 
 ```
 npm run all:deploy
