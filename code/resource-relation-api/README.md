@@ -14,6 +14,9 @@ This project was created following the instructions provided at this url: https:
 
 #### Dependencies
 
+- A combination of Operating System and git configuration that supports
+  _Symbolic Links_. This is used to share handlers.js and package.js between
+  multiple api routes when relevant.
 - nodejs (v12.x): https://github.com/nvm-sh/nvm#installing-and-updating
 - serverless framework cli: https://serverless.com/framework/docs/getting-started#installing-via-npm
 - configure aws credentials: https://serverless.com/framework/docs/providers/aws/guide/credentials/
